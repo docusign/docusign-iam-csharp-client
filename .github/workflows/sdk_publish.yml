@@ -1,0 +1,22 @@
+name: Publish
+permissions:
+  checks: write
+  contents: write
+  pull-requests: write
+  statuses: write
+  id-token: write
+"on":
+  workflow_dispatch:
+    inputs:
+      ado_build_id:
+        description: Optional Azure DevOps build ID for traceability when triggering this workflow from ADO pipelines.
+        type: string  
+jobs:
+  publish:
+    uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
+    with:
+      target: docusign-iam
+    secrets:
+      github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      nuget_api_key: ${{ secrets.NUGET_API_KEY }}
+      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
