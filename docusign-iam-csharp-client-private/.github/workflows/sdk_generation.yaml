@@ -1,0 +1,40 @@
+name: Generate
+permissions:
+  checks: write
+  contents: write
+  pull-requests: write
+  statuses: write
+  id-token: write
+"on":
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Force SDK generation, even if no changes are detected.
+        type: boolean
+        default: false
+      set_version:
+        description: optionally set a specific SDK version
+        type: string
+      ado_build_id:
+        description: Optional Azure DevOps build ID for traceability when triggering this workflow from ADO pipelines.
+        type: string
+      generate_mode:
+        description: Optional mode for SDK generation, defaults to 'pr'.
+        default: pr
+        options:
+          - pr
+          - test
+          - direct
+        type: string
+jobs:
+  generate:
+    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
+    with:
+      speakeasy_version: latest
+      force: ${{ github.event.inputs.force }}
+      mode: ${{ github.event.inputs.generate_mode }}
+      set_version: ${{ github.event.inputs.set_version }}
+      github_repository: "docusign/docusign-iam-csharp-client"
+    secrets:
+      github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
