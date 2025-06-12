@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>Docusign.IAM.SDK</PackageId>
+    <Version>1.0.0-beta.1</Version>
+    <TargetFramework>net8.0</TargetFramework>
+    <Authors>Docusign</Authors>
+    <Copyright>Copyright (c) Docusign 2025</Copyright>
+    <RepositoryUrl>https://github.com/docusign/docusign-iam-csharp-client.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Docusign IAM Agreement Intelligent-Agreement-Management Navigator Maestro Workflow Workflow-Management Connected-Fields Docusign-Platform Docusign-APIs Agreement-Insights</PackageTags>
+    <Description>Docusign IAM API: Docusign IAM API</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\NUGET.md" Pack="true" PackagePath="README.md"/>
+    <None Include="..\..\..\..\icon.png" Pack="true" PackagePath="\"/>
+    <None Include="..\..\..\..\docs\**\*" Pack="true" PackagePath="\docs"  CopyToOutputDirectory="PreserveNewest"/>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedAllSources>true</EmbedAllSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="newtonsoft.json" Version="13.0.3" />
+    <PackageReference Include="nodatime" Version="3.1.9" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.9.0" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+  </ItemGroup>
+
+</Project>

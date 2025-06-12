@@ -1,0 +1,12 @@
+# Error
+
+Bad Request - The request could not be understood or was missing required parameters.
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Error`                                                                               | *string*                                                                              | :heavy_minus_sign:                                                                    | A message describing the error.                                                       | An unexpected error occurred on the server.                                           |
+| `Code`                                                                                | *long*                                                                                | :heavy_minus_sign:                                                                    | HTTP status code for the error.                                                       | 500                                                                                   |
+| `Timestamp`                                                                           | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_minus_sign:                                                                    | The timestamp when the error occurred.                                                | 2023-01-01T12:00:00Z                                                                  |
