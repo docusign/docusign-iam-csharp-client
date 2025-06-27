@@ -12,6 +12,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     /// <summary>
     /// A list of workflows has been successfully returned.
@@ -23,7 +24,7 @@ namespace Docusign.IAM.SDK.Models.Components
         /// A list of workflows
         /// </summary>
         [JsonProperty("data")]
-        public WorkflowList? Data { get; set; }
+        public List<Workflow>? Data { get; set; }
 
         /// <summary>
         /// Control information and metadata for the response.

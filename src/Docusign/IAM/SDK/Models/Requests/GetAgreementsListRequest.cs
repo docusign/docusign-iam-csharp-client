@@ -9,13 +9,15 @@
 #nullable enable
 namespace Docusign.IAM.SDK.Models.Requests
 {
+    using Docusign.IAM.SDK.Models.Requests;
     using Docusign.IAM.SDK.Utils;
+    using System.Collections.Generic;
     
     public class GetAgreementsListRequest
     {
 
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
-        public string? AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
+        public string AccountId { get; set; } = default!;
 
         /// <summary>
         /// The maximum number of items that can be returned in a single page.
@@ -28,5 +30,95 @@ namespace Docusign.IAM.SDK.Models.Requests
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=ctoken")]
         public string? Ctoken { get; set; } = null;
+
+        /// <summary>
+        /// Field to sort the agreements by.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")]
+        public string? Sort { get; set; }
+
+        /// <summary>
+        /// Direction of sorting (ascending or descending).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=direction")]
+        public Direction? Direction { get; set; }
+
+        /// <summary>
+        /// List of agreement IDs to filter by (comma-separated), use operators (=, [in]) with an UUID format.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=id")]
+        public string? Id { get; set; }
+
+        /// <summary>
+        /// Status of the agreement.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
+        public string? Status { get; set; }
+
+        /// <summary>
+        /// Filter by party display name in the agreement.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=parties.name_in_agreement")]
+        public string? PartiesNameInAgreement { get; set; }
+
+        /// <summary>
+        /// Filter by creation date (also available via `created_at` key). Use operators (`=`, `gte`, `gt`, `lte`, `le`, `ne`) with an ISO 8601 DateTime string (e.g., `YYYY-MM-DD`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=metadata.created_at")]
+        public string? MetadataCreatedAt { get; set; }
+
+        /// <summary>
+        /// Title of the agreement.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=title")]
+        public string? Title { get; set; }
+
+        /// <summary>
+        /// Filter by parent agreement document ID (also available via `parent_agreement_document_id` key). with an UUID format.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=related_agreement_documents.parent_agreement_document_id")]
+        public string? RelatedAgreementDocumentsParentAgreementDocumentId { get; set; }
+
+        /// <summary>
+        /// List of BCP-47 language tags
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=languages")]
+        public List<string>? Languages { get; set; }
+
+        /// <summary>
+        /// Filter by effective date range (also available via `effective_date` key). Use operators (`=`, `gte`, `gt`, `lte`, `le`, `ne`) with an ISO 8601 DateTime string (e.g., `YYYY-MM-DD`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=provisions.effective_date")]
+        public string? ProvisionsEffectiveDate { get; set; }
+
+        /// <summary>
+        /// Filter by expiration date (also available via `expiration_date` key). Use operators (`=`, `gte`, `gt`, `lte`, `le`, `ne`) with an ISO 8601 DateTime string (e.g., `YYYY-MM-DD`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=provisions.expiration_date")]
+        public string? ProvisionsExpirationDate { get; set; }
+
+        /// <summary>
+        /// Filter by execution date (also available via `execution_date` key). Use operators (`=`, `gte`, `gt`, `lte`, `le`, `ne`) with an ISO 8601 DateTime string (e.g., `YYYY-MM-DD`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=provisions.execution_date")]
+        public string? ProvisionsExecutionDate { get; set; }
+
+        /// <summary>
+        /// duration of the agreement (also available via `term_length` key). Use operators (`=`, `gte`, `gt`, `lte`, `le`, `ne`) with an ISO 8601 Duration string (e.g., `P1Y`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=provisions.term_length")]
+        public string? ProvisionsTermLength { get; set; }
+
+        /// <summary>
+        /// Source name of the agreement.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=source_name")]
+        public string? SourceName { get; set; }
+
+        /// <summary>
+        /// Source id of the agreement.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=source_id")]
+        public string? SourceId { get; set; }
     }
 }

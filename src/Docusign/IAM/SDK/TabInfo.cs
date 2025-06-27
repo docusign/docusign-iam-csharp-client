@@ -41,8 +41,8 @@ namespace Docusign.IAM.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.1";
-        private const string _sdkGenVersion = "2.628.0";
+        private const string _sdkVersion = "1.0.0-beta.2";
+        private const string _sdkGenVersion = "2.638.5";
         private const string _openapiDocVersion = "v1";
 
         public TabInfo(SDKConfig config)
@@ -58,7 +58,7 @@ namespace Docusign.IAM.SDK
                 AppId = appId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/accounts/{accountId}/connected-fields/tab-groups", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/connected-fields/tab-groups", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

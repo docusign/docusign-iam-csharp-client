@@ -17,7 +17,7 @@ namespace Docusign.IAM.SDK.Models.Components
     {
 
         [JsonProperty("id")]
-        public string? Id { get; set; } = "00000000-0000-0000-0000-000000000000";
+        public string? Id { get; set; }
 
         /// <summary>
         /// A user-provided name for this workflow
@@ -26,7 +26,7 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? Name { get; set; }
 
         [JsonProperty("account_id")]
-        public string? AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
+        public string? AccountId { get; set; }
 
         /// <summary>
         /// Indicates the readiness and deployment status of a workflow

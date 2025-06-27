@@ -9,6 +9,7 @@
 #nullable enable
 namespace Docusign.IAM.SDK.Models.Requests
 {
+    using Docusign.IAM.SDK.Models.Requests;
     using Docusign.IAM.SDK.Utils;
     
     public class GetWorkflowsListRequest
@@ -19,5 +20,21 @@ namespace Docusign.IAM.SDK.Models.Requests
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
+
+        /// <summary>
+        /// Filter workflows by their status. If provided, only workflows with the specified status will be returned.<br/>
+        /// 
+        /// <remarks>
+        /// - `active`: Returns only active workflows.<br/>
+        /// - `inactive`: Returns only inactive workflows.<br/>
+        /// - `publishing`: Returns workflows currently being published.<br/>
+        /// - `unpublishing`: Returns workflows currently being unpublished.<br/>
+        /// - `archived`: Returns workflows that have been archived.<br/>
+        /// - `archiving`: Returns workflows currently being archived.        <br/>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
+        public Status? Status { get; set; }
     }
 }

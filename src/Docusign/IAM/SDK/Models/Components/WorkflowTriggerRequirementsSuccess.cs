@@ -22,7 +22,7 @@ namespace Docusign.IAM.SDK.Models.Components
     {
 
         [JsonProperty("trigger_id")]
-        public string? TriggerId { get; set; } = "00000000-0000-0000-0000-000000000000";
+        public string? TriggerId { get; set; }
 
         /// <summary>
         /// The type of event that triggers the workflow. In this case, the workflow is initiated<br/>
@@ -77,14 +77,14 @@ namespace Docusign.IAM.SDK.Models.Components
         /// <summary>
         /// Unique identifier for the request, useful for tracking and debugging.
         /// </summary>
-        [JsonProperty("request_id")]
-        public string? RequestId { get; set; } = null;
+        [JsonProperty("request_id", NullValueHandling = NullValueHandling.Include)]
+        public string? RequestId { get; set; }
 
         /// <summary>
         /// The timestamp indicating when the response was generated.
         /// </summary>
-        [JsonProperty("response_timestamp")]
-        public DateTime? ResponseTimestamp { get; set; } = null;
+        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? ResponseTimestamp { get; set; }
 
         /// <summary>
         /// The duration of time, in milliseconds, that the server took to process and respond <br/>
@@ -95,7 +95,7 @@ namespace Docusign.IAM.SDK.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("response_duration_ms")]
-        public int? ResponseDurationMs { get; set; } = null;
+        [JsonProperty("response_duration_ms", NullValueHandling = NullValueHandling.Include)]
+        public int? ResponseDurationMs { get; set; }
     }
 }

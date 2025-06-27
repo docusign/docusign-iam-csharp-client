@@ -20,9 +20,6 @@ namespace Docusign.IAM.SDK.Models.Requests
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 
-        /// <summary>
-        /// The unique identifier of the workflow.
-        /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=workflowId")]
         public string WorkflowId { get; set; } = default!;
     }

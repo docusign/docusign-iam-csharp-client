@@ -15,12 +15,6 @@ namespace Docusign.IAM.SDK.Models.Components
         AdmStoreUnifiedRepoRead,
 
         /// <summary>
-        /// Allows write access to the unified repository.
-        /// </summary>
-        [JsonProperty("adm_store_unified_repo_write")]
-        AdmStoreUnifiedRepoWrite,
-
-        /// <summary>
         /// Allows management of advanced workflow operations.
         /// </summary>
         [JsonProperty("aow_manage")]
@@ -32,12 +26,6 @@ namespace Docusign.IAM.SDK.Models.Components
         /// </summary>
         [JsonProperty("impersonation")]
         Impersonation,
-
-        /// <summary>
-        /// Used to the read model schema.
-        /// </summary>
-        [JsonProperty("models_read")]
-        ModelsRead,
 
         /// <summary>
         /// Required to call most eSignature REST API endpoints

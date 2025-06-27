@@ -22,7 +22,7 @@ namespace Docusign.IAM.SDK.Models.Components
         /// An AI-generated summary of the agreement. This summary is provided for convenience <br/>
         /// 
         /// <remarks>
-        /// and may not capture every detail of the original agreement.<br/>
+        /// and may not capture every detail of the original agreement. <br/>
         /// 
         /// </remarks>
         /// </summary>

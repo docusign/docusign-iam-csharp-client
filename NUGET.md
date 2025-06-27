@@ -226,10 +226,10 @@ catch (Exception ex)
 
 You can override the default server globally by passing a server name to the `server: string` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name   | Server                          | Description |
-| ------ | ------------------------------- | ----------- |
-| `demo` | `https://api-d.docusign.com/v1` | Demo        |
-| `prod` | `https://api.docusign.com/v1`   | Production  |
+| Name   | Server                       | Description |
+| ------ | ---------------------------- | ----------- |
+| `demo` | `https://api-d.docusign.com` | Demo        |
+| `prod` | `https://api.docusign.com`   | Production  |
 
 #### Example
 
@@ -266,7 +266,7 @@ using Docusign.IAM.SDK.Models.Components;
 using Docusign.IAM.SDK.Models.Requests;
 
 var sdk = IamClient.Builder()
-    .WithServerUrl("https://api-d.docusign.com/v1")
+    .WithServerUrl("https://api-d.docusign.com")
     .Build();
 
 ConfidentialAuthCodeGrantRequestBody req = new ConfidentialAuthCodeGrantRequestBody() {

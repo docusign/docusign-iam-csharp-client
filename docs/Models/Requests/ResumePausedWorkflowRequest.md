@@ -1,4 +1,4 @@
-# GetWorkflowInstancesListRequest
+# ResumePausedWorkflowRequest
 
 
 ## Fields

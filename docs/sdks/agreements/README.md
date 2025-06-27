@@ -38,27 +38,28 @@ The response also includes provisions that outline the key legal, financial, and
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
+using Docusign.IAM.SDK.Models.Requests;
 
 var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Navigator.Agreements.GetAgreementsListAsync(
-    accountId: "00000000-0000-0000-0000-000000000000",
-    limit: 10,
-    ctoken: "abc123"
-);
+GetAgreementsListRequest req = new GetAgreementsListRequest() {
+    AccountId = "00000000-0000-0000-0000-000000000000",
+    Limit = 10,
+    Ctoken = "abc123",
+};
+
+var res = await sdk.Navigator.Agreements.GetAgreementsListAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `AccountId`                                                        | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |                                                                    |
-| `Limit`                                                            | *int*                                                              | :heavy_minus_sign:                                                 | The maximum number of items that can be returned in a single page. | 10                                                                 |
-| `Ctoken`                                                           | *string*                                                           | :heavy_minus_sign:                                                 | An opaque token that helps retrieve the a page of data.            | abc123                                                             |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [GetAgreementsListRequest](../../Models/Requests/GetAgreementsListRequest.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
 
 ### Response
 
@@ -68,7 +69,7 @@ var res = await sdk.Navigator.Agreements.GetAgreementsListAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 401, 403, 404                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
@@ -93,7 +94,7 @@ The operation is essential for retrieving the full context of an agreement, enab
 - **Provisions for Legal, Financial, and Lifecycle Conditions**: Includes the full set of provisions that define the terms and conditions of the agreement, making it ideal for compliance and auditing purposes.
 - **Metadata and History**: Tracks the agreement’s history through metadata such as creation and modification dates and user-defined fields.
 - **Data Source for AI Applications**: Enables LLM-based applications to access granular agreement data, providing AI/ML-based solutions (such as Copilots) with the necessary context to answer detailed queries about an agreement.
-- **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.
+- **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.   
 
 
 ### Example Usage
@@ -129,7 +130,7 @@ var res = await sdk.Navigator.Agreements.GetAgreementAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 401, 403, 404                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
@@ -167,7 +168,7 @@ await sdk.Navigator.Agreements.DeleteAgreementAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 401, 403, 404                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
@@ -215,6 +216,6 @@ var res = await sdk.Navigator.Agreements.CreateAgreementSummaryAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 401, 403, 404                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |

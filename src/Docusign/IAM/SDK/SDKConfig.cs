@@ -32,8 +32,8 @@ namespace Docusign.IAM.SDK
         /// </summary>
         public static readonly Dictionary<Server, string> ServerMap = new Dictionary<Server, string>()
         {
-            { Server.Demo, "https://api-d.docusign.com/v1" },
-            { Server.Prod, "https://api.docusign.com/v1" },
+            { Server.Demo, "https://api-d.docusign.com" },
+            { Server.Prod, "https://api.docusign.com" },
         };
 
         public ISpeakeasyHttpClient Client;
@@ -52,7 +52,7 @@ namespace Docusign.IAM.SDK
             Client = client ?? new SpeakeasyHttpClient();
             ServerUrl = "";
             ServerName = null;
-            UserAgent = "speakeasy-sdk/csharp 1.0.0-beta.1 2.628.0 v1 Docusign.IAM.SDK";
+            UserAgent = "speakeasy-sdk/csharp 1.0.0-beta.2 2.638.5 v1 Docusign.IAM.SDK";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

@@ -28,7 +28,7 @@ namespace Docusign.IAM.SDK.Models.Components
     {
 
         [JsonProperty("id")]
-        public string? Id { get; set; } = "00000000-0000-0000-0000-000000000000";
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// Title of the agreement document, summarizing its purpose.
@@ -73,15 +73,20 @@ namespace Docusign.IAM.SDK.Models.Components
         public List<Party>? Parties { get; set; } = null;
 
         /// <summary>
-        /// &quot;The conditions or rules written in a legal agreement. The set of possible provisions is determined by the agreement type. <br/>
+        /// &quot;The conditions or rules written in a legal agreement. The set of possible provisions is determined by the agreement type.&quot;<br/>
         /// 
         /// <remarks>
-        /// This set of provisions can change dynamically.&quot;<br/>
         /// 
         /// </remarks>
         /// </summary>
         [JsonProperty("provisions")]
         public Provisions? Provisions { get; set; } = null;
+
+        /// <summary>
+        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects
+        /// </summary>
+        [JsonProperty("custom_provisions")]
+        public Dictionary<string, CustomProperty>? CustomProvisions { get; set; } = null;
 
         /// <summary>
         /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects

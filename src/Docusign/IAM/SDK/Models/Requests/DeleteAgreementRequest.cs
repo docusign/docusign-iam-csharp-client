@@ -15,9 +15,9 @@ namespace Docusign.IAM.SDK.Models.Requests
     {
 
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
-        public string? AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
+        public string AccountId { get; set; } = default!;
 
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=agreementId")]
-        public string? AgreementId { get; set; } = "00000000-0000-0000-0000-000000000000";
+        public string AgreementId { get; set; } = default!;
     }
 }
