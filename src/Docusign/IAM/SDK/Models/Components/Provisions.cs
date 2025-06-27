@@ -12,14 +12,12 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    using NodaTime;
     using System;
     
     /// <summary>
-    /// &quot;The conditions or rules written in a legal agreement. The set of possible provisions is determined by the agreement type. <br/>
+    /// &quot;The conditions or rules written in a legal agreement. The set of possible provisions is determined by the agreement type.&quot;<br/>
     /// 
     /// <remarks>
-    /// This set of provisions can change dynamically.&quot;<br/>
     /// 
     /// </remarks>
     /// </summary>
@@ -174,7 +172,7 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? RenewalExtensionPeriod { get; set; } = null;
 
         [JsonProperty("renewal_process_owner")]
-        public string? RenewalProcessOwner { get; set; } = null;
+        public string? RenewalProcessOwner { get; set; }
 
         /// <summary>
         /// Additional information related to the renewal process.
@@ -203,19 +201,19 @@ namespace Docusign.IAM.SDK.Models.Components
         /// The date when the terms of the agreement start to apply and become legally binding.
         /// </summary>
         [JsonProperty("effective_date")]
-        public LocalDate? EffectiveDate { get; set; } = null;
+        public DateTime? EffectiveDate { get; set; } = null;
 
         /// <summary>
         /// The date when the agreement ends and is no longer valid or enforceable.
         /// </summary>
         [JsonProperty("expiration_date")]
-        public LocalDate? ExpirationDate { get; set; } = null;
+        public DateTime? ExpirationDate { get; set; } = null;
 
         /// <summary>
         /// The date when the agreement is signed by all parties, making it officially binding. This is not necessarily the same as the effective date.
         /// </summary>
         [JsonProperty("execution_date")]
-        public LocalDate? ExecutionDate { get; set; } = null;
+        public DateTime? ExecutionDate { get; set; } = null;
 
         /// <summary>
         /// Overall duration of the agreement.

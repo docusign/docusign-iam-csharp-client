@@ -51,7 +51,7 @@ namespace Docusign.IAM.SDK
         /// 
         /// </remarks>
         /// </summary>
-        Task<AgreementsResponse> GetAgreementsListAsync(string? accountId = "00000000-0000-0000-0000-000000000000", int? limit = null, string? ctoken = null, RetryConfig? retryConfig = null);
+        Task<AgreementsResponse> GetAgreementsListAsync(GetAgreementsListRequest request, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Retrieve detailed information about a specific agreement
@@ -76,11 +76,11 @@ namespace Docusign.IAM.SDK
         /// - **Provisions for Legal, Financial, and Lifecycle Conditions**: Includes the full set of provisions that define the terms and conditions of the agreement, making it ideal for compliance and auditing purposes.<br/>
         /// - **Metadata and History**: Tracks the agreement’s history through metadata such as creation and modification dates and user-defined fields.<br/>
         /// - **Data Source for AI Applications**: Enables LLM-based applications to access granular agreement data, providing AI/ML-based solutions (such as Copilots) with the necessary context to answer detailed queries about an agreement.<br/>
-        /// - **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.<br/>
+        /// - **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.   <br/>
         /// 
         /// </remarks>
         /// </summary>
-        Task<Agreement> GetAgreementAsync(string? accountId = "00000000-0000-0000-0000-000000000000", string? agreementId = "00000000-0000-0000-0000-000000000000", RetryConfig? retryConfig = null);
+        Task<Agreement> GetAgreementAsync(string accountId, string agreementId, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete a specific agreement
@@ -90,7 +90,7 @@ namespace Docusign.IAM.SDK
         /// 
         /// </remarks>
         /// </summary>
-        Task DeleteAgreementAsync(string? accountId = "00000000-0000-0000-0000-000000000000", string? agreementId = "00000000-0000-0000-0000-000000000000", RetryConfig? retryConfig = null);
+        Task DeleteAgreementAsync(string accountId, string agreementId, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create an AI-generated summary of an agreement document
@@ -106,15 +106,15 @@ namespace Docusign.IAM.SDK
         /// 
         /// </remarks>
         /// </summary>
-        Task<AgreementSummary> CreateAgreementSummaryAsync(string? accountId = "00000000-0000-0000-0000-000000000000", string? agreementId = "00000000-0000-0000-0000-000000000000", RetryConfig? retryConfig = null);
+        Task<AgreementSummary> CreateAgreementSummaryAsync(string accountId, string agreementId, RetryConfig? retryConfig = null);
     }
 
     public class Agreements: IAgreements
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.1";
-        private const string _sdkGenVersion = "2.628.0";
+        private const string _sdkVersion = "1.0.0-beta.2";
+        private const string _sdkGenVersion = "2.638.5";
         private const string _openapiDocVersion = "v1";
 
         public Agreements(SDKConfig config)
@@ -122,16 +122,10 @@ namespace Docusign.IAM.SDK
             SDKConfiguration = config;
         }
 
-        public async Task<AgreementsResponse> GetAgreementsListAsync(string? accountId = "00000000-0000-0000-0000-000000000000", int? limit = null, string? ctoken = null, RetryConfig? retryConfig = null)
+        public async Task<AgreementsResponse> GetAgreementsListAsync(GetAgreementsListRequest request, RetryConfig? retryConfig = null)
         {
-            var request = new GetAgreementsListRequest()
-            {
-                AccountId = accountId,
-                Limit = limit,
-                Ctoken = ctoken,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/accounts/{accountId}/agreements", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/agreements", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -221,7 +215,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
-            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -241,7 +235,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
@@ -253,7 +247,7 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
         }
 
-        public async Task<Agreement> GetAgreementAsync(string? accountId = "00000000-0000-0000-0000-000000000000", string? agreementId = "00000000-0000-0000-0000-000000000000", RetryConfig? retryConfig = null)
+        public async Task<Agreement> GetAgreementAsync(string accountId, string agreementId, RetryConfig? retryConfig = null)
         {
             var request = new GetAgreementRequest()
             {
@@ -261,7 +255,7 @@ namespace Docusign.IAM.SDK
                 AgreementId = agreementId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/accounts/{accountId}/agreements/{agreementId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/agreements/{agreementId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -351,7 +345,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
-            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -371,7 +365,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
@@ -383,7 +377,7 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
         }
 
-        public async Task DeleteAgreementAsync(string? accountId = "00000000-0000-0000-0000-000000000000", string? agreementId = "00000000-0000-0000-0000-000000000000", RetryConfig? retryConfig = null)
+        public async Task DeleteAgreementAsync(string accountId, string agreementId, RetryConfig? retryConfig = null)
         {
             var request = new DeleteAgreementRequest()
             {
@@ -391,7 +385,7 @@ namespace Docusign.IAM.SDK
                 AgreementId = agreementId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/accounts/{accountId}/agreements/{agreementId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/agreements/{agreementId}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -475,7 +469,7 @@ namespace Docusign.IAM.SDK
             {                
                 return;
             }
-            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -495,7 +489,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
@@ -507,7 +501,7 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
         }
 
-        public async Task<AgreementSummary> CreateAgreementSummaryAsync(string? accountId = "00000000-0000-0000-0000-000000000000", string? agreementId = "00000000-0000-0000-0000-000000000000", RetryConfig? retryConfig = null)
+        public async Task<AgreementSummary> CreateAgreementSummaryAsync(string accountId, string agreementId, RetryConfig? retryConfig = null)
         {
             var request = new CreateAgreementSummaryRequest()
             {
@@ -515,7 +509,7 @@ namespace Docusign.IAM.SDK
                 AgreementId = agreementId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/accounts/{accountId}/agreements/{agreementId}/ai/actions/summarize", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/agreements/{agreementId}/ai/actions/summarize", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -605,7 +599,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
-            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -625,7 +619,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", responseStatusCode, await httpResponse.Content.ReadAsStringAsync(), httpResponse);
             }

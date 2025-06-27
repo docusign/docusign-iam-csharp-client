@@ -11,7 +11,7 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
     
-    public class GetWorkflowTriggerRequirementsRequest
+    public class ResumePausedWorkflowRequest
     {
 
         /// <summary>

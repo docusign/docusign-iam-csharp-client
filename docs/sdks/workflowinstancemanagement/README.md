@@ -74,10 +74,10 @@ var res = await sdk.Maestro.WorkflowInstanceManagement.GetWorkflowInstancesListA
 
 ### Parameters
 
-| Parameter                              | Type                                   | Required                               | Description                            | Example                                |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| `AccountId`                            | *string*                               | :heavy_check_mark:                     | The unique identifier of the account.  | ae232f1f-8efc-4b8c-bb08-626847fad8bb   |
-| `WorkflowId`                           | *string*                               | :heavy_check_mark:                     | The unique identifier of the workflow. | ae232f1f-8efc-4b8c-bb08-626847fad8bb   |
+| Parameter                             | Type                                  | Required                              | Description                           |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `AccountId`                           | *string*                              | :heavy_check_mark:                    | The unique identifier of the account. |
+| `WorkflowId`                          | *string*                              | :heavy_check_mark:                    | N/A                                   |
 
 ### Response
 
@@ -132,11 +132,11 @@ var res = await sdk.Maestro.WorkflowInstanceManagement.GetWorkflowInstanceAsync(
 
 ### Parameters
 
-| Parameter                                   | Type                                        | Required                                    | Description                                 | Example                                     |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `AccountId`                                 | *string*                                    | :heavy_check_mark:                          | The unique identifier of the account.       | ae232f1f-8efc-4b8c-bb08-626847fad8bb        |
-| `WorkflowId`                                | *string*                                    | :heavy_check_mark:                          | The unique identifier of the workflow.      | ae232f1f-8efc-4b8c-bb08-626847fad8bb        |
-| `InstanceId`                                | *string*                                    | :heavy_check_mark:                          | Unique identifier for the workflow instance |                                             |
+| Parameter                                   | Type                                        | Required                                    | Description                                 |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `AccountId`                                 | *string*                                    | :heavy_check_mark:                          | The unique identifier of the account.       |
+| `WorkflowId`                                | *string*                                    | :heavy_check_mark:                          | N/A                                         |
+| `InstanceId`                                | *string*                                    | :heavy_check_mark:                          | Unique identifier for the workflow instance |
 
 ### Response
 
@@ -146,7 +146,7 @@ var res = await sdk.Maestro.WorkflowInstanceManagement.GetWorkflowInstanceAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 401, 403, 404                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
@@ -185,11 +185,11 @@ var res = await sdk.Maestro.WorkflowInstanceManagement.CancelWorkflowInstanceAsy
 
 ### Parameters
 
-| Parameter                                   | Type                                        | Required                                    | Description                                 | Example                                     |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `AccountId`                                 | *string*                                    | :heavy_check_mark:                          | The unique identifier of the account.       | ae232f1f-8efc-4b8c-bb08-626847fad8bb        |
-| `WorkflowId`                                | *string*                                    | :heavy_check_mark:                          | The unique identifier of the workflow.      | ae232f1f-8efc-4b8c-bb08-626847fad8bb        |
-| `InstanceId`                                | *string*                                    | :heavy_check_mark:                          | Unique identifier for the workflow instance |                                             |
+| Parameter                                   | Type                                        | Required                                    | Description                                 |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `AccountId`                                 | *string*                                    | :heavy_check_mark:                          | The unique identifier of the account.       |
+| `WorkflowId`                                | *string*                                    | :heavy_check_mark:                          | N/A                                         |
+| `InstanceId`                                | *string*                                    | :heavy_check_mark:                          | Unique identifier for the workflow instance |
 
 ### Response
 
@@ -199,4 +199,6 @@ var res = await sdk.Maestro.WorkflowInstanceManagement.CancelWorkflowInstanceAsy
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404, 409                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |

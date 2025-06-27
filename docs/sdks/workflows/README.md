@@ -8,6 +8,8 @@
 * [GetWorkflowsList](#getworkflowslist) - Retrieve a list of available Maestro workflows
 * [GetWorkflowTriggerRequirements](#getworkflowtriggerrequirements) - Retrieve trigger requirements for a specific Maestro workflow
 * [TriggerWorkflow](#triggerworkflow) - Trigger a new instance of a Maestro workflow
+* [PauseNewWorkflowInstances](#pausenewworkflowinstances) - Pause an Active Workflow
+* [ResumePausedWorkflow](#resumepausedworkflow) - Resume a Paused Workflow
 
 ## GetWorkflowsList
 
@@ -72,21 +74,26 @@ be triggered.
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
+using Docusign.IAM.SDK.Models.Requests;
 
 var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.Workflows.GetWorkflowsListAsync(accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb");
+var res = await sdk.Maestro.Workflows.GetWorkflowsListAsync(
+    accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
+    status: Status.Active
+);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                             | Type                                  | Required                              | Description                           | Example                               |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `AccountId`                           | *string*                              | :heavy_check_mark:                    | The unique identifier of the account. | ae232f1f-8efc-4b8c-bb08-626847fad8bb  |
+| Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AccountId`                                                                                                                                                                                                                                                                                                                                                                                                                                                    | *string*                                                                                                                                                                                                                                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                             | The unique identifier of the account.                                                                                                                                                                                                                                                                                                                                                                                                                          | ae232f1f-8efc-4b8c-bb08-626847fad8bb                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `Status`                                                                                                                                                                                                                                                                                                                                                                                                                                                       | [Status](../../Models/Requests/Status.md)                                                                                                                                                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                             | Filter workflows by their status. If provided, only workflows with the specified status will be returned.<br/>- `active`: Returns only active workflows.<br/>- `inactive`: Returns only inactive workflows.<br/>- `publishing`: Returns workflows currently being published.<br/>- `unpublishing`: Returns workflows currently being unpublished.<br/>- `archived`: Returns workflows that have been archived.<br/>- `archiving`: Returns workflows currently being archived.        <br/> | active                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ### Response
 
@@ -96,7 +103,7 @@ var res = await sdk.Maestro.Workflows.GetWorkflowsListAsync(accountId: "ae232f1f
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 401, 403, 404                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
@@ -166,10 +173,10 @@ var res = await sdk.Maestro.Workflows.GetWorkflowTriggerRequirementsAsync(
 
 ### Parameters
 
-| Parameter                              | Type                                   | Required                               | Description                            | Example                                |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| `AccountId`                            | *string*                               | :heavy_check_mark:                     | The unique identifier of the account.  | ae232f1f-8efc-4b8c-bb08-626847fad8bb   |
-| `WorkflowId`                           | *string*                               | :heavy_check_mark:                     | The unique identifier of the workflow. | ae232f1f-8efc-4b8c-bb08-626847fad8bb   |
+| Parameter                             | Type                                  | Required                              | Description                           | Example                               |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `AccountId`                           | *string*                              | :heavy_check_mark:                    | The unique identifier of the account. | ae232f1f-8efc-4b8c-bb08-626847fad8bb  |
+| `WorkflowId`                          | *string*                              | :heavy_check_mark:                    | N/A                                   |                                       |
 
 ### Response
 
@@ -179,7 +186,7 @@ var res = await sdk.Maestro.Workflows.GetWorkflowTriggerRequirementsAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 401, 403, 404                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
@@ -272,7 +279,7 @@ var res = await sdk.Maestro.Workflows.TriggerWorkflowAsync(
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              | Example                                                                                                  |
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `AccountId`                                                                                              | *string*                                                                                                 | :heavy_check_mark:                                                                                       | The unique identifier of the account.                                                                    | ae232f1f-8efc-4b8c-bb08-626847fad8bb                                                                     |
-| `WorkflowId`                                                                                             | *string*                                                                                                 | :heavy_check_mark:                                                                                       | The unique identifier of the workflow.                                                                   | ae232f1f-8efc-4b8c-bb08-626847fad8bb                                                                     |
+| `WorkflowId`                                                                                             | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |                                                                                                          |
 | `TriggerWorkflow`                                                                                        | [TriggerWorkflow](../../Models/Components/TriggerWorkflow.md)                                            | :heavy_check_mark:                                                                                       | N/A                                                                                                      | {<br/>"instance_name": "My Instance",<br/>"trigger_inputs": {<br/>"name": "Jon Doe",<br/>"email": "jdoe@example.com"<br/>}<br/>} |
 
 ### Response
@@ -283,6 +290,90 @@ var res = await sdk.Maestro.Workflows.TriggerWorkflowAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 401, 403, 404                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
+
+## PauseNewWorkflowInstances
+
+This operation pauses new workflow instances from being created. Any running workflows instances will be unaffected.
+
+
+### Example Usage
+
+```csharp
+using Docusign.IAM.SDK;
+using Docusign.IAM.SDK.Models.Components;
+
+var sdk = IamClient.Builder()
+    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
+    .Build();
+
+var res = await sdk.Maestro.Workflows.PauseNewWorkflowInstancesAsync(
+    accountId: "<id>",
+    workflowId: "<id>"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                             | Type                                  | Required                              | Description                           |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `AccountId`                           | *string*                              | :heavy_check_mark:                    | The unique identifier of the account. |
+| `WorkflowId`                          | *string*                              | :heavy_check_mark:                    | N/A                                   |
+
+### Response
+
+**[PauseNewWorkflowInstancesSuccess](../../Models/Components/PauseNewWorkflowInstancesSuccess.md)**
+
+### Errors
+
+| Error Type                                  | Status Code                                 | Content Type                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404, 409                          | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
+
+## ResumePausedWorkflow
+
+This operation enables new workflow instances to be created
+
+
+### Example Usage
+
+```csharp
+using Docusign.IAM.SDK;
+using Docusign.IAM.SDK.Models.Components;
+
+var sdk = IamClient.Builder()
+    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
+    .Build();
+
+var res = await sdk.Maestro.Workflows.ResumePausedWorkflowAsync(
+    accountId: "<id>",
+    workflowId: "<id>"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                             | Type                                  | Required                              | Description                           |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `AccountId`                           | *string*                              | :heavy_check_mark:                    | The unique identifier of the account. |
+| `WorkflowId`                          | *string*                              | :heavy_check_mark:                    | N/A                                   |
+
+### Response
+
+**[ResumeNewWorkflowInstancesSuccess](../../Models/Components/ResumeNewWorkflowInstancesSuccess.md)**
+
+### Errors
+
+| Error Type                                  | Status Code                                 | Content Type                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404, 409                          | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |

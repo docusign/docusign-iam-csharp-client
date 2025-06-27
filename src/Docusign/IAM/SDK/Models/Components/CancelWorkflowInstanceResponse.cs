@@ -12,12 +12,12 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     
+    /// <summary>
+    /// A message confirming the instance was canceled, including the instance and workflow IDs
+    /// </summary>
     public class CancelWorkflowInstanceResponse
     {
 
-        /// <summary>
-        /// A message confirming the instance was canceled, including the instance and workflow IDs
-        /// </summary>
         [JsonProperty("message")]
         public string? Message { get; set; }
     }

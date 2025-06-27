@@ -40,7 +40,7 @@ namespace Docusign.IAM.SDK.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("field_data_type")]
-        public FieldDataType? FieldDataType { get; set; }
+        public string? FieldDataType { get; set; }
 
         /// <summary>
         /// The default value for the input field if one is provided. This can be a string, number,<br/>
