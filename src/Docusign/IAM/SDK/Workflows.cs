@@ -223,8 +223,8 @@ namespace Docusign.IAM.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.2";
-        private const string _sdkGenVersion = "2.638.5";
+        private const string _sdkVersion = "1.0.0-beta.3";
+        private const string _sdkGenVersion = "2.651.2";
         private const string _openapiDocVersion = "v1";
 
         public Workflows(SDKConfig config)
@@ -587,7 +587,7 @@ namespace Docusign.IAM.SDK
 
             var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
             int responseStatusCode = (int)httpResponse.StatusCode;
-            if(responseStatusCode == 201)
+            if(responseStatusCode == 200)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

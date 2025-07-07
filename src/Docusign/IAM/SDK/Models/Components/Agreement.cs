@@ -113,7 +113,7 @@ namespace Docusign.IAM.SDK.Models.Components
         /// List of languages applicable to the agreement, identified using BCP-47 language codes.
         /// </summary>
         [JsonProperty("languages")]
-        public List<string>? Languages { get; set; } = null;
+        public List<string?>? Languages { get; set; } = null;
 
         /// <summary>
         /// The name of the source system who creates this entity, e.g. eSign, CLM, or Salesforce.

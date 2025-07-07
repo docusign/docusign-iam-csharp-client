@@ -34,14 +34,14 @@ namespace Docusign.IAM.SDK.Models.Components
         /// <summary>
         /// Unique identifier for the request, useful for tracking and debugging.
         /// </summary>
-        [JsonProperty("request_id", NullValueHandling = NullValueHandling.Include)]
-        public string? RequestId { get; set; }
+        [JsonProperty("request_id")]
+        public string? RequestId { get; set; } = null;
 
         /// <summary>
         /// The timestamp indicating when the response was generated.
         /// </summary>
-        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
-        public DateTime? ResponseTimestamp { get; set; }
+        [JsonProperty("response_timestamp")]
+        public DateTime? ResponseTimestamp { get; set; } = null;
 
         /// <summary>
         /// The duration of time, in milliseconds, that the server took to process and respond <br/>
@@ -52,7 +52,7 @@ namespace Docusign.IAM.SDK.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("response_duration_ms", NullValueHandling = NullValueHandling.Include)]
-        public int? ResponseDurationMs { get; set; }
+        [JsonProperty("response_duration_ms")]
+        public int? ResponseDurationMs { get; set; } = null;
     }
 }
