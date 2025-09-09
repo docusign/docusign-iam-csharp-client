@@ -32,6 +32,30 @@ namespace Docusign.IAM.SDK.Models.Components
         /// </summary>
         [JsonProperty("signature")]
         Signature,
+
+        /// <summary>
+        /// Read workspace profile information
+        /// </summary>
+        [JsonProperty("dtr.company.read")]
+        DtrCompanyRead,
+
+        /// <summary>
+        /// Read workspace data
+        /// </summary>
+        [JsonProperty("dtr.rooms.read")]
+        DtrRoomsRead,
+
+        /// <summary>
+        /// Update workspace data
+        /// </summary>
+        [JsonProperty("dtr.rooms.write")]
+        DtrRoomsWrite,
+
+        /// <summary>
+        /// Modify workspace documents
+        /// </summary>
+        [JsonProperty("dtr.documents.write")]
+        DtrDocumentsWrite,
     }
 
     public static class AuthScopeExtension

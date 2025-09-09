@@ -1,0 +1,11 @@
+# RevokeWorkspaceUserAccessRequest
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `AccountId`                                                                         | *string*                                                                            | :heavy_check_mark:                                                                  | The ID of the account                                                               |
+| `WorkspaceId`                                                                       | *string*                                                                            | :heavy_check_mark:                                                                  | The ID of the workspace to revoke access from                                       |
+| `UserId`                                                                            | *string*                                                                            | :heavy_check_mark:                                                                  | The ID of the user to be revoked from the workspace                                 |
+| `RevokeWorkspaceUserDetails`                                                        | [RevokeWorkspaceUserDetails](../../Models/Components/RevokeWorkspaceUserDetails.md) | :heavy_minus_sign:                                                                  | Optional details. Allows scheduling the revocation for the future                   |

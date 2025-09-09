@@ -39,8 +39,10 @@ be triggered.
 
 
 
+
   into all the automated processes available within the Maestro platform.
 - **Input Schema Information**: Each workflow includes its trigger input schema, showing
+
 
 
 
@@ -57,8 +59,10 @@ be triggered.
 
 
 
+
   and user details are included to support tracking and auditing workflows.
 - **Future-Proof**: The operation is designed to be expandable as more workflows are added
+
 
 
 
@@ -71,6 +75,7 @@ be triggered.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetWorkflowsList" method="get" path="/v1/accounts/{accountId}/workflows" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -132,8 +137,10 @@ the workflow instance, ensuring seamless execution and compliance with workflow 
 
 
 
+
   their data types, and optional default values for easy reference and data validation.
 - **Trigger Event Type Information**: Specifies the type of event required to initiate the workflow
+
 
 
 
@@ -150,11 +157,13 @@ the workflow instance, ensuring seamless execution and compliance with workflow 
 
 
 
+
   in how workflows can be triggered according to system needs.
 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetWorkflowTriggerRequirements" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/trigger-requirements" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -223,8 +232,10 @@ interact with or track the running instance.
 
 
 
+
   against the workflow's input schema.
 - **Real-Time Triggering**: Designed to be invoked as part of an event-driven architecture,
+
 
 
 
@@ -241,11 +252,13 @@ interact with or track the running instance.
 
 
 
+
   of the workflow instance or take further actions while it runs.
 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="TriggerWorkflow" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/trigger" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -301,6 +314,7 @@ This operation pauses new workflow instances from being created. Any running wor
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="pauseNewWorkflowInstances" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/pause" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -343,6 +357,7 @@ This operation enables new workflow instances to be created
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="resumePausedWorkflow" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/resume" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

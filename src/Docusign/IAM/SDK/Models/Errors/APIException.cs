@@ -6,36 +6,22 @@
 // the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 #nullable enable
 namespace Docusign.IAM.SDK.Models.Errors
 {
     using System;
     using System.Net.Http;
 
-    public class APIException : Exception
+    public class APIException : IamClientError
     {
-
-        public override string Message { get; }
-        public int StatusCode { get; set; }
-        public string Body { get; set; }
-        public HttpResponseMessage RawResponse { get; set; } = default!;
-        public APIException(string message, int statusCode, string body, HttpResponseMessage rawResponse)
-        {
-            Message = message;
-            this.StatusCode = statusCode;
-            StatusCode = statusCode;
-            Body = body;
-            RawResponse = rawResponse;
-        }
-
-        public override string ToString(){
-            var body = "";
-            if (Body.Length > 0)
-            {
-                body += $"\n{Body}";
-            }
-            return Message + ": Status " + StatusCode + body;
-        }
-
+        /// <summary>
+        /// Default API exception.
+        /// </summary>
+        public APIException(
+            string message,
+            HttpResponseMessage rawResponse,
+            string body
+        ): base(message, rawResponse, body) {}
     }
 }

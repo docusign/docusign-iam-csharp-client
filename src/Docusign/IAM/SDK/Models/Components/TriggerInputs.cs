@@ -16,23 +16,23 @@ namespace Docusign.IAM.SDK.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class TriggerInputsType
     {
         private TriggerInputsType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static TriggerInputsType Str { get { return new TriggerInputsType("str"); } }
-        
+
         public static TriggerInputsType Number { get { return new TriggerInputsType("number"); } }
-        
+
         public static TriggerInputsType Boolean { get { return new TriggerInputsType("boolean"); } }
-        
+
         public static TriggerInputsType MapOfAny { get { return new TriggerInputsType("mapOfAny"); } }
-        
+
         public static TriggerInputsType ArrayOfAny { get { return new TriggerInputsType("arrayOfAny"); } }
-        
+
         public static TriggerInputsType Null { get { return new TriggerInputsType("null"); } }
 
         public override string ToString() { return Value; }
@@ -73,8 +73,10 @@ namespace Docusign.IAM.SDK.Models.Components
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(TriggerInputs.TriggerInputsConverter))]
-    public class TriggerInputs {
-        public TriggerInputs(TriggerInputsType type) {
+    public class TriggerInputs
+    {
+        public TriggerInputs(TriggerInputsType type)
+        {
             Type = type;
         }
 
@@ -94,41 +96,40 @@ namespace Docusign.IAM.SDK.Models.Components
         public List<object>? ArrayOfAny { get; set; }
 
         public TriggerInputsType Type { get; set; }
-
-
-        public static TriggerInputs CreateStr(string str) {
+        public static TriggerInputs CreateStr(string str)
+        {
             TriggerInputsType typ = TriggerInputsType.Str;
 
             TriggerInputs res = new TriggerInputs(typ);
             res.Str = str;
             return res;
         }
-
-        public static TriggerInputs CreateNumber(double number) {
+        public static TriggerInputs CreateNumber(double number)
+        {
             TriggerInputsType typ = TriggerInputsType.Number;
 
             TriggerInputs res = new TriggerInputs(typ);
             res.Number = number;
             return res;
         }
-
-        public static TriggerInputs CreateBoolean(bool boolean) {
+        public static TriggerInputs CreateBoolean(bool boolean)
+        {
             TriggerInputsType typ = TriggerInputsType.Boolean;
 
             TriggerInputs res = new TriggerInputs(typ);
             res.Boolean = boolean;
             return res;
         }
-
-        public static TriggerInputs CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static TriggerInputs CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             TriggerInputsType typ = TriggerInputsType.MapOfAny;
 
             TriggerInputs res = new TriggerInputs(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static TriggerInputs CreateArrayOfAny(List<object> arrayOfAny) {
+        public static TriggerInputs CreateArrayOfAny(List<object> arrayOfAny)
+        {
             TriggerInputsType typ = TriggerInputsType.ArrayOfAny;
 
             TriggerInputs res = new TriggerInputs(typ);
@@ -136,7 +137,8 @@ namespace Docusign.IAM.SDK.Models.Components
             return res;
         }
 
-        public static TriggerInputs CreateNull() {
+        public static TriggerInputs CreateNull()
+        {
             TriggerInputsType typ = TriggerInputsType.Null;
             return new TriggerInputs(typ);
         }
@@ -260,38 +262,43 @@ namespace Docusign.IAM.SDK.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 TriggerInputs res = (TriggerInputs)value;
                 if (TriggerInputsType.FromString(res.Type).Equals(TriggerInputsType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.Number != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Number));
                     return;
                 }
+
                 if (res.Boolean != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Boolean));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfAny));
                     return;
                 }
-
             }
 
         }

@@ -16,23 +16,23 @@ namespace Docusign.IAM.SDK.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class DefaultValueType
     {
         private DefaultValueType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static DefaultValueType Str { get { return new DefaultValueType("str"); } }
-        
+
         public static DefaultValueType Number { get { return new DefaultValueType("number"); } }
-        
+
         public static DefaultValueType Boolean { get { return new DefaultValueType("boolean"); } }
-        
+
         public static DefaultValueType MapOfAny { get { return new DefaultValueType("mapOfAny"); } }
-        
+
         public static DefaultValueType ArrayOfAny { get { return new DefaultValueType("arrayOfAny"); } }
-        
+
         public static DefaultValueType Null { get { return new DefaultValueType("null"); } }
 
         public override string ToString() { return Value; }
@@ -74,8 +74,10 @@ namespace Docusign.IAM.SDK.Models.Components
     /// </remarks>
     /// </summary>
     [JsonConverter(typeof(DefaultValue.DefaultValueConverter))]
-    public class DefaultValue {
-        public DefaultValue(DefaultValueType type) {
+    public class DefaultValue
+    {
+        public DefaultValue(DefaultValueType type)
+        {
             Type = type;
         }
 
@@ -95,41 +97,40 @@ namespace Docusign.IAM.SDK.Models.Components
         public List<object>? ArrayOfAny { get; set; }
 
         public DefaultValueType Type { get; set; }
-
-
-        public static DefaultValue CreateStr(string str) {
+        public static DefaultValue CreateStr(string str)
+        {
             DefaultValueType typ = DefaultValueType.Str;
 
             DefaultValue res = new DefaultValue(typ);
             res.Str = str;
             return res;
         }
-
-        public static DefaultValue CreateNumber(double number) {
+        public static DefaultValue CreateNumber(double number)
+        {
             DefaultValueType typ = DefaultValueType.Number;
 
             DefaultValue res = new DefaultValue(typ);
             res.Number = number;
             return res;
         }
-
-        public static DefaultValue CreateBoolean(bool boolean) {
+        public static DefaultValue CreateBoolean(bool boolean)
+        {
             DefaultValueType typ = DefaultValueType.Boolean;
 
             DefaultValue res = new DefaultValue(typ);
             res.Boolean = boolean;
             return res;
         }
-
-        public static DefaultValue CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static DefaultValue CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             DefaultValueType typ = DefaultValueType.MapOfAny;
 
             DefaultValue res = new DefaultValue(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static DefaultValue CreateArrayOfAny(List<object> arrayOfAny) {
+        public static DefaultValue CreateArrayOfAny(List<object> arrayOfAny)
+        {
             DefaultValueType typ = DefaultValueType.ArrayOfAny;
 
             DefaultValue res = new DefaultValue(typ);
@@ -137,7 +138,8 @@ namespace Docusign.IAM.SDK.Models.Components
             return res;
         }
 
-        public static DefaultValue CreateNull() {
+        public static DefaultValue CreateNull()
+        {
             DefaultValueType typ = DefaultValueType.Null;
             return new DefaultValue(typ);
         }
@@ -261,38 +263,43 @@ namespace Docusign.IAM.SDK.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 DefaultValue res = (DefaultValue)value;
                 if (DefaultValueType.FromString(res.Type).Equals(DefaultValueType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.Number != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Number));
                     return;
                 }
+
                 if (res.Boolean != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Boolean));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfAny));
                     return;
                 }
-
             }
 
         }

@@ -20,6 +20,7 @@ You do not need an integration key to obtain an access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetTokenFromConfidentialAuthCode" method="post" path="/oauth/token#FromConfidentialAuthCode" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -72,6 +73,7 @@ You do not need an integration key to obtain an access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetTokenFromPublicAuthCode" method="post" path="/oauth/token#FromPublicAuthCode" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -122,6 +124,7 @@ You do not need an integration key to obtain an access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetTokenFromJWTGrant" method="post" path="/oauth/token#FromJWTGrant" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -168,6 +171,7 @@ You do not need an integration key to obtain an access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetTokenFromRefreshToken" method="post" path="/oauth/token#FromRefreshToken" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Requests;
@@ -219,6 +223,7 @@ For the production environment, the URI is https://account.docusign.com/oauth/us
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetUserInfo" method="get" path="/oauth/userinfo" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

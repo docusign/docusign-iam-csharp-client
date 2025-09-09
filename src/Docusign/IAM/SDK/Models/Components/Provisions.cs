@@ -171,6 +171,9 @@ namespace Docusign.IAM.SDK.Models.Components
         [JsonProperty("renewal_extension_period")]
         public string? RenewalExtensionPeriod { get; set; } = null;
 
+        /// <summary>
+        /// The userId parameter
+        /// </summary>
         [JsonProperty("renewal_process_owner")]
         public string? RenewalProcessOwner { get; set; }
 

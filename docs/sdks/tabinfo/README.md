@@ -15,6 +15,7 @@ Returns all tabs associated with the given account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ConnectedFieldsApi_GetTabGroups" method="get" path="/v1/accounts/{accountId}/connected-fields/tab-groups" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

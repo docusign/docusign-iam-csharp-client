@@ -12,14 +12,43 @@ namespace Docusign.IAM.SDK.Models.Errors
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public class OAuthErrorResponse : Exception
-    {
+    using System.Net.Http;
 
+    public class OAuthErrorResponsePayload
+    {
         [JsonProperty("error")]
         public string? Error { get; set; }
 
         [JsonProperty("error_description")]
         public string? ErrorDescription { get; set; }
     }
+
+    public class OAuthErrorResponse : IamClientError
+    {
+        /// <summary>
+        ///  The original data that was passed to this exception.
+        /// </summary>
+        public OAuthErrorResponsePayload Payload { get; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use OAuthErrorResponse.Payload.Error instead.")]
+        public string? Error { get; set; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use OAuthErrorResponse.Payload.ErrorDescription instead.")]
+        public string? ErrorDescription { get; set; }
+
+        public OAuthErrorResponse(
+            OAuthErrorResponsePayload payload,
+            HttpResponseMessage rawResponse,
+            string body
+        ): base("API error occurred", rawResponse, body)
+        {
+           Payload = payload;
+
+           #pragma warning disable CS0618
+           Error = payload.Error;
+           ErrorDescription = payload.ErrorDescription;
+           #pragma warning restore CS0618
+        }
+    }
+
 }
