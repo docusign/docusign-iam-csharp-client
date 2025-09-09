@@ -1,0 +1,15 @@
+# WorkspaceEnvelopeSummary
+
+The summary of the envelope in the workspace
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `EnvelopeId`                                                                          | *string*                                                                              | :heavy_check_mark:                                                                    | The ID of the envelope                                                                |
+| `Status`                                                                              | *string*                                                                              | :heavy_check_mark:                                                                    | The status of the envelope in the workspace                                           |
+| `Name`                                                                                | *string*                                                                              | :heavy_minus_sign:                                                                    | The envelope name                                                                     |
+| `Subject`                                                                             | *string*                                                                              | :heavy_minus_sign:                                                                    | The envelope subject                                                                  |
+| `CreatedDate`                                                                         | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_minus_sign:                                                                    | The date the envelope was created                                                     |
+| `LastUpdatedDate`                                                                     | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_minus_sign:                                                                    | The date the envelope was last updated                                                |

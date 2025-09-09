@@ -33,8 +33,10 @@ as who started it, when it was last modified, and how many steps have been compl
 
 
 
+
   into all ongoing and completed workflows within the Maestro platform
 - **Metadata for Tracking**: Includes helpful metadata like creation time, last modification date,
+
 
 
 
@@ -51,11 +53,13 @@ as who started it, when it was last modified, and how many steps have been compl
 
 
 
+
   platform scales
 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="getWorkflowInstancesList" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -113,6 +117,7 @@ auditing and reporting within the system.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="getWorkflowInstance" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -166,6 +171,7 @@ Once canceled, the workflow instance will no longer continue executing any remai
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="cancelWorkflowInstance" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}/actions/cancel" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

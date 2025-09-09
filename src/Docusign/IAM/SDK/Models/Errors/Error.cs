@@ -12,13 +12,10 @@ namespace Docusign.IAM.SDK.Models.Errors
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    /// <summary>
-    /// Bad Request - The request could not be understood or was missing required parameters.
-    /// </summary>
-    public class Error : Exception
-    {
+    using System.Net.Http;
 
+    public class ErrorPayload
+    {
         /// <summary>
         /// A message describing the error.
         /// </summary>
@@ -29,7 +26,7 @@ namespace Docusign.IAM.SDK.Models.Errors
         /// HTTP status code for the error.
         /// </summary>
         [JsonProperty("code")]
-        public long? Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The timestamp when the error occurred.
@@ -37,4 +34,40 @@ namespace Docusign.IAM.SDK.Models.Errors
         [JsonProperty("timestamp")]
         public DateTime? Timestamp { get; set; }
     }
+
+    /// <summary>
+    /// Bad Request - The request could not be understood or was missing required parameters.
+    /// </summary>
+    public class Error : IamClientError
+    {
+        /// <summary>
+        ///  The original data that was passed to this exception.
+        /// </summary>
+        public ErrorPayload Payload { get; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use Error.Payload.ErrorValue instead.")]
+        public string? ErrorValue { get; set; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use Error.Payload.Code instead.")]
+        public string? Code { get; set; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use Error.Payload.Timestamp instead.")]
+        public DateTime? Timestamp { get; set; }
+
+        public Error(
+            ErrorPayload payload,
+            HttpResponseMessage rawResponse,
+            string body
+        ): base("API error occurred", rawResponse, body)
+        {
+           Payload = payload;
+
+           #pragma warning disable CS0618
+           ErrorValue = payload.ErrorValue;
+           Code = payload.Code;
+           Timestamp = payload.Timestamp;
+           #pragma warning restore CS0618
+        }
+    }
+
 }

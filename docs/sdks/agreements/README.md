@@ -35,6 +35,7 @@ The response also includes provisions that outline the key legal, financial, and
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetAgreementsList" method="get" path="/v1/accounts/{accountId}/agreements" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -99,6 +100,7 @@ The operation is essential for retrieving the full context of an agreement, enab
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetAgreement" method="get" path="/v1/accounts/{accountId}/agreements/{agreementId}" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -141,6 +143,7 @@ This operation safely deletes an agreement. This action conforms to GDPR and CCP
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteAgreement" method="delete" path="/v1/accounts/{accountId}/agreements/{agreementId}" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -185,6 +188,7 @@ Please refer to the original agreement for any legally binding information.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateAgreementSummary" method="post" path="/v1/accounts/{accountId}/agreements/{agreementId}/ai/actions/summarize" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

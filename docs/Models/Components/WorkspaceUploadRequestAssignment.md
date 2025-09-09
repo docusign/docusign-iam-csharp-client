@@ -1,0 +1,9 @@
+# WorkspaceUploadRequestAssignment
+
+
+## Fields
+
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `AssigneeUserId`                                                                                                | *string*                                                                                                        | :heavy_check_mark:                                                                                              | The ID of the assigned user                                                                                     |
+| `UploadRequestResponsibilityTypeId`                                                                             | [WorkspaceUploadRequestResponsibilityType](../../Models/Components/WorkspaceUploadRequestResponsibilityType.md) | :heavy_minus_sign:                                                                                              | Enum representing the responsibility type for a workspace upload request assignment                             |

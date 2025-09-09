@@ -29,6 +29,7 @@ namespace Docusign.IAM.SDK
         public IMaestro Maestro { get; }
         public INavigator Navigator { get; }
         public IConnectedFields ConnectedFields { get; }
+        public IWorkspaces1 Workspaces { get; }
     }
 
 
@@ -40,13 +41,14 @@ namespace Docusign.IAM.SDK
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.3";
-        private const string _sdkGenVersion = "2.651.2";
+        private const string _sdkVersion = "1.0.0-beta.4";
+        private const string _sdkGenVersion = "2.692.0";
         private const string _openapiDocVersion = "v1";
         public IAuth Auth { get; private set; }
         public IMaestro Maestro { get; private set; }
         public INavigator Navigator { get; private set; }
         public IConnectedFields ConnectedFields { get; private set; }
+        public IWorkspaces1 Workspaces { get; private set; }
 
         public IamClient(SDKConfig config)
         {
@@ -60,6 +62,8 @@ namespace Docusign.IAM.SDK
             Navigator = new Navigator(SDKConfiguration);
 
             ConnectedFields = new ConnectedFields(SDKConfiguration);
+
+            Workspaces = new Workspaces1(SDKConfiguration);
         }
 
         public IamClient(string? accessToken = null, Func<string>? accessTokenSource = null, SDKConfig.Server? server = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
@@ -100,6 +104,8 @@ namespace Docusign.IAM.SDK
             Navigator = new Navigator(SDKConfiguration);
 
             ConnectedFields = new ConnectedFields(SDKConfiguration);
+
+            Workspaces = new Workspaces1(SDKConfiguration);
         }
 
         private void InitHooks()

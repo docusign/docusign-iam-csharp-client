@@ -1,0 +1,11 @@
+# WorkspaceSummary
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `WorkspaceId`                                                                         | *string*                                                                              | :heavy_minus_sign:                                                                    | The ID of the workspace                                                               |
+| `Name`                                                                                | *string*                                                                              | :heavy_minus_sign:                                                                    | The name of the workspace                                                             |
+| `CreatedDate`                                                                         | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_minus_sign:                                                                    | The date the workspace was created                                                    |
+| `CreatedByUserId`                                                                     | *string*                                                                              | :heavy_minus_sign:                                                                    | The ID of the user who created the workspace                                          |

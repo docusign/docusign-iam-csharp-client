@@ -1,0 +1,8 @@
+# RevokeWorkspaceUserDetails
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `RevocationDate`                                                                                               | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0)                          | :heavy_minus_sign:                                                                                             | The optional date in the future to initiate the revocation. If not specified, the revocation will be immediate |

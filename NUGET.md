@@ -157,23 +157,18 @@ var res = await sdk.Auth.GetTokenFromConfidentialAuthCodeAsync(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations. All operations return a response object or throw an exception.
-
-By default, an API error will raise a `Docusign.IAM.SDK.Models.Errors.APIException` exception, which has the following properties:
+[`IamClientError`](./src/Docusign/IAM/SDK/Models/Errors/IamClientError.cs) is the base exception class for all HTTP error responses. It has the following properties:
 
 | Property      | Type                  | Description           |
 |---------------|-----------------------|-----------------------|
-| `Message`     | *string*              | The error message     |
-| `StatusCode`  | *int*                 | The HTTP status code  |
-| `RawResponse` | *HttpResponseMessage* | The raw HTTP response |
-| `Body`        | *string*              | The response content  |
+| `Message`     | *string*              | Error message         |
+| `StatusCode`  | *int*                 | HTTP status code      |
+| `Headers`     | *HttpResponseHeaders* | HTTP headers          |
+| `ContentType` | *string?*             | HTTP content type     |
+| `RawResponse` | *HttpResponseMessage* | HTTP response object  |
+| `Body`        | *string*              | HTTP response body    |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `GetTokenFromConfidentialAuthCodeAsync` method throws the following exceptions:
-
-| Error Type                                        | Status Code | Content Type     |
-| ------------------------------------------------- | ----------- | ---------------- |
-| Docusign.IAM.SDK.Models.Errors.OAuthErrorResponse | 400         | application/json |
-| Docusign.IAM.SDK.Models.Errors.APIException       | 4XX, 5XX    | \*/\*            |
+Some exceptions in this SDK include an additional `Payload` field, which will contain deserialized custom error data when present. Possible exceptions are listed in the [Error Classes](#error-classes) section.
 
 ### Example
 
@@ -203,20 +198,55 @@ try
 
     // handle response
 }
-catch (Exception ex)
+catch (IamClientError ex)  // all SDK exceptions inherit from IamClientError
 {
-    if (ex is OAuthErrorResponse)
+    // ex.ToString() provides a detailed error message
+    System.Console.WriteLine(ex);
+
+    // Base exception fields
+    HttpResponseMessage rawResponse = ex.RawResponse;
+    HttpResponseHeaders headers = ex.Headers;
+    int statusCode = ex.StatusCode;
+    string? contentType = ex.ContentType;
+    var responseBody = ex.Body;
+
+    if (ex is OAuthErrorResponse) // different exceptions may be thrown depending on the method
     {
-        // Handle exception data
-        throw;
+        // Check error data fields
+        OAuthErrorResponsePayload payload = ex.Payload;
+        string Error = payload.Error;
+        string ErrorDescription = payload.ErrorDescription;
     }
-    else if (ex is Docusign.IAM.SDK.Models.Errors.APIException)
+
+    // An underlying cause may be provided
+    if (ex.InnerException != null)
     {
-        // Handle default exception
-        throw;
+        Exception cause = ex.InnerException;
     }
 }
+catch (System.Net.Http.HttpRequestException ex)
+{
+    // Check ex.InnerException for Network connectivity errors
+}
 ```
+
+### Error Classes
+
+**Primary exception:**
+* [`IamClientError`](./src/Docusign/IAM/SDK/Models/Errors/IamClientError.cs): The base class for HTTP error responses.
+
+<details><summary>Less common exceptions (5)</summary>
+
+* [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
+
+* Inheriting from [`IamClientError`](./src/Docusign/IAM/SDK/Models/Errors/IamClientError.cs):
+  * [`ErrorDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrorDetails.cs): The error response object for the Workspaces API. Applicable to 21 of 39 methods.*
+  * [`Error`](./src/Docusign/IAM/SDK/Models/Errors/Error.cs): Bad Request - The request could not be understood or was missing required parameters. Applicable to 11 of 39 methods.*
+  * [`OAuthErrorResponse`](./src/Docusign/IAM/SDK/Models/Errors/OAuthErrorResponse.cs): Status code `400`. Applicable to 5 of 39 methods.*
+  * [`ResponseValidationError`](./src/Docusign/IAM/SDK/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
+</details>
+
+\* Refer to the [relevant documentation](#available-resources-and-operations) to determine whether an exception applies to a specific operation.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

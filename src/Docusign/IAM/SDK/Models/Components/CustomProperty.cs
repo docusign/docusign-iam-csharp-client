@@ -16,23 +16,23 @@ namespace Docusign.IAM.SDK.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class CustomPropertyType
     {
         private CustomPropertyType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static CustomPropertyType Str { get { return new CustomPropertyType("str"); } }
-        
+
         public static CustomPropertyType Number { get { return new CustomPropertyType("number"); } }
-        
+
         public static CustomPropertyType Boolean { get { return new CustomPropertyType("boolean"); } }
-        
+
         public static CustomPropertyType MapOfAny { get { return new CustomPropertyType("mapOfAny"); } }
-        
+
         public static CustomPropertyType ArrayOfAny { get { return new CustomPropertyType("arrayOfAny"); } }
-        
+
         public static CustomPropertyType Null { get { return new CustomPropertyType("null"); } }
 
         public override string ToString() { return Value; }
@@ -65,8 +65,10 @@ namespace Docusign.IAM.SDK.Models.Components
 
 
     [JsonConverter(typeof(CustomProperty.CustomPropertyConverter))]
-    public class CustomProperty {
-        public CustomProperty(CustomPropertyType type) {
+    public class CustomProperty
+    {
+        public CustomProperty(CustomPropertyType type)
+        {
             Type = type;
         }
 
@@ -86,41 +88,40 @@ namespace Docusign.IAM.SDK.Models.Components
         public List<object>? ArrayOfAny { get; set; }
 
         public CustomPropertyType Type { get; set; }
-
-
-        public static CustomProperty CreateStr(string str) {
+        public static CustomProperty CreateStr(string str)
+        {
             CustomPropertyType typ = CustomPropertyType.Str;
 
             CustomProperty res = new CustomProperty(typ);
             res.Str = str;
             return res;
         }
-
-        public static CustomProperty CreateNumber(double number) {
+        public static CustomProperty CreateNumber(double number)
+        {
             CustomPropertyType typ = CustomPropertyType.Number;
 
             CustomProperty res = new CustomProperty(typ);
             res.Number = number;
             return res;
         }
-
-        public static CustomProperty CreateBoolean(bool boolean) {
+        public static CustomProperty CreateBoolean(bool boolean)
+        {
             CustomPropertyType typ = CustomPropertyType.Boolean;
 
             CustomProperty res = new CustomProperty(typ);
             res.Boolean = boolean;
             return res;
         }
-
-        public static CustomProperty CreateMapOfAny(Dictionary<string, object> mapOfAny) {
+        public static CustomProperty CreateMapOfAny(Dictionary<string, object> mapOfAny)
+        {
             CustomPropertyType typ = CustomPropertyType.MapOfAny;
 
             CustomProperty res = new CustomProperty(typ);
             res.MapOfAny = mapOfAny;
             return res;
         }
-
-        public static CustomProperty CreateArrayOfAny(List<object> arrayOfAny) {
+        public static CustomProperty CreateArrayOfAny(List<object> arrayOfAny)
+        {
             CustomPropertyType typ = CustomPropertyType.ArrayOfAny;
 
             CustomProperty res = new CustomProperty(typ);
@@ -128,7 +129,8 @@ namespace Docusign.IAM.SDK.Models.Components
             return res;
         }
 
-        public static CustomProperty CreateNull() {
+        public static CustomProperty CreateNull()
+        {
             CustomPropertyType typ = CustomPropertyType.Null;
             return new CustomProperty(typ);
         }
@@ -252,38 +254,43 @@ namespace Docusign.IAM.SDK.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 CustomProperty res = (CustomProperty)value;
                 if (CustomPropertyType.FromString(res.Type).Equals(CustomPropertyType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Str != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Str));
                     return;
                 }
+
                 if (res.Number != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Number));
                     return;
                 }
+
                 if (res.Boolean != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Boolean));
                     return;
                 }
+
                 if (res.MapOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.MapOfAny));
                     return;
                 }
+
                 if (res.ArrayOfAny != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfAny));
                     return;
                 }
-
             }
 
         }
