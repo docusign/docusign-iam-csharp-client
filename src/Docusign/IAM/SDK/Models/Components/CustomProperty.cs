@@ -33,8 +33,6 @@ namespace Docusign.IAM.SDK.Models.Components
 
         public static CustomPropertyType ArrayOfAny { get { return new CustomPropertyType("arrayOfAny"); } }
 
-        public static CustomPropertyType Null { get { return new CustomPropertyType("null"); } }
-
         public override string ToString() { return Value; }
         public static implicit operator String(CustomPropertyType v) { return v.Value; }
         public static CustomPropertyType FromString(string v) {
@@ -44,7 +42,6 @@ namespace Docusign.IAM.SDK.Models.Components
                 case "boolean": return Boolean;
                 case "mapOfAny": return MapOfAny;
                 case "arrayOfAny": return ArrayOfAny;
-                case "null": return Null;
                 default: throw new ArgumentException("Invalid value for CustomPropertyType");
             }
         }
@@ -129,27 +126,20 @@ namespace Docusign.IAM.SDK.Models.Components
             return res;
         }
 
-        public static CustomProperty CreateNull()
-        {
-            CustomPropertyType typ = CustomPropertyType.Null;
-            return new CustomProperty(typ);
-        }
-
         public class CustomPropertyConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(CustomProperty);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                if (reader.TokenType == JsonToken.Null)
                 {
-                    return null;
+                    throw new InvalidOperationException("Received unexpected null JSON value");
                 }
 
+                var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
 
                 if (json[0] == '"' && json[^1] == '"'){
@@ -250,17 +240,12 @@ namespace Docusign.IAM.SDK.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
-                    writer.WriteRawValue("null");
-                    return;
+                if (value == null)
+                {
+                    throw new InvalidOperationException("Unexpected null JSON value.");
                 }
 
                 CustomProperty res = (CustomProperty)value;
-                if (CustomPropertyType.FromString(res.Type).Equals(CustomPropertyType.Null))
-                {
-                    writer.WriteRawValue("null");
-                    return;
-                }
 
                 if (res.Str != null)
                 {

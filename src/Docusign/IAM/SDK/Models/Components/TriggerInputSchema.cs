@@ -51,7 +51,7 @@ namespace Docusign.IAM.SDK.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("default_value")]
+        [JsonProperty("default_value", NullValueHandling = NullValueHandling.Include)]
         public DefaultValue? DefaultValue { get; set; }
     }
 }

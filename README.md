@@ -14,6 +14,7 @@ methods to interact with the following Docusign APIs:
 * [Maestro API](https://developers.docusign.com/docs/maestro-api/)
 * [Navigator API](https://developers.docusign.com/docs/navigator-api/)
 * [Connected Fields API](https://developers.docusign.com/docs/connected-fields-api/)
+* [Workspaces API](https://developers.docusign.com/docs/workspaces-api/)
 
 This repo contains the source-code for this SDK. You only need to use the code
 in this repo if you want to customize the SDK for your own needs. To use the
@@ -263,16 +264,9 @@ var res = await sdk.Auth.GetUserInfoAsync();
 * [GetTokenFromRefreshToken](docs/sdks/auth/README.md#gettokenfromrefreshtoken) - Obtains an access token from the Docusign API using an authorization code.
 * [GetUserInfo](docs/sdks/auth/README.md#getuserinfo) - Get user information
 
-### [ConnectedFields](docs/sdks/connectedfields/README.md)
-
-
 #### [ConnectedFields.TabInfo](docs/sdks/tabinfo/README.md)
 
 * [GetConnectedFieldsTabGroups](docs/sdks/tabinfo/README.md#getconnectedfieldstabgroups) - Returns all tabs associated with the given account
-
-
-### [Maestro](docs/sdks/maestro/README.md)
-
 
 #### [Maestro.WorkflowInstanceManagement](docs/sdks/workflowinstancemanagement/README.md)
 
@@ -288,9 +282,6 @@ var res = await sdk.Auth.GetUserInfoAsync();
 * [PauseNewWorkflowInstances](docs/sdks/workflows/README.md#pausenewworkflowinstances) - Pause an Active Workflow
 * [ResumePausedWorkflow](docs/sdks/workflows/README.md#resumepausedworkflow) - Resume a Paused Workflow
 
-### [Navigator](docs/sdks/navigator/README.md)
-
-
 #### [Navigator.Agreements](docs/sdks/agreements/README.md)
 
 * [GetAgreementsList](docs/sdks/agreements/README.md#getagreementslist) - Retrieve a list of agreements
@@ -298,12 +289,10 @@ var res = await sdk.Auth.GetUserInfoAsync();
 * [DeleteAgreement](docs/sdks/agreements/README.md#deleteagreement) - Delete a specific agreement
 * [CreateAgreementSummary](docs/sdks/agreements/README.md#createagreementsummary) - Create an AI-generated summary of an agreement document
 
-### [Workspaces](docs/sdks/workspaces1/README.md)
-
-
 #### [Workspaces.WorkspaceDocuments](docs/sdks/workspacedocuments/README.md)
 
 * [GetWorkspaceDocuments](docs/sdks/workspacedocuments/README.md#getworkspacedocuments) - Get documents in the workspace accessible to the calling user
+* [AddWorkspaceDocument](docs/sdks/workspacedocuments/README.md#addworkspacedocument) - Add a document to a workspace via file contents upload
 * [GetWorkspaceDocument](docs/sdks/workspacedocuments/README.md#getworkspacedocument) - Get information about the document
 * [DeleteWorkspaceDocument](docs/sdks/workspacedocuments/README.md#deleteworkspacedocument) - Deletes a document in the workspace
 * [GetWorkspaceDocumentContents](docs/sdks/workspacedocuments/README.md#getworkspacedocumentcontents) - Get the file contents of the document
@@ -324,6 +313,7 @@ var res = await sdk.Auth.GetUserInfoAsync();
 * [GetWorkspaceUploadRequest](docs/sdks/workspaceuploadrequest/README.md#getworkspaceuploadrequest) - Gets details for a specific upload request
 * [UpdateWorkspaceUploadRequest](docs/sdks/workspaceuploadrequest/README.md#updateworkspaceuploadrequest) - Updates a specific upload request
 * [DeleteWorkspaceUploadRequest](docs/sdks/workspaceuploadrequest/README.md#deleteworkspaceuploadrequest) - Deletes a specific upload request
+* [AddWorkspaceUploadRequestDocument](docs/sdks/workspaceuploadrequest/README.md#addworkspaceuploadrequestdocument) - Add a document to an upload request via file upload
 * [CompleteWorkspaceUploadRequest](docs/sdks/workspaceuploadrequest/README.md#completeworkspaceuploadrequest) - Complete an upload request
 
 #### [Workspaces.WorkspaceUsers](docs/sdks/workspaceusers/README.md)
@@ -498,9 +488,9 @@ catch (System.Net.Http.HttpRequestException ex)
 * [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
 
 * Inheriting from [`IamClientError`](./src/Docusign/IAM/SDK/Models/Errors/IamClientError.cs):
-  * [`ErrorDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrorDetails.cs): The error response object for the Workspaces API. Applicable to 21 of 39 methods.*
-  * [`Error`](./src/Docusign/IAM/SDK/Models/Errors/Error.cs): Bad Request - The request could not be understood or was missing required parameters. Applicable to 11 of 39 methods.*
-  * [`OAuthErrorResponse`](./src/Docusign/IAM/SDK/Models/Errors/OAuthErrorResponse.cs): Status code `400`. Applicable to 5 of 39 methods.*
+  * [`ErrorDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrorDetails.cs): The error response object for the Workspaces API. Applicable to 23 of 41 methods.*
+  * [`Error`](./src/Docusign/IAM/SDK/Models/Errors/Error.cs): Bad Request - The request could not be understood or was missing required parameters. Applicable to 11 of 41 methods.*
+  * [`OAuthErrorResponse`](./src/Docusign/IAM/SDK/Models/Errors/OAuthErrorResponse.cs): Status code `400`. Applicable to 5 of 41 methods.*
   * [`ResponseValidationError`](./src/Docusign/IAM/SDK/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
 </details>
 

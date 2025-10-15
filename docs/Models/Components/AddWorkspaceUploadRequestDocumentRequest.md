@@ -1,0 +1,8 @@
+# AddWorkspaceUploadRequestDocumentRequest
+
+
+## Fields
+
+| Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `File`                                                                                                                  | [AddWorkspaceUploadRequestDocumentRequestFile](../../Models/Components/AddWorkspaceUploadRequestDocumentRequestFile.md) | :heavy_minus_sign:                                                                                                      | The file within the multipart/form-data                                                                                 |

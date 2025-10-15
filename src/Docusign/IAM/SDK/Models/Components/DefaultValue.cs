@@ -33,8 +33,6 @@ namespace Docusign.IAM.SDK.Models.Components
 
         public static DefaultValueType ArrayOfAny { get { return new DefaultValueType("arrayOfAny"); } }
 
-        public static DefaultValueType Null { get { return new DefaultValueType("null"); } }
-
         public override string ToString() { return Value; }
         public static implicit operator String(DefaultValueType v) { return v.Value; }
         public static DefaultValueType FromString(string v) {
@@ -44,7 +42,6 @@ namespace Docusign.IAM.SDK.Models.Components
                 case "boolean": return Boolean;
                 case "mapOfAny": return MapOfAny;
                 case "arrayOfAny": return ArrayOfAny;
-                case "null": return Null;
                 default: throw new ArgumentException("Invalid value for DefaultValueType");
             }
         }
@@ -138,27 +135,20 @@ namespace Docusign.IAM.SDK.Models.Components
             return res;
         }
 
-        public static DefaultValue CreateNull()
-        {
-            DefaultValueType typ = DefaultValueType.Null;
-            return new DefaultValue(typ);
-        }
-
         public class DefaultValueConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(DefaultValue);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                if (reader.TokenType == JsonToken.Null)
                 {
-                    return null;
+                    throw new InvalidOperationException("Received unexpected null JSON value");
                 }
 
+                var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
 
                 if (json[0] == '"' && json[^1] == '"'){
@@ -259,17 +249,12 @@ namespace Docusign.IAM.SDK.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
-                    writer.WriteRawValue("null");
-                    return;
+                if (value == null)
+                {
+                    throw new InvalidOperationException("Unexpected null JSON value.");
                 }
 
                 DefaultValue res = (DefaultValue)value;
-                if (DefaultValueType.FromString(res.Type).Equals(DefaultValueType.Null))
-                {
-                    writer.WriteRawValue("null");
-                    return;
-                }
 
                 if (res.Str != null)
                 {

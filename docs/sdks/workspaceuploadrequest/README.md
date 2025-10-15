@@ -10,6 +10,7 @@
 * [GetWorkspaceUploadRequest](#getworkspaceuploadrequest) - Gets details for a specific upload request
 * [UpdateWorkspaceUploadRequest](#updateworkspaceuploadrequest) - Updates a specific upload request
 * [DeleteWorkspaceUploadRequest](#deleteworkspaceuploadrequest) - Deletes a specific upload request
+* [AddWorkspaceUploadRequestDocument](#addworkspaceuploadrequestdocument) - Add a document to an upload request via file upload
 * [CompleteWorkspaceUploadRequest](#completeworkspaceuploadrequest) - Complete an upload request
 
 ## CreateWorkspaceUploadRequest
@@ -236,6 +237,51 @@ await sdk.Workspaces.WorkspaceUploadRequest.DeleteWorkspaceUploadRequestAsync(
 | `AccountId`                            | *string*                               | :heavy_check_mark:                     | The ID of the account                  |
 | `WorkspaceId`                          | *string*                               | :heavy_check_mark:                     | The ID of the workspace                |
 | `UploadRequestId`                      | *string*                               | :heavy_check_mark:                     | The ID of the upload request to delete |
+
+### Errors
+
+| Error Type                                  | Status Code                                 | Content Type                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| Docusign.IAM.SDK.Models.Errors.ErrorDetails | 400, 401                                    | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrorDetails | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
+
+## AddWorkspaceUploadRequestDocument
+
+This operation adds a document to a specific upload request within a workspace via file upload. The file is passed in the request body as multipart/form-data. The file name is used as the document name.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="addWorkspaceUploadRequestDocument" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/documents" -->
+```csharp
+using Docusign.IAM.SDK;
+using Docusign.IAM.SDK.Models.Components;
+
+var sdk = IamClient.Builder()
+    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
+    .Build();
+
+var res = await sdk.Workspaces.WorkspaceUploadRequest.AddWorkspaceUploadRequestDocumentAsync(
+    accountId: "8b599acd-faa6-4529-b5ad-02f99b937198",
+    workspaceId: "4cbc6785-7806-4970-8bca-94d8b557bc6e",
+    uploadRequestId: "a1972622-e272-42d7-9477-b2574b1da2ae"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `AccountId`                                                                                                                       | *string*                                                                                                                          | :heavy_check_mark:                                                                                                                | The ID of the account                                                                                                             |
+| `WorkspaceId`                                                                                                                     | *string*                                                                                                                          | :heavy_check_mark:                                                                                                                | The ID of the workspace                                                                                                           |
+| `UploadRequestId`                                                                                                                 | *string*                                                                                                                          | :heavy_check_mark:                                                                                                                | The ID of the upload request                                                                                                      |
+| `AddWorkspaceUploadRequestDocumentRequest`                                                                                        | [Models.Components.AddWorkspaceUploadRequestDocumentRequest](../../Models/Components/AddWorkspaceUploadRequestDocumentRequest.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |
+
+### Response
+
+**[AddWorkspaceUploadRequestDocumentResponse](../../Models/Components/AddWorkspaceUploadRequestDocumentResponse.md)**
 
 ### Errors
 
