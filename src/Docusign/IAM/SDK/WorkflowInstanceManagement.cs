@@ -52,6 +52,7 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// <br/>
         /// <br/>
+        /// <br/>
         ///   into all ongoing and completed workflows within the Maestro platform<br/>
         /// - **Metadata for Tracking**: Includes helpful metadata like creation time, last modification date,<br/>
         /// <br/>
@@ -62,8 +63,10 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// <br/>
         /// <br/>
+        /// <br/>
         ///   and user details to support audit trails<br/>
         /// - **Scalable and Future-Proof**: Designed to handle growing numbers of workflow instances as the<br/>
+        /// <br/>
         /// <br/>
         /// <br/>
         /// <br/>
@@ -129,8 +132,8 @@ namespace Docusign.IAM.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.4";
-        private const string _sdkGenVersion = "2.692.0";
+        private const string _sdkVersion = "1.0.0-beta.5";
+        private const string _sdkGenVersion = "2.723.8";
         private const string _openapiDocVersion = "v1";
 
         public WorkflowInstanceManagement(SDKConfig config)
@@ -156,7 +159,7 @@ namespace Docusign.IAM.SDK
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkflowInstancesList", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkflowInstancesList", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -277,7 +280,7 @@ namespace Docusign.IAM.SDK
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkflowInstance", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkflowInstance", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -438,7 +441,7 @@ namespace Docusign.IAM.SDK
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "cancelWorkflowInstance", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "cancelWorkflowInstance", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)

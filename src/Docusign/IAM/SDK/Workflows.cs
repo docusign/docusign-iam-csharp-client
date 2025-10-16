@@ -56,8 +56,10 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// <br/>
         /// <br/>
+        /// <br/>
         ///   into all the automated processes available within the Maestro platform.<br/>
         /// - **Input Schema Information**: Each workflow includes its trigger input schema, showing<br/>
+        /// <br/>
         /// <br/>
         /// <br/>
         /// <br/>
@@ -76,8 +78,10 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// <br/>
         /// <br/>
+        /// <br/>
         ///   and user details are included to support tracking and auditing workflows.<br/>
         /// - **Future-Proof**: The operation is designed to be expandable as more workflows are added<br/>
+        /// <br/>
         /// <br/>
         /// <br/>
         /// <br/>
@@ -120,6 +124,7 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// <br/>
         /// <br/>
+        /// <br/>
         ///   their data types, and optional default values for easy reference and data validation.<br/>
         /// - **Trigger Event Type Information**: Specifies the type of event required to initiate the workflow<br/>
         /// <br/>
@@ -130,8 +135,10 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// <br/>
         /// <br/>
+        /// <br/>
         ///   (e.g., HTTP), helping developers configure their systems to invoke the workflow appropriately.<br/>
         /// - **Configurable for Custom Triggers**: Suitable for custom configurations, enabling flexibility<br/>
+        /// <br/>
         /// <br/>
         /// <br/>
         /// <br/>
@@ -182,6 +189,7 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// <br/>
         /// <br/>
+        /// <br/>
         ///   against the workflow&apos;s input schema.<br/>
         /// - **Real-Time Triggering**: Designed to be invoked as part of an event-driven architecture,<br/>
         /// <br/>
@@ -192,8 +200,10 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// <br/>
         /// <br/>
+        /// <br/>
         ///   allowing for workflows to respond to external events.<br/>
         /// - **Tracking and Interaction**: The response includes a URL that allows users to check the status<br/>
+        /// <br/>
         /// <br/>
         /// <br/>
         /// <br/>
@@ -233,8 +243,8 @@ namespace Docusign.IAM.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.4";
-        private const string _sdkGenVersion = "2.692.0";
+        private const string _sdkVersion = "1.0.0-beta.5";
+        private const string _sdkGenVersion = "2.723.8";
         private const string _openapiDocVersion = "v1";
 
         public Workflows(SDKConfig config)
@@ -260,7 +270,7 @@ namespace Docusign.IAM.SDK
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetWorkflowsList", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetWorkflowsList", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -420,7 +430,7 @@ namespace Docusign.IAM.SDK
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetWorkflowTriggerRequirements", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetWorkflowTriggerRequirements", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -587,7 +597,7 @@ namespace Docusign.IAM.SDK
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "TriggerWorkflow", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "TriggerWorkflow", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -747,7 +757,7 @@ namespace Docusign.IAM.SDK
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "pauseNewWorkflowInstances", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "pauseNewWorkflowInstances", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -907,7 +917,7 @@ namespace Docusign.IAM.SDK
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "resumePausedWorkflow", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "resumePausedWorkflow", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)

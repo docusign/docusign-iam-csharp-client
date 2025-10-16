@@ -34,6 +34,7 @@ as who started it, when it was last modified, and how many steps have been compl
 
 
 
+
   into all ongoing and completed workflows within the Maestro platform
 - **Metadata for Tracking**: Includes helpful metadata like creation time, last modification date,
 
@@ -44,8 +45,10 @@ as who started it, when it was last modified, and how many steps have been compl
 
 
 
+
   and user details to support audit trails
 - **Scalable and Future-Proof**: Designed to handle growing numbers of workflow instances as the
+
 
 
 

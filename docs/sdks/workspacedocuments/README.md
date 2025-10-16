@@ -6,6 +6,7 @@
 ### Available Operations
 
 * [GetWorkspaceDocuments](#getworkspacedocuments) - Get documents in the workspace accessible to the calling user
+* [AddWorkspaceDocument](#addworkspacedocument) - Add a document to a workspace via file contents upload
 * [GetWorkspaceDocument](#getworkspacedocument) - Get information about the document
 * [DeleteWorkspaceDocument](#deleteworkspacedocument) - Deletes a document in the workspace
 * [GetWorkspaceDocumentContents](#getworkspacedocumentcontents) - Get the file contents of the document
@@ -47,6 +48,51 @@ var res = await sdk.Workspaces.WorkspaceDocuments.GetWorkspaceDocumentsAsync(req
 ### Response
 
 **[GetWorkspaceDocumentsResponse](../../Models/Components/GetWorkspaceDocumentsResponse.md)**
+
+### Errors
+
+| Error Type                                  | Status Code                                 | Content Type                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| Docusign.IAM.SDK.Models.Errors.ErrorDetails | 400, 401                                    | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrorDetails | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
+
+## AddWorkspaceDocument
+
+This operation adds a document to a workspace via file contents upload. The file is passed in the request body as a multipart/form-data file. The file name is used as the document name.
+
+Once added, it may be used to create an envelope associated with the workspace.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="addWorkspaceDocument" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/documents" -->
+```csharp
+using Docusign.IAM.SDK;
+using Docusign.IAM.SDK.Models.Components;
+
+var sdk = IamClient.Builder()
+    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
+    .Build();
+
+var res = await sdk.Workspaces.WorkspaceDocuments.AddWorkspaceDocumentAsync(
+    accountId: "5eddb8e1-d00e-47c4-9ed6-3b1c8915ae0d",
+    workspaceId: "7f9e0991-b6d1-4de8-bfa5-7724e59a3087"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `AccountId`                                                                                             | *string*                                                                                                | :heavy_check_mark:                                                                                      | The ID of the account                                                                                   |
+| `WorkspaceId`                                                                                           | *string*                                                                                                | :heavy_check_mark:                                                                                      | The ID of the workspace                                                                                 |
+| `AddWorkspaceDocumentRequest`                                                                           | [Models.Components.AddWorkspaceDocumentRequest](../../Models/Components/AddWorkspaceDocumentRequest.md) | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |
+
+### Response
+
+**[CreateWorkspaceDocumentResponse](../../Models/Components/CreateWorkspaceDocumentResponse.md)**
 
 ### Errors
 
