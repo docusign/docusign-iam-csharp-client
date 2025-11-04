@@ -69,14 +69,14 @@ namespace Docusign.IAM.SDK.Models.Components
         /// <summary>
         /// The date the upload request was created
         /// </summary>
-        [JsonProperty("created_date")]
-        public DateTime CreatedDate { get; set; } = default!;
+        [JsonProperty("created_date", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? CreatedDate { get; set; }
 
         /// <summary>
         /// The date the upload request was last updated
         /// </summary>
-        [JsonProperty("updated_date")]
-        public DateTime UpdatedDate { get; set; } = default!;
+        [JsonProperty("updated_date", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? UpdatedDate { get; set; }
 
         /// <summary>
         /// The due date for the upload request

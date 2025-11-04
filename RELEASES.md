@@ -81,3 +81,13 @@ Based on:
 - [csharp v1.0.0-beta.5] .
 ### Releases
 - [NuGet v1.0.0-beta.5] https://www.nuget.org/packages/Docusign.IAM.SDK/1.0.0-beta.5 - .
+
+## 2025-10-17 12:40:27
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.637.0 (2.727.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [csharp v1.0.0-beta.6] .
+### Releases
+- [NuGet v1.0.0-beta.6] https://www.nuget.org/packages/Docusign.IAM.SDK/1.0.0-beta.6 - .

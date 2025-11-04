@@ -16,6 +16,7 @@ namespace Docusign.IAM.SDK
 
     public interface IWorkspaces1
     {
+        public IWorkspaceBrands WorkspaceBrands { get; }
         public IWorkspaceDocuments WorkspaceDocuments { get; }
         public IWorkspaceUploadRequest WorkspaceUploadRequest { get; }
         public IWorkspaceUsers WorkspaceUsers { get; }
@@ -26,9 +27,10 @@ namespace Docusign.IAM.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.5";
-        private const string _sdkGenVersion = "2.723.8";
+        private const string _sdkVersion = "1.0.0-beta.6";
+        private const string _sdkGenVersion = "2.727.4";
         private const string _openapiDocVersion = "v1";
+        public IWorkspaceBrands WorkspaceBrands { get; private set; }
         public IWorkspaceDocuments WorkspaceDocuments { get; private set; }
         public IWorkspaceUploadRequest WorkspaceUploadRequest { get; private set; }
         public IWorkspaceUsers WorkspaceUsers { get; private set; }
@@ -37,6 +39,7 @@ namespace Docusign.IAM.SDK
         public Workspaces1(SDKConfig config)
         {
             SDKConfiguration = config;
+            WorkspaceBrands = new WorkspaceBrands(SDKConfiguration);
             WorkspaceDocuments = new WorkspaceDocuments(SDKConfiguration);
             WorkspaceUploadRequest = new WorkspaceUploadRequest(SDKConfiguration);
             WorkspaceUsers = new WorkspaceUsers(SDKConfiguration);

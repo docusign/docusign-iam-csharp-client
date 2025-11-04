@@ -165,6 +165,7 @@ This operation updates a specific upload request within a workspace. Only draft 
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
+using System;
 
 var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
@@ -178,7 +179,7 @@ var res = await sdk.Workspaces.WorkspaceUploadRequest.UpdateWorkspaceUploadReque
         Name = "<value>",
         Description = "at providence phew furthermore save digitize than how circa never",
         Status = WorkspaceUploadRequestStatus.Overdue,
-        DueDate = "<value>",
+        DueDate = System.DateTime.Parse("<value>"),
     }
 );
 
