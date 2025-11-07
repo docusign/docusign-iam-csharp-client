@@ -7,6 +7,7 @@
 
 * [GetWorkspaces](#getworkspaces) - Gets workspaces available to the calling user
 * [CreateWorkspace](#createworkspace) - Creates a new workspace
+* [UpdateWorkspace](#updateworkspace) - Updates an existing workspace
 * [GetWorkspace](#getworkspace) - Returns details about the workspace
 * [GetWorkspaceAssignableRoles](#getworkspaceassignableroles) - Returns the roles the caller can assign to workspace users
 * [CreateWorkspaceEnvelope](#createworkspaceenvelope) - Creates an envelope with the given documents. Returns the ID of the created envelope
@@ -91,6 +92,52 @@ var res = await sdk.Workspaces.Workspaces.CreateWorkspaceAsync(
 ### Response
 
 **[CreateWorkspaceResponse](../../Models/Components/CreateWorkspaceResponse.md)**
+
+### Errors
+
+| Error Type                                  | Status Code                                 | Content Type                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| Docusign.IAM.SDK.Models.Errors.ErrorDetails | 400, 401                                    | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrorDetails | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
+
+## UpdateWorkspace
+
+This operation updates details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="updateWorkspace" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}" -->
+```csharp
+using Docusign.IAM.SDK;
+using Docusign.IAM.SDK.Models.Components;
+
+var sdk = IamClient.Builder()
+    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
+    .Build();
+
+var res = await sdk.Workspaces.Workspaces.UpdateWorkspaceAsync(
+    accountId: "a03ca946-93ee-47cf-8cbe-a53c7e3284bf",
+    workspaceId: "c41ace15-4a79-4fe4-84bb-81adc9c7df98",
+    updateWorkspaceBody: new UpdateWorkspaceBody() {
+        Name = "<value>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `AccountId`                                                           | *string*                                                              | :heavy_check_mark:                                                    | The ID of the account                                                 |
+| `WorkspaceId`                                                         | *string*                                                              | :heavy_check_mark:                                                    | The ID of the workspace                                               |
+| `UpdateWorkspaceBody`                                                 | [UpdateWorkspaceBody](../../Models/Components/UpdateWorkspaceBody.md) | :heavy_check_mark:                                                    | N/A                                                                   |
+
+### Response
+
+**[UpdateWorkspaceResponse](../../Models/Components/UpdateWorkspaceResponse.md)**
 
 ### Errors
 

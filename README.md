@@ -289,6 +289,11 @@ var res = await sdk.Auth.GetUserInfoAsync();
 * [DeleteAgreement](docs/sdks/agreements/README.md#deleteagreement) - Delete a specific agreement
 * [CreateAgreementSummary](docs/sdks/agreements/README.md#createagreementsummary) - Create an AI-generated summary of an agreement document
 
+#### [Workspaces.WorkspaceBrands](docs/sdks/workspacebrands/README.md)
+
+* [GetWorkspaceBrand](docs/sdks/workspacebrands/README.md#getworkspacebrand) - Returns details about the brand set for a workspace
+* [UpdateWorkspaceBrand](docs/sdks/workspacebrands/README.md#updateworkspacebrand) - Updates brand for an existing workspace
+
 #### [Workspaces.WorkspaceDocuments](docs/sdks/workspacedocuments/README.md)
 
 * [GetWorkspaceDocuments](docs/sdks/workspacedocuments/README.md#getworkspacedocuments) - Get documents in the workspace accessible to the calling user
@@ -301,6 +306,7 @@ var res = await sdk.Auth.GetUserInfoAsync();
 
 * [GetWorkspaces](docs/sdks/workspaces2/README.md#getworkspaces) - Gets workspaces available to the calling user
 * [CreateWorkspace](docs/sdks/workspaces2/README.md#createworkspace) - Creates a new workspace
+* [UpdateWorkspace](docs/sdks/workspaces2/README.md#updateworkspace) - Updates an existing workspace
 * [GetWorkspace](docs/sdks/workspaces2/README.md#getworkspace) - Returns details about the workspace
 * [GetWorkspaceAssignableRoles](docs/sdks/workspaces2/README.md#getworkspaceassignableroles) - Returns the roles the caller can assign to workspace users
 * [CreateWorkspaceEnvelope](docs/sdks/workspaces2/README.md#createworkspaceenvelope) - Creates an envelope with the given documents. Returns the ID of the created envelope
@@ -488,9 +494,9 @@ catch (System.Net.Http.HttpRequestException ex)
 * [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
 
 * Inheriting from [`IamClientError`](./src/Docusign/IAM/SDK/Models/Errors/IamClientError.cs):
-  * [`ErrorDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrorDetails.cs): The error response object for the Workspaces API. Applicable to 23 of 41 methods.*
-  * [`Error`](./src/Docusign/IAM/SDK/Models/Errors/Error.cs): Bad Request - The request could not be understood or was missing required parameters. Applicable to 11 of 41 methods.*
-  * [`OAuthErrorResponse`](./src/Docusign/IAM/SDK/Models/Errors/OAuthErrorResponse.cs): Status code `400`. Applicable to 5 of 41 methods.*
+  * [`ErrorDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrorDetails.cs): The error response object for the Workspaces API. Applicable to 26 of 44 methods.*
+  * [`Error`](./src/Docusign/IAM/SDK/Models/Errors/Error.cs): Bad Request - The request could not be understood or was missing required parameters. Applicable to 11 of 44 methods.*
+  * [`OAuthErrorResponse`](./src/Docusign/IAM/SDK/Models/Errors/OAuthErrorResponse.cs): Status code `400`. Applicable to 5 of 44 methods.*
   * [`ResponseValidationError`](./src/Docusign/IAM/SDK/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
 </details>
 

@@ -12,6 +12,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
     
     /// <summary>
@@ -80,8 +81,8 @@ namespace Docusign.IAM.SDK.Models.Components
         /// <summary>
         /// The due date for the upload request (editable)
         /// </summary>
-        [JsonProperty("due_date", NullValueHandling = NullValueHandling.Include)]
-        public string? DueDate { get; set; }
+        [JsonProperty("due_date")]
+        public DateTime DueDate { get; set; } = default!;
 
         /// <summary>
         /// The date the upload request was sent

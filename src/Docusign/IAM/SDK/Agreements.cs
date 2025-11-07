@@ -113,8 +113,8 @@ namespace Docusign.IAM.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.5";
-        private const string _sdkGenVersion = "2.723.8";
+        private const string _sdkVersion = "1.0.0-beta.6";
+        private const string _sdkGenVersion = "2.727.4";
         private const string _openapiDocVersion = "v1";
 
         public Agreements(SDKConfig config)
