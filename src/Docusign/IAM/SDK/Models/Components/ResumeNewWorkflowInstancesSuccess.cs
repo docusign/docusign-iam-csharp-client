@@ -11,36 +11,18 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Indicates that the ability to create new workflow instances from this workflow has been resumed.<br/>
-    /// 
-    /// <remarks>
-    /// Existing workflow instances will be unaffected.<br/>
-    /// 
-    /// </remarks>
+    /// Existing workflow instances will be unaffected.
     /// </summary>
     public class ResumeNewWorkflowInstancesSuccess
     {
-
         /// <summary>
-        /// Represents the new state of a workflow&apos;s mechanism to permit new workflow instances from being created.<br/>
-        /// 
-        /// <remarks>
+        /// Represents the new state of a workflow's mechanism to permit new workflow instances from being created.<br/>
         /// Valid values include:<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   - active<br/>
-        ///   - paused<br/>
-        /// 
-        /// </remarks>
+        ///   - paused.
         /// </summary>
         [JsonProperty("status")]
         public string? Status { get; set; }

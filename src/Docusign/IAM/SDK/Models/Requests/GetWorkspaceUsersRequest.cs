@@ -11,18 +11,17 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
-    
+
     public class GetWorkspaceUsersRequest
     {
-
         /// <summary>
-        /// The ID of the account
+        /// The ID of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the workspace
+        /// The ID of the workspace.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=workspaceId")]
         public string WorkspaceId { get; set; } = default!;
@@ -40,7 +39,7 @@ namespace Docusign.IAM.SDK.Models.Requests
         public int? StartPosition { get; set; }
 
         /// <summary>
-        /// Returns workspace users filtered by Name and Email
+        /// Returns workspace users filtered by Name and Email.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")]
         public string? Filter { get; set; }

@@ -11,17 +11,12 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// A party is a person, group, or organization that is involved in a contract and has legally binding obligations and responsibilities. They also seek to benefit from the agreement.<br/>
-    /// 
-    /// <remarks>
-    /// 
-    /// </remarks>
+    /// A party is a person, group, or organization that is involved in a contract and has legally binding obligations and responsibilities. They also seek to benefit from the agreement.
     /// </summary>
     public class Party
     {
-
         /// <summary>
         /// Unique identifier for the party, mapped to the party entity reference.
         /// </summary>

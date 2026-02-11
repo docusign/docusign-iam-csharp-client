@@ -12,30 +12,29 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public class WorkspaceRoleSummary
     {
-
         /// <summary>
-        /// The ID of the role
+        /// The ID of the role.
         /// </summary>
         [JsonProperty("role_id")]
         public string? RoleId { get; set; }
 
         /// <summary>
-        /// The name of the role
+        /// The name of the role.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// If this role is applicable to any participant of a workspace including those outside the account. If false, this role may only be assigned to internal users of the same account
+        /// If this role is applicable to any participant of a workspace including those outside the account. If false, this role may only be assigned to internal users of the same account.
         /// </summary>
         [JsonProperty("is_external")]
         public bool? IsExternal { get; set; } = null;
 
         /// <summary>
-        /// The date the role was created
+        /// The date the role was created.
         /// </summary>
         [JsonProperty("created_date")]
         public DateTime? CreatedDate { get; set; } = null;

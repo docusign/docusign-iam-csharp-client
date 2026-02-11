@@ -1,5 +1,4 @@
-# WorkspaceDocuments
-(*Workspaces.WorkspaceDocuments*)
+# Workspaces.WorkspaceDocuments
 
 ## Overview
 

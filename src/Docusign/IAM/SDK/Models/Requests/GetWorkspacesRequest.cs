@@ -10,24 +10,23 @@
 namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
-    
+
     public class GetWorkspacesRequest
     {
-
         /// <summary>
-        /// The ID of the account
+        /// The ID of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 
         /// <summary>
-        /// Number of workspaces to return. Defaults to the maximum which is 100
+        /// Number of workspaces to return. Defaults to the maximum which is 100.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=count")]
         public int? Count { get; set; }
 
         /// <summary>
-        /// Position of the first item in the total results. Defaults to 0
+        /// Position of the first item in the total results. Defaults to 0.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=start_position")]
         public int? StartPosition { get; set; }

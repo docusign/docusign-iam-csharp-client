@@ -1,0 +1,14 @@
+# PageLinks
+
+Hypermedia controls (HATEOAS) for navigating between pages in a paginated collection of results.
+Links for the current page, next page, and previous page, with optional first and last page links.
+
+
+
+## Fields
+
+| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `First`                                                                                                                            | [PageLink](../../Models/Components/PageLink.md)                                                                                    | :heavy_minus_sign:                                                                                                                 | A URL that references a specific page in the pagination process. This is typically used for navigation<br/>between paginated results.<br/> |
+| `Next`                                                                                                                             | [PageLink](../../Models/Components/PageLink.md)                                                                                    | :heavy_minus_sign:                                                                                                                 | A URL that references a specific page in the pagination process. This is typically used for navigation<br/>between paginated results.<br/> |
+| `Self`                                                                                                                             | [PageLink](../../Models/Components/PageLink.md)                                                                                    | :heavy_minus_sign:                                                                                                                 | A URL that references a specific page in the pagination process. This is typically used for navigation<br/>between paginated results.<br/> |

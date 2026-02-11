@@ -12,12 +12,11 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public class RevokeWorkspaceUserDetails
     {
-
         /// <summary>
-        /// The optional date in the future to initiate the revocation. If not specified, the revocation will be immediate
+        /// The optional date in the future to initiate the revocation. If not specified, the revocation will be immediate.
         /// </summary>
         [JsonProperty("revocation_date")]
         public DateTime? RevocationDate { get; set; } = null;

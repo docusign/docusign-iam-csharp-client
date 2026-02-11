@@ -12,9 +12,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The grant type. This value must be set to &quot;authorization_code&quot;.
+    /// The grant type. This value must be set to "authorization_code".
     /// </summary>
     public enum ConfidentialAuthCodeGrantRequestBodyGrantType
     {
@@ -54,5 +54,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum ConfidentialAuthCodeGrantRequestBodyGrantType");
         }
     }
-
 }

@@ -24,74 +24,164 @@ namespace Docusign.IAM.SDK
 
     public interface IWorkspaceUsers
     {
-
         /// <summary>
-        /// Retrieves the list of users in the given workspace
-        /// 
+        /// Retrieves the list of users in the given workspace.
+        /// </summary>
         /// <remarks>
         /// This operations retrieves the users in a workspace. Users sent envelopes or assigned tasks will automatically be added to the workspace with the Participate role.<br/>
         /// <br/>
         /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceUsersResponse> GetWorkspaceUsersAsync(GetWorkspaceUsersRequest request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="GetWorkspaceUsersRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceUsersResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceUsersResponse> GetWorkspaceUsersAsync(
+            GetWorkspaceUsersRequest request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Adds a user to the workspace by email address
-        /// 
+        /// Adds a user to the workspace by email address.
+        /// </summary>
         /// <remarks>
-        /// This operation manually adds an internal or external user to a specific workspace by email address. Users within the account are considered &quot;Internal&quot; and may be assigned any role. Users outside the account are considered &quot;External&quot; and may only be assigned the Participate role. This operation is not typically needed for adding external participants to a Workspace as they will be automatically added as tasks are assigned.<br/>
+        /// This operation manually adds an internal or external user to a specific workspace by email address. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned the Participate role. This operation is not typically needed for adding external participants to a Workspace as they will be automatically added as tasks are assigned.<br/>
         /// <br/>
         /// Available role IDs can be retrieved via the Assignable Roles operation on a workspace. If the `role_id` is not passed, the user is added with the Participate role.
         /// </remarks>
-        /// </summary>
-        Task<CreateWorkspaceUserResponse> AddWorkspaceUserAsync(string accountId, string workspaceId, WorkspaceUserForCreate? workspaceUserForCreate = null, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="workspaceUserForCreate">The user details.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWorkspaceUserResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateWorkspaceUserResponse> AddWorkspaceUserAsync(
+            string accountId,
+            string workspaceId,
+            WorkspaceUserForCreate? workspaceUserForCreate = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Updates the specified user&apos;s role
-        /// 
-        /// <remarks>
-        /// This operation updates the specified user&apos;s role in the workspace. Users within the account are considered &quot;Internal&quot; and may be assigned any role. Users outside the account are considered &quot;External&quot; and may only be assigned &quot;External&quot; roles.
-        /// </remarks>
+        /// Updates the specified user's role.
         /// </summary>
-        Task<UpdateWorkspaceUserResponse> UpdateWorkspaceUserAsync(string accountId, string workspaceId, string userId, WorkspaceUserForUpdate? workspaceUserForUpdate = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// This operation updates the specified user's role in the workspace. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="userId">The ID of the user to update.</param>
+        /// <param name="workspaceUserForUpdate">The user details to update to including the RoleId.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateWorkspaceUserResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateWorkspaceUserResponse> UpdateWorkspaceUserAsync(
+            string accountId,
+            string workspaceId,
+            string userId,
+            WorkspaceUserForUpdate? workspaceUserForUpdate = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Revokes the specified user&apos;s access to the workspace
-        /// 
-        /// <remarks>
-        /// This operation revokes the specified user&apos;s access to the workspace. The optional `revocation_date` may be set to schedule revocation in the future. If not specified, the revocation will be immediate.
-        /// </remarks>
+        /// Revokes the specified user's access to the workspace.
         /// </summary>
-        Task RevokeWorkspaceUserAccessAsync(string accountId, string workspaceId, string userId, RevokeWorkspaceUserDetails? revokeWorkspaceUserDetails = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// This operation revokes the specified user's access to the workspace. The optional `revocation_date` may be set to schedule revocation in the future. If not specified, the revocation will be immediate.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace to revoke access from.</param>
+        /// <param name="userId">The ID of the user to be revoked from the workspace.</param>
+        /// <param name="revokeWorkspaceUserDetails">Optional details. Allows scheduling the revocation for the future.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task RevokeWorkspaceUserAccessAsync(
+            string accountId,
+            string workspaceId,
+            string userId,
+            RevokeWorkspaceUserDetails? revokeWorkspaceUserDetails = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Restores the specified user&apos;s access to the workspace
-        /// 
-        /// <remarks>
-        /// This operation restores the specified user&apos;s access to the workspace. The user must have been previously revoked from the workspace. The access is immediately restored.
-        /// </remarks>
+        /// Restores the specified user's access to the workspace.
         /// </summary>
-        Task RestoreWorkspaceUserAccessAsync(string accountId, string workspaceId, string userId, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// This operation restores the specified user's access to the workspace. The user must have been previously revoked from the workspace. The access is immediately restored.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace to restore access.</param>
+        /// <param name="userId">The ID of the user to be restored to the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task RestoreWorkspaceUserAccessAsync(
+            string accountId,
+            string workspaceId,
+            string userId,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class WorkspaceUsers: IWorkspaceUsers
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public WorkspaceUsers(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetWorkspaceUsersResponse> GetWorkspaceUsersAsync(GetWorkspaceUsersRequest request, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Retrieves the list of users in the given workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operations retrieves the users in a workspace. Users sent envelopes or assigned tasks will automatically be added to the workspace with the Participate role.<br/>
+        /// <br/>
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetWorkspaceUsersRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceUsersResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceUsersResponse> GetWorkspaceUsersAsync(
+            GetWorkspaceUsersRequest request,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -145,7 +235,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -231,7 +321,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 404 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -243,16 +333,44 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateWorkspaceUserResponse> AddWorkspaceUserAsync(string accountId, string workspaceId, WorkspaceUserForCreate? workspaceUserForCreate = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Adds a user to the workspace by email address.
+        /// </summary>
+        /// <remarks>
+        /// This operation manually adds an internal or external user to a specific workspace by email address. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned the Participate role. This operation is not typically needed for adding external participants to a Workspace as they will be automatically added as tasks are assigned.<br/>
+        /// <br/>
+        /// Available role IDs can be retrieved via the Assignable Roles operation on a workspace. If the `role_id` is not passed, the user is added with the Participate role.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="workspaceUserForCreate">The user details.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWorkspaceUserResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateWorkspaceUserResponse> AddWorkspaceUserAsync(
+            string accountId,
+            string workspaceId,
+            WorkspaceUserForCreate? workspaceUserForCreate = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+
             var request = new AddWorkspaceUserRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 WorkspaceUserForCreate = workspaceUserForCreate,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -312,7 +430,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -410,8 +528,36 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateWorkspaceUserResponse> UpdateWorkspaceUserAsync(string accountId, string workspaceId, string userId, WorkspaceUserForUpdate? workspaceUserForUpdate = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Updates the specified user's role.
+        /// </summary>
+        /// <remarks>
+        /// This operation updates the specified user's role in the workspace. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="userId">The ID of the user to update.</param>
+        /// <param name="workspaceUserForUpdate">The user details to update to including the RoleId.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateWorkspaceUserResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateWorkspaceUserResponse> UpdateWorkspaceUserAsync(
+            string accountId,
+            string workspaceId,
+            string userId,
+            WorkspaceUserForUpdate? workspaceUserForUpdate = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new UpdateWorkspaceUserRequest()
             {
                 AccountId = accountId,
@@ -419,8 +565,9 @@ namespace Docusign.IAM.SDK
                 UserId = userId,
                 WorkspaceUserForUpdate = workspaceUserForUpdate,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -480,7 +627,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -578,8 +725,36 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task RevokeWorkspaceUserAccessAsync(string accountId, string workspaceId, string userId, RevokeWorkspaceUserDetails? revokeWorkspaceUserDetails = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Revokes the specified user's access to the workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation revokes the specified user's access to the workspace. The optional `revocation_date` may be set to schedule revocation in the future. If not specified, the revocation will be immediate.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace to revoke access from.</param>
+        /// <param name="userId">The ID of the user to be revoked from the workspace.</param>
+        /// <param name="revokeWorkspaceUserDetails">Optional details. Allows scheduling the revocation for the future.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task RevokeWorkspaceUserAccessAsync(
+            string accountId,
+            string workspaceId,
+            string userId,
+            RevokeWorkspaceUserDetails? revokeWorkspaceUserDetails = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new RevokeWorkspaceUserAccessRequest()
             {
                 AccountId = accountId,
@@ -587,8 +762,9 @@ namespace Docusign.IAM.SDK
                 UserId = userId,
                 RevokeWorkspaceUserDetails = revokeWorkspaceUserDetails,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}/actions/revoke-access", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}/actions/revoke-access", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -648,7 +824,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -710,16 +886,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task RestoreWorkspaceUserAccessAsync(string accountId, string workspaceId, string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Restores the specified user's access to the workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation restores the specified user's access to the workspace. The user must have been previously revoked from the workspace. The access is immediately restored.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace to restore access.</param>
+        /// <param name="userId">The ID of the user to be restored to the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task RestoreWorkspaceUserAccessAsync(
+            string accountId,
+            string workspaceId,
+            string userId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new RestoreWorkspaceUserAccessRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}/actions/restore-access", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}/actions/restore-access", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -773,7 +976,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -834,5 +1037,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

@@ -13,13 +13,12 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// The details of a single workspace brand
+    /// The details of a single workspace brand.
     /// </summary>
     public class GetWorkspaceBrandResponse
     {
-
         [JsonProperty("brand_id")]
         public string? BrandId { get; set; } = null;
 

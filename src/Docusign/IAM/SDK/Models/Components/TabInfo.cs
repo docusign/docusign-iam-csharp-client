@@ -13,18 +13,17 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class TabInfo
     {
-
         /// <summary>
-        /// Unique ID of the installed extension app
+        /// Unique ID of the installed extension app.
         /// </summary>
         [JsonProperty("appId")]
         public string AppId { get; set; } = default!;
 
         /// <summary>
-        /// Tab data representing the tabs associated with installed apps in the account
+        /// Tab data representing the tabs associated with installed apps in the account.
         /// </summary>
         [JsonProperty("tabs")]
         public List<Tab> Tabs { get; set; } = default!;

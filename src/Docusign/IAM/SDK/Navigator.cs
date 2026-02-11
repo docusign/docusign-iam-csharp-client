@@ -17,21 +17,35 @@ namespace Docusign.IAM.SDK
     public interface INavigator
     {
         public IAgreements Agreements { get; }
+
+        public IBulkJob BulkJob { get; }
     }
 
     public class Navigator: INavigator
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
+
+        /// <summary>
+        /// Agreements SubSDK.
+        /// <see cref="IAgreements"/>
+        /// </summary>
         public IAgreements Agreements { get; private set; }
+
+        /// <summary>
+        /// BulkJob SubSDK.
+        /// <see cref="IBulkJob"/>
+        /// </summary>
+        public IBulkJob BulkJob { get; private set; }
 
         public Navigator(SDKConfig config)
         {
             SDKConfiguration = config;
             Agreements = new Agreements(SDKConfiguration);
+            BulkJob = new BulkJob(SDKConfiguration);
         }
     }
 }

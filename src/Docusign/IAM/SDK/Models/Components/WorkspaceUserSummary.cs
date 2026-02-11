@@ -11,42 +11,41 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class WorkspaceUserSummary
     {
-
         /// <summary>
-        /// The ID of the user
+        /// The ID of the user.
         /// </summary>
         [JsonProperty("user_id")]
         public string? UserId { get; set; }
 
         /// <summary>
-        /// The email of the user
+        /// The email of the user.
         /// </summary>
         [JsonProperty("email")]
         public string? Email { get; set; } = null;
 
         /// <summary>
-        /// The first name of the user
+        /// The first name of the user.
         /// </summary>
         [JsonProperty("first_name")]
         public string? FirstName { get; set; } = null;
 
         /// <summary>
-        /// The last name of the user
+        /// The last name of the user.
         /// </summary>
         [JsonProperty("last_name")]
         public string? LastName { get; set; } = null;
 
         /// <summary>
-        /// The ID of the users&apos;s role
+        /// The ID of the users's role.
         /// </summary>
         [JsonProperty("role_id")]
         public string? RoleId { get; set; } = null;
 
         /// <summary>
-        /// The name of the user&apos;s role
+        /// The name of the user's role.
         /// </summary>
         [JsonProperty("role_name")]
         public string? RoleName { get; set; } = null;

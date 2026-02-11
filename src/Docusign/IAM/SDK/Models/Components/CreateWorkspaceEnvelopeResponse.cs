@@ -11,10 +11,9 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateWorkspaceEnvelopeResponse
     {
-
         [JsonProperty("envelope_id")]
         public string? EnvelopeId { get; set; } = null;
     }

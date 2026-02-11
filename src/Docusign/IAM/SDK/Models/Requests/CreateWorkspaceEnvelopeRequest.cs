@@ -11,24 +11,23 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
-    
+
     public class CreateWorkspaceEnvelopeRequest
     {
-
         /// <summary>
-        /// The ID of the account
+        /// The ID of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the workspace
+        /// The ID of the workspace.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=workspaceId")]
         public string WorkspaceId { get; set; } = default!;
 
         /// <summary>
-        /// The details of the envelope to be created including the list of document IDs to add to the envelope
+        /// The details of the envelope to be created including the list of document IDs to add to the envelope.
         /// </summary>
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public WorkspaceEnvelopeForCreate WorkspaceEnvelopeForCreate { get; set; } = default!;

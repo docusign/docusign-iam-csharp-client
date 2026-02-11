@@ -10,24 +10,23 @@
 namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
-    
+
     public class RestoreWorkspaceUserAccessRequest
     {
-
         /// <summary>
-        /// The ID of the account
+        /// The ID of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the workspace to restore access
+        /// The ID of the workspace to restore access.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=workspaceId")]
         public string WorkspaceId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the user to be restored to the workspace
+        /// The ID of the user to be restored to the workspace.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=userId")]
         public string UserId { get; set; } = default!;

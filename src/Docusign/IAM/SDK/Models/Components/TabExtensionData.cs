@@ -13,10 +13,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class TabExtensionData
     {
-
         /// <summary>
         /// A unique UUID for each tab group. Tabs associated with the same model or concept will share the same extensionGroupId.
         /// </summary>
@@ -30,7 +29,7 @@ namespace Docusign.IAM.SDK.Models.Components
         public string ActionInputKey { get; set; } = default!;
 
         /// <summary>
-        /// Indicates if the field is required to sign the document
+        /// Indicates if the field is required to sign the document.
         /// </summary>
         [JsonProperty("extensionPolicy")]
         public ExtensionPolicy? ExtensionPolicy { get; set; }

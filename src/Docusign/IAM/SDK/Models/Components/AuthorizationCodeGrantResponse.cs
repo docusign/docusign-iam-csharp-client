@@ -11,10 +11,9 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class AuthorizationCodeGrantResponse
     {
-
         /// <summary>
         /// The value of the access token. This value will be added to the Authorization header of all Docusign API calls.
         /// </summary>

@@ -11,11 +11,13 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class RelatedAgreementDocuments
     {
-
+        /// <summary>
+        /// ID of the parent agreement document, if related.
+        /// </summary>
         [JsonProperty("parent_agreement_document_id")]
-        public string? ParentAgreementDocumentId { get; set; }
+        public string? ParentAgreementDocumentId { get; set; } = "00000000-0000-0000-0000-000000000000";
     }
 }

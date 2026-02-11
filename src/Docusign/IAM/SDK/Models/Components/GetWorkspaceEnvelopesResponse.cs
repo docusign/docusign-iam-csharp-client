@@ -13,12 +13,11 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class GetWorkspaceEnvelopesResponse
     {
-
         /// <summary>
-        /// The summary list of envelopes associated with the workspace
+        /// The summary list of envelopes associated with the workspace.
         /// </summary>
         [JsonProperty("envelopes", NullValueHandling = NullValueHandling.Include)]
         public List<WorkspaceEnvelopeSummary>? Envelopes { get; set; }

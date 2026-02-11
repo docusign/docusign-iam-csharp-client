@@ -14,33 +14,32 @@ namespace Docusign.IAM.SDK.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Upload request details for update operations
+    /// Upload request details for update operations.
     /// </summary>
     public class UpdateWorkspaceUploadRequestBody
     {
-
         /// <summary>
-        /// The ID of the upload request
+        /// The ID of the upload request.
         /// </summary>
         [JsonProperty("upload_request_id")]
         public string? UploadRequestId { get; set; } = null;
 
         /// <summary>
-        /// The ID of the workspace
+        /// The ID of the workspace.
         /// </summary>
         [JsonProperty("workspace_id")]
         public string? WorkspaceId { get; set; } = null;
 
         /// <summary>
-        /// The name of the upload request (editable)
+        /// The name of the upload request (editable).
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Include)]
         public string? Name { get; set; }
 
         /// <summary>
-        /// The description of the upload request (editable)
+        /// The description of the upload request (editable).
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Include)]
         public string? Description { get; set; }
@@ -49,67 +48,67 @@ namespace Docusign.IAM.SDK.Models.Components
         public WorkspaceUploadRequestOwner? UploadRequestOwner { get; set; }
 
         /// <summary>
-        /// Enum representing the status of a workspace upload request
+        /// Enum representing the status of a workspace upload request.
         /// </summary>
         [JsonProperty("status")]
         public WorkspaceUploadRequestStatus Status { get; set; } = default!;
 
         /// <summary>
-        /// List of documents associated with the upload request
+        /// List of documents associated with the upload request.
         /// </summary>
         [JsonProperty("documents")]
         public List<WorkspaceUploadRequestDocument>? Documents { get; set; } = null;
 
         /// <summary>
-        /// List of user assignments for the upload request
+        /// List of user assignments for the upload request.
         /// </summary>
         [JsonProperty("assignments")]
         public List<WorkspaceUploadRequestAssignment>? Assignments { get; set; } = null;
 
         /// <summary>
-        /// The date the upload request was created
+        /// The date the upload request was created.
         /// </summary>
         [JsonProperty("created_date")]
         public string? CreatedDate { get; set; } = null;
 
         /// <summary>
-        /// The date the upload request was last updated
+        /// The date the upload request was last updated.
         /// </summary>
         [JsonProperty("updated_date")]
         public string? UpdatedDate { get; set; } = null;
 
         /// <summary>
-        /// The due date for the upload request (editable)
+        /// The due date for the upload request (editable).
         /// </summary>
         [JsonProperty("due_date")]
         public DateTime DueDate { get; set; } = default!;
 
         /// <summary>
-        /// The date the upload request was sent
+        /// The date the upload request was sent.
         /// </summary>
         [JsonProperty("sent_date")]
         public string? SentDate { get; set; } = null;
 
         /// <summary>
-        /// The date the upload request was completed
+        /// The date the upload request was completed.
         /// </summary>
         [JsonProperty("completed_date")]
         public string? CompletedDate { get; set; } = null;
 
         /// <summary>
-        /// Whether the current user can view the upload request
+        /// Whether the current user can view the upload request.
         /// </summary>
         [JsonProperty("can_view")]
         public bool? CanView { get; set; } = null;
 
         /// <summary>
-        /// Whether the current user can edit the upload request
+        /// Whether the current user can edit the upload request.
         /// </summary>
         [JsonProperty("can_edit")]
         public bool? CanEdit { get; set; } = null;
 
         /// <summary>
-        /// Whether the current user can delete the upload request
+        /// Whether the current user can delete the upload request.
         /// </summary>
         [JsonProperty("can_delete")]
         public bool? CanDelete { get; set; } = null;

@@ -11,18 +11,17 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
-    
+
     public class CreateWorkspaceRequest
     {
-
         /// <summary>
-        /// The ID of the account
+        /// The ID of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 
         /// <summary>
-        /// The details of the workspace to be created including the name
+        /// The details of the workspace to be created including the name.
         /// </summary>
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public CreateWorkspaceBody CreateWorkspaceBody { get; set; } = default!;

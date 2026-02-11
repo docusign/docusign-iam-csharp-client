@@ -1,5 +1,4 @@
-# Workflows
-(*Maestro.Workflows*)
+# Maestro.Workflows
 
 ## Overview
 
@@ -32,48 +31,12 @@ be triggered.
 
 ### Key Features:
 - **Comprehensive Workflow Overview**: Provides a full list of workflows, giving visibility
-
-
-
-
-
-
-
-
-
   into all the automated processes available within the Maestro platform.
 - **Input Schema Information**: Each workflow includes its trigger input schema, showing
-
-
-
-
-
-
-
-
-
   what data must be provided when triggering the workflow.
 - **Metadata for Tracking**: Useful metadata like creation time, last modification date,
-
-
-
-
-
-
-
-
-
   and user details are included to support tracking and auditing workflows.
 - **Future-Proof**: The operation is designed to be expandable as more workflows are added
-
-
-
-
-
-
-
-
-
   or the platform grows, ensuring scalability in the workflow management process.
 
 
@@ -134,37 +97,10 @@ the workflow instance, ensuring seamless execution and compliance with workflow 
 
 ### Key Features:
 - **Detailed Trigger Input Requirements**: Provides an exhaustive schema of required fields,
-
-
-
-
-
-
-
-
-
   their data types, and optional default values for easy reference and data validation.
 - **Trigger Event Type Information**: Specifies the type of event required to initiate the workflow
-
-
-
-
-
-
-
-
-
   (e.g., HTTP), helping developers configure their systems to invoke the workflow appropriately.
 - **Configurable for Custom Triggers**: Suitable for custom configurations, enabling flexibility
-
-
-
-
-
-
-
-
-
   in how workflows can be triggered according to system needs.
 
 
@@ -232,37 +168,10 @@ interact with or track the running instance.
 ### Key Features:
 - **Automated Execution**: Once triggered, the workflow runs until a step requires manual intervention.
 - **Input-Driven**: Workflow execution is based on the provided input data, which is validated
-
-
-
-
-
-
-
-
-
   against the workflow's input schema.
 - **Real-Time Triggering**: Designed to be invoked as part of an event-driven architecture,
-
-
-
-
-
-
-
-
-
   allowing for workflows to respond to external events.
 - **Tracking and Interaction**: The response includes a URL that allows users to check the status
-
-
-
-
-
-
-
-
-
   of the workflow instance or take further actions while it runs.
 
 
@@ -334,8 +243,8 @@ var sdk = IamClient.Builder()
     .Build();
 
 var res = await sdk.Maestro.Workflows.PauseNewWorkflowInstancesAsync(
-    accountId: "<id>",
-    workflowId: "<id>"
+    accountId: "00000000-0000-0000-0000-000000000000",
+    workflowId: "00000000-0000-0000-0000-000000000000"
 );
 
 // handle response
@@ -377,8 +286,8 @@ var sdk = IamClient.Builder()
     .Build();
 
 var res = await sdk.Maestro.Workflows.ResumePausedWorkflowAsync(
-    accountId: "<id>",
-    workflowId: "<id>"
+    accountId: "00000000-0000-0000-0000-000000000000",
+    workflowId: "00000000-0000-0000-0000-000000000000"
 );
 
 // handle response

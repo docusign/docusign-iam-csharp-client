@@ -10,17 +10,16 @@
 namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
-    
+
     public class ResumePausedWorkflowRequest
     {
-
         /// <summary>
         /// The unique identifier of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
-        public string AccountId { get; set; } = default!;
+        public string AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=workflowId")]
-        public string WorkflowId { get; set; } = default!;
+        public string WorkflowId { get; set; } = "00000000-0000-0000-0000-000000000000";
     }
 }

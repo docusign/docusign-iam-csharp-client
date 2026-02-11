@@ -50,5 +50,4 @@ namespace Docusign.IAM.SDK.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

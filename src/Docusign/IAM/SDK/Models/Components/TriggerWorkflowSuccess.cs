@@ -12,24 +12,19 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Control information and metadata for the response.
     /// </summary>
     public class TriggerWorkflowSuccess
     {
-
         [JsonProperty("instance_id")]
-        public string? InstanceId { get; set; }
+        public string? InstanceId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
         /// <summary>
         /// A fully-qualified URL that can be used to access or interact with this<br/>
-        /// 
-        /// <remarks>
         /// workflow instance while it is running. This URL may provide access to<br/>
-        /// additional details, actions, or logs related to the workflow execution.<br/>
-        /// 
-        /// </remarks>
+        /// additional details, actions, or logs related to the workflow execution.
         /// </summary>
         [JsonProperty("instance_url")]
         public string? InstanceUrl { get; set; }
@@ -38,36 +33,26 @@ namespace Docusign.IAM.SDK.Models.Components
         /// The maximum number of items that can be returned in a single page.
         /// </summary>
         [JsonProperty("page_limit")]
-        public int? PageLimit { get; set; } = null;
-
-        /// <summary>
-        /// The continuation token used to retrieve a page in a paginated response.
-        /// </summary>
-        [JsonProperty("page_token_next")]
-        public string? PageTokenNext { get; set; } = null;
+        public int? PageLimit { get; set; } = 25;
 
         /// <summary>
         /// Unique identifier for the request, useful for tracking and debugging.
         /// </summary>
-        [JsonProperty("request_id")]
-        public string? RequestId { get; set; } = null;
+        [JsonProperty("request_id", NullValueHandling = NullValueHandling.Include)]
+        public string? RequestId { get; set; }
+
+        /// <summary>
+        /// The duration of time, in milliseconds, that the server took to process and respond<br/>
+        /// to the request. This is measured from the time the server received the request<br/>
+        /// until the time the response was sent.
+        /// </summary>
+        [JsonProperty("response_duration_ms", NullValueHandling = NullValueHandling.Include)]
+        public int? ResponseDurationMs { get; set; }
 
         /// <summary>
         /// The timestamp indicating when the response was generated.
         /// </summary>
-        [JsonProperty("response_timestamp")]
-        public DateTime? ResponseTimestamp { get; set; } = null;
-
-        /// <summary>
-        /// The duration of time, in milliseconds, that the server took to process and respond <br/>
-        /// 
-        /// <remarks>
-        /// to the request. This is measured from the time the server received the request <br/>
-        /// until the time the response was sent.<br/>
-        /// 
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("response_duration_ms")]
-        public int? ResponseDurationMs { get; set; } = null;
+        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? ResponseTimestamp { get; set; }
     }
 }

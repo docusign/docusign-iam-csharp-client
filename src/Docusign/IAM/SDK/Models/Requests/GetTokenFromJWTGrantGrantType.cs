@@ -12,7 +12,7 @@ namespace Docusign.IAM.SDK.Models.Requests
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The grant type.
     /// </summary>
@@ -54,5 +54,4 @@ namespace Docusign.IAM.SDK.Models.Requests
             throw new Exception($"Unknown value {value} for enum GetTokenFromJWTGrantGrantType");
         }
     }
-
 }

@@ -3,14 +3,14 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>Docusign.IAM.SDK</PackageId>
-    <Version>1.0.0-beta.6</Version>
+    <Version>1.0.0-beta.7</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Docusign</Authors>
-    <Copyright>Copyright (c) Docusign 2025</Copyright>
+    <Copyright>Copyright (c) Docusign 2026</Copyright>
     <RepositoryUrl>https://github.com/docusign/docusign-iam-csharp-client.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Docusign IAM Agreement Intelligent-Agreement-Management Navigator Maestro Workflow Workflow-Management Connected-Fields Docusign-Platform Docusign-APIs Agreement-Insights</PackageTags>
-    <Description>Docusign IAM API: Docusign IAM API</Description>
+    <Description>Docusign IAM API: Docusign IAM API.</Description>
   </PropertyGroup>
 
   <PropertyGroup>

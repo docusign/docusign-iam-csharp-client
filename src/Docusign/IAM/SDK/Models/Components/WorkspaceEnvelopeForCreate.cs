@@ -12,18 +12,17 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class WorkspaceEnvelopeForCreate
     {
-
         /// <summary>
-        /// The name for the envelope
+        /// The name for the envelope.
         /// </summary>
         [JsonProperty("envelope_name", NullValueHandling = NullValueHandling.Include)]
         public string? EnvelopeName { get; set; }
 
         /// <summary>
-        /// The optional list of document IDs to be added to the envelope
+        /// The optional list of document IDs to be added to the envelope.
         /// </summary>
         [JsonProperty("document_ids")]
         public List<string>? DocumentIds { get; set; } = null;

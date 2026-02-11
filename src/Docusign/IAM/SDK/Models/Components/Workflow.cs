@@ -12,24 +12,23 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class Workflow
     {
-
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string? Id { get; set; } = "00000000-0000-0000-0000-000000000000";
 
         /// <summary>
-        /// A user-provided name for this workflow
+        /// A user-provided name for this workflow.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         [JsonProperty("account_id")]
-        public string? AccountId { get; set; }
+        public string? AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
         /// <summary>
-        /// Indicates the readiness and deployment status of a workflow
+        /// Indicates the readiness and deployment status of a workflow.
         /// </summary>
         [JsonProperty("status")]
         public string? Status { get; set; }

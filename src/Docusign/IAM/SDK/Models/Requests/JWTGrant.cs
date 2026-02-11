@@ -11,13 +11,12 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Models.Requests;
     using Docusign.IAM.SDK.Utils;
-    
+
     /// <summary>
-    /// JSON Web Token (JWT) Grant is an OAuth 2.0 flow that is used to grant an access token to service integrations
+    /// JSON Web Token (JWT) Grant is an OAuth 2.0 flow that is used to grant an access token to service integrations.
     /// </summary>
     public class JWTGrant
     {
-
         /// <summary>
         /// The grant type.
         /// </summary>
@@ -25,7 +24,7 @@ namespace Docusign.IAM.SDK.Models.Requests
         public GetTokenFromJWTGrantGrantType? GrantType { get; set; } = Docusign.IAM.SDK.Models.Requests.GetTokenFromJWTGrantGrantType.UrnIetfParamsOauthGrantTypeJwtBearer;
 
         /// <summary>
-        /// Your JWT
+        /// Your JWT.
         /// </summary>
         [SpeakeasyMetadata("form:name=assertion")]
         public string Assertion { get; set; } = default!;

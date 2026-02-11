@@ -12,36 +12,35 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateWorkspaceUploadRequestAssignment
     {
-
         /// <summary>
-        /// The ID of the assigned user
+        /// The ID of the assigned user.
         /// </summary>
         [JsonProperty("assignee_user_id")]
         public string? AssigneeUserId { get; set; } = null;
 
         /// <summary>
-        /// Enum representing the responsibility type for a workspace upload request assignment
+        /// Enum representing the responsibility type for a workspace upload request assignment.
         /// </summary>
         [JsonProperty("upload_request_responsibility_type_id")]
         public WorkspaceUploadRequestResponsibilityType UploadRequestResponsibilityTypeId { get; set; } = default!;
 
         /// <summary>
-        /// The first name of the assignee
+        /// The first name of the assignee.
         /// </summary>
         [JsonProperty("first_name")]
         public string? FirstName { get; set; } = null;
 
         /// <summary>
-        /// The last name of the assignee
+        /// The last name of the assignee.
         /// </summary>
         [JsonProperty("last_name")]
         public string? LastName { get; set; } = null;
 
         /// <summary>
-        /// The email of the assignee
+        /// The email of the assignee.
         /// </summary>
         [JsonProperty("email")]
         public string? Email { get; set; } = null;

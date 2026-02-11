@@ -13,10 +13,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public class CreateWorkspaceDocumentResponse
     {
-
         [JsonProperty("document_id")]
         public string? DocumentId { get; set; }
 

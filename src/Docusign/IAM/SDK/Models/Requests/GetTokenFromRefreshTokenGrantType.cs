@@ -12,9 +12,9 @@ namespace Docusign.IAM.SDK.Models.Requests
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The grant type. This value must be set to &quot;refresh_token&quot;.
+    /// The grant type. This value must be set to "refresh_token".
     /// </summary>
     public enum GetTokenFromRefreshTokenGrantType
     {
@@ -54,5 +54,4 @@ namespace Docusign.IAM.SDK.Models.Requests
             throw new Exception($"Unknown value {value} for enum GetTokenFromRefreshTokenGrantType");
         }
     }
-
 }

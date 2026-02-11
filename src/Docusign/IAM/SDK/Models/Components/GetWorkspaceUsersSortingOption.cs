@@ -12,7 +12,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum GetWorkspaceUsersSortingOption
     {
         [JsonProperty("first_name_asc")]
@@ -61,5 +61,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum GetWorkspaceUsersSortingOption");
         }
     }
-
 }

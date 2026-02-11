@@ -13,36 +13,35 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class GetWorkspacesResponse
     {
-
         /// <summary>
-        /// The workspace summary list. Includes the ID, name, and creation metadata
+        /// The workspace summary list. Includes the ID, name, and creation metadata.
         /// </summary>
         [JsonProperty("workspaces")]
         public List<WorkspaceSummary>? Workspaces { get; set; } = null;
 
         /// <summary>
-        /// The number of workspaces returned in the response. Always equal or less than the `count` of the request
+        /// The number of workspaces returned in the response. Always equal or less than the `count` of the request.
         /// </summary>
         [JsonProperty("result_set_size")]
         public int? ResultSetSize { get; set; } = null;
 
         /// <summary>
-        /// Position of the first item in the total results
+        /// Position of the first item in the total results.
         /// </summary>
         [JsonProperty("start_position")]
         public int? StartPosition { get; set; } = null;
 
         /// <summary>
-        /// Position of the last item in the total results
+        /// Position of the last item in the total results.
         /// </summary>
         [JsonProperty("end_position")]
         public int? EndPosition { get; set; } = null;
 
         /// <summary>
-        /// The total number of workspaces applicable to the request regardless of pagination. It may not always be computed
+        /// The total number of workspaces applicable to the request regardless of pagination. It may not always be computed.
         /// </summary>
         [JsonProperty("total_row_count")]
         public int? TotalRowCount { get; set; } = null;

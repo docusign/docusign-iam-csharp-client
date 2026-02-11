@@ -11,18 +11,17 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class WorkspaceDocumentOwner
     {
-
         /// <summary>
-        /// The first name of the document owner
+        /// The first name of the document owner.
         /// </summary>
         [JsonProperty("first_name")]
         public string? FirstName { get; set; } = null;
 
         /// <summary>
-        /// The last name of the document owner
+        /// The last name of the document owner.
         /// </summary>
         [JsonProperty("last_name")]
         public string? LastName { get; set; } = null;

@@ -12,44 +12,31 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Array of fields required as inputs to trigger the workflow, including field names, data types, and default values.
     /// </summary>
     public class TriggerInputSchema
     {
-
         /// <summary>
         /// The name of the input field expected by the workflow. This key must match the name<br/>
-        /// 
-        /// <remarks>
-        /// provided in the `trigger_inputs` when triggering the workflow.<br/>
-        /// 
-        /// </remarks>
+        /// provided in the `trigger_inputs` when triggering the workflow.
         /// </summary>
         [JsonProperty("field_name")]
         public string? FieldName { get; set; }
 
         /// <summary>
         /// The data type expected for the input field. This indicates whether the input should<br/>
-        /// 
-        /// <remarks>
         /// be a string, number, boolean, object, or array, ensuring the data is passed in the<br/>
-        /// correct format.<br/>
-        /// 
-        /// </remarks>
+        /// correct format.
         /// </summary>
         [JsonProperty("field_data_type")]
         public string? FieldDataType { get; set; }
 
         /// <summary>
         /// The default value for the input field if one is provided. This can be a string, number,<br/>
-        /// 
-        /// <remarks>
         /// boolean, object, or array. If no value is provided during the trigger, the workflow may<br/>
-        /// use this default value.<br/>
-        /// 
-        /// </remarks>
+        /// use this default value.
         /// </summary>
         [JsonProperty("default_value", NullValueHandling = NullValueHandling.Include)]
         public DefaultValue? DefaultValue { get; set; }

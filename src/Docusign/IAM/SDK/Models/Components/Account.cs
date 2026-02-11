@@ -12,10 +12,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class Account
     {
-
         [JsonProperty("account_id")]
         public string AccountId { get; set; } = default!;
 

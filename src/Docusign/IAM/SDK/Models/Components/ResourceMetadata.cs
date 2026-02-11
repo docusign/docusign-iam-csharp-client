@@ -12,10 +12,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public class ResourceMetadata
     {
-
         /// <summary>
         /// Timestamp when the agreement document was created.
         /// </summary>
@@ -47,21 +46,17 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? RequestId { get; set; } = null;
 
         /// <summary>
+        /// The duration of time, in milliseconds, that the server took to process and respond<br/>
+        /// to the request. This is measured from the time the server received the request<br/>
+        /// until the time the response was sent.
+        /// </summary>
+        [JsonProperty("response_duration_ms")]
+        public int? ResponseDurationMs { get; set; } = null;
+
+        /// <summary>
         /// The timestamp indicating when the response was generated.
         /// </summary>
         [JsonProperty("response_timestamp")]
         public DateTime? ResponseTimestamp { get; set; } = null;
-
-        /// <summary>
-        /// The duration of time, in milliseconds, that the server took to process and respond <br/>
-        /// 
-        /// <remarks>
-        /// to the request. This is measured from the time the server received the request <br/>
-        /// until the time the response was sent.<br/>
-        /// 
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("response_duration_ms")]
-        public int? ResponseDurationMs { get; set; } = null;
     }
 }

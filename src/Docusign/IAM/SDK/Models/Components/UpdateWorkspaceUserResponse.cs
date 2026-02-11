@@ -11,12 +11,11 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateWorkspaceUserResponse
     {
-
         /// <summary>
-        /// The ID of the role assigned to the user
+        /// The ID of the role assigned to the user.
         /// </summary>
         [JsonProperty("role_id")]
         public string? RoleId { get; set; }

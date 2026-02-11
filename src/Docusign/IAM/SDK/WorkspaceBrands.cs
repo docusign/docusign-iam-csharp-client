@@ -24,48 +24,96 @@ namespace Docusign.IAM.SDK
 
     public interface IWorkspaceBrands
     {
-
         /// <summary>
-        /// Returns details about the brand set for a workspace
-        /// 
+        /// Returns details about the brand set for a workspace.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves details about a specific workspace. It returns the brand details such as its unique identifier (ID), name, and metadata such as brand colors and logos.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceBrandResponse> GetWorkspaceBrandAsync(string accountId, string workspaceId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The details of a single workspace brand.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceBrandResponse> GetWorkspaceBrandAsync(
+            string accountId,
+            string workspaceId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Updates brand for an existing workspace
-        /// 
+        /// Updates brand for an existing workspace.
+        /// </summary>
         /// <remarks>
         /// This operation updates brand for a specific workspace. It returns the brand details such as its unique identifier (ID), name, and metadata such as brand colors and logos.
         /// </remarks>
-        /// </summary>
-        Task<UpdateWorkspaceBrandResponse> UpdateWorkspaceBrandAsync(string accountId, string workspaceId, UpdateWorkspaceBrandBody updateWorkspaceBrandBody, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="updateWorkspaceBrandBody">A <see cref="UpdateWorkspaceBrandBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The brand details set for a workspace.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="updateWorkspaceBrandBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateWorkspaceBrandResponse> UpdateWorkspaceBrandAsync(
+            string accountId,
+            string workspaceId,
+            UpdateWorkspaceBrandBody updateWorkspaceBrandBody,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class WorkspaceBrands: IWorkspaceBrands
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public WorkspaceBrands(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetWorkspaceBrandResponse> GetWorkspaceBrandAsync(string accountId, string workspaceId, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Returns details about the brand set for a workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves details about a specific workspace. It returns the brand details such as its unique identifier (ID), name, and metadata such as brand colors and logos.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The details of a single workspace brand.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceBrandResponse> GetWorkspaceBrandAsync(
+            string accountId,
+            string workspaceId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+
             var request = new GetWorkspaceBrandRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/brand", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/brand", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -119,7 +167,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -217,16 +265,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateWorkspaceBrandResponse> UpdateWorkspaceBrandAsync(string accountId, string workspaceId, UpdateWorkspaceBrandBody updateWorkspaceBrandBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Updates brand for an existing workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation updates brand for a specific workspace. It returns the brand details such as its unique identifier (ID), name, and metadata such as brand colors and logos.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="updateWorkspaceBrandBody">A <see cref="UpdateWorkspaceBrandBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The brand details set for a workspace.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="updateWorkspaceBrandBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateWorkspaceBrandResponse> UpdateWorkspaceBrandAsync(
+            string accountId,
+            string workspaceId,
+            UpdateWorkspaceBrandBody updateWorkspaceBrandBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (updateWorkspaceBrandBody == null) throw new ArgumentNullException(nameof(updateWorkspaceBrandBody));
+
             var request = new UpdateWorkspaceBrandRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 UpdateWorkspaceBrandBody = updateWorkspaceBrandBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/brand", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/brand", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -286,7 +361,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -383,5 +458,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

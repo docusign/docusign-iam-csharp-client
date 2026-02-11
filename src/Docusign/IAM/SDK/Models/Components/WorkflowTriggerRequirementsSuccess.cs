@@ -14,47 +14,34 @@ namespace Docusign.IAM.SDK.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// Control information and metadata for the response.
     /// </summary>
     public class WorkflowTriggerRequirementsSuccess
     {
-
         [JsonProperty("trigger_id")]
-        public string? TriggerId { get; set; }
+        public string? TriggerId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
         /// <summary>
         /// The type of event that triggers the workflow. In this case, the workflow is initiated<br/>
-        /// 
-        /// <remarks>
-        /// by an HTTP request. Future iterations may support additional event types beyond HTTP.<br/>
-        /// 
-        /// </remarks>
+        /// by an HTTP request. Future iterations may support additional event types beyond HTTP.
         /// </summary>
         [JsonProperty("trigger_event_type")]
         public TriggerEventType? TriggerEventType { get; set; }
 
         /// <summary>
         /// Configuration details specific to HTTP-triggered workflows. This object describes the<br/>
-        /// 
-        /// <remarks>
         /// HTTP method and URL that will trigger the workflow, providing the endpoint and method<br/>
-        /// that should be used to initiate the workflow.<br/>
-        /// 
-        /// </remarks>
+        /// that should be used to initiate the workflow.
         /// </summary>
         [JsonProperty("trigger_http_config")]
         public TriggerHttpConfig? TriggerHttpConfig { get; set; }
 
         /// <summary>
         /// A list of input fields that define the structure of the data required to trigger the workflow.<br/>
-        /// 
-        /// <remarks>
         /// Each item describes a field that must be included in the request when the workflow is triggered.<br/>
-        /// The schema includes the field name, expected data type, and any default values for the input.<br/>
-        /// 
-        /// </remarks>
+        /// The schema includes the field name, expected data type, and any default values for the input.
         /// </summary>
         [JsonProperty("trigger_input_schema")]
         public List<TriggerInputSchema>? TriggerInputSchema { get; set; }
@@ -66,36 +53,26 @@ namespace Docusign.IAM.SDK.Models.Components
         /// The maximum number of items that can be returned in a single page.
         /// </summary>
         [JsonProperty("page_limit")]
-        public int? PageLimit { get; set; } = null;
-
-        /// <summary>
-        /// The continuation token used to retrieve a page in a paginated response.
-        /// </summary>
-        [JsonProperty("page_token_next")]
-        public string? PageTokenNext { get; set; } = null;
+        public int? PageLimit { get; set; } = 25;
 
         /// <summary>
         /// Unique identifier for the request, useful for tracking and debugging.
         /// </summary>
-        [JsonProperty("request_id")]
-        public string? RequestId { get; set; } = null;
+        [JsonProperty("request_id", NullValueHandling = NullValueHandling.Include)]
+        public string? RequestId { get; set; }
+
+        /// <summary>
+        /// The duration of time, in milliseconds, that the server took to process and respond<br/>
+        /// to the request. This is measured from the time the server received the request<br/>
+        /// until the time the response was sent.
+        /// </summary>
+        [JsonProperty("response_duration_ms", NullValueHandling = NullValueHandling.Include)]
+        public int? ResponseDurationMs { get; set; }
 
         /// <summary>
         /// The timestamp indicating when the response was generated.
         /// </summary>
-        [JsonProperty("response_timestamp")]
-        public DateTime? ResponseTimestamp { get; set; } = null;
-
-        /// <summary>
-        /// The duration of time, in milliseconds, that the server took to process and respond <br/>
-        /// 
-        /// <remarks>
-        /// to the request. This is measured from the time the server received the request <br/>
-        /// until the time the response was sent.<br/>
-        /// 
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("response_duration_ms")]
-        public int? ResponseDurationMs { get; set; } = null;
+        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? ResponseTimestamp { get; set; }
     }
 }

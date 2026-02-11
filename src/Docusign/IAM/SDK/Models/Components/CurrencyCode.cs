@@ -12,14 +12,10 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// &apos;ISO 4217 codes. From https://en.wikipedia.org/wiki/ISO_4217<br/>
-    /// 
-    /// <remarks>
-    /// https://www.currency-iso.org/en/home/tables/table-a1.html&apos;<br/>
-    /// 
-    /// </remarks>
+    /// 'ISO 4217 codes. From https://en.wikipedia.org/wiki/ISO_4217<br/>
+    /// https://www.currency-iso.org/en/home/tables/table-a1.html'
     /// </summary>
     public enum CurrencyCode
     {
@@ -413,5 +409,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum CurrencyCode");
         }
     }
-
 }

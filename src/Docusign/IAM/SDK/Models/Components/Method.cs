@@ -12,14 +12,10 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The HTTP method used to trigger the workflow. This defines the type of request<br/>
-    /// 
-    /// <remarks>
-    /// that will initiate the workflow (e.g., GET, POST).<br/>
-    /// 
-    /// </remarks>
+    /// that will initiate the workflow (e.g., GET, POST).
     /// </summary>
     public enum Method
     {
@@ -67,5 +63,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum Method");
         }
     }
-
 }

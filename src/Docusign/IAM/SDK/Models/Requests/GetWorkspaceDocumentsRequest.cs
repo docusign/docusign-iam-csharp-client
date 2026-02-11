@@ -10,36 +10,35 @@
 namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
-    
+
     public class GetWorkspaceDocumentsRequest
     {
-
         /// <summary>
-        /// The ID of the account
+        /// The ID of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the workspace
+        /// The ID of the workspace.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=workspaceId")]
         public string WorkspaceId { get; set; } = default!;
 
         /// <summary>
-        /// Number of documents to return. Defaults to the maximum which is 100
+        /// Number of documents to return. Defaults to the maximum which is 100.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=count")]
         public int? Count { get; set; }
 
         /// <summary>
-        /// Position of the first item in the total results. Defaults to 0
+        /// Position of the first item in the total results. Defaults to 0.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=start_position")]
         public int? StartPosition { get; set; }
 
         /// <summary>
-        /// Filter documents where Name contains the filter. Defaults to null, to not filter
+        /// Filter documents where Name contains the filter. Defaults to null, to not filter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=name_filter")]
         public string? NameFilter { get; set; }

@@ -1,0 +1,12 @@
+# BulkJobMetadata
+
+Properties about THIS request/response, not the job resource itself
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `RequestId`                                                                           | *string*                                                                              | :heavy_minus_sign:                                                                    | N/A                                                                                   | a1b2c3d4-e5f6-7890-abcd-ef1234567890                                                  |
+| `ResponseDuration`                                                                    | *int*                                                                                 | :heavy_minus_sign:                                                                    | Time in ms to process this request                                                    | 150                                                                                   |
+| `ResponseTimestamp`                                                                   | [DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-5.0) | :heavy_minus_sign:                                                                    | When this response was generated                                                      | 2025-10-27T19:11:42Z                                                                  |

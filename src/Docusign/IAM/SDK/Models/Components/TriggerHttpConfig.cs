@@ -12,31 +12,22 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Configuration details specific to HTTP-triggered workflows. This object describes the<br/>
-    /// 
-    /// <remarks>
     /// HTTP method and URL that will trigger the workflow, providing the endpoint and method<br/>
-    /// that should be used to initiate the workflow.<br/>
-    /// 
-    /// </remarks>
+    /// that should be used to initiate the workflow.
     /// </summary>
     public class TriggerHttpConfig
     {
-
         /// <summary>
         /// The HTTP method used to trigger the workflow. This defines the type of request<br/>
-        /// 
-        /// <remarks>
-        /// that will initiate the workflow (e.g., GET, POST).<br/>
-        /// 
-        /// </remarks>
+        /// that will initiate the workflow (e.g., GET, POST).
         /// </summary>
         [JsonProperty("method")]
         public Method? Method { get; set; }
 
         [JsonProperty("url")]
-        public string? Url { get; set; }
+        public string? Url { get; set; } = null;
     }
 }
