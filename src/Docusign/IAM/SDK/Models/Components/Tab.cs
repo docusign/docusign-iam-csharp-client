@@ -13,15 +13,14 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class Tab
     {
-
         [JsonProperty("extensionData")]
         public TabExtensionData ExtensionData { get; set; } = default!;
 
         /// <summary>
-        /// Indicates the type of tab
+        /// Indicates the type of tab.
         /// </summary>
         [JsonProperty("tabType")]
         public string TabType { get; set; } = default!;
@@ -33,7 +32,7 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? ValidationPattern { get; set; }
 
         /// <summary>
-        /// The message displayed if the custom tab fails input validation
+        /// The message displayed if the custom tab fails input validation.
         /// </summary>
         [JsonProperty("validationMessage")]
         public string? ValidationMessage { get; set; }
@@ -45,7 +44,7 @@ namespace Docusign.IAM.SDK.Models.Components
         public string TabLabel { get; set; } = default!;
 
         /// <summary>
-        /// The radio button properties for the tab (if the tab is of radio type)
+        /// The radio button properties for the tab (if the tab is of radio type).
         /// </summary>
         [JsonProperty("radios")]
         public List<string>? Radios { get; set; }

@@ -13,6 +13,9 @@ namespace Docusign.IAM.SDK.Models.Errors
     using System;
     using System.Net.Http;
 
+    /// <summary>
+    /// Default API Exception.
+    /// </summary>
     public class APIException : IamClientError
     {
         /// <summary>

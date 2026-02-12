@@ -10,10 +10,9 @@
 namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
-    
+
     public class Security
     {
-
         [SpeakeasyMetadata("security:scheme=true,type=oauth2,name=Authorization")]
         public string? AccessToken { get; set; }
     }

@@ -11,15 +11,14 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Models.Requests;
     using Docusign.IAM.SDK.Utils;
-    
+
     /// <summary>
     /// This grant optionally uses Proof Key for Code Exchange (PKCE) to authenticate securely without requiring a client secret.
     /// </summary>
     public class AuthorizationCodeGrant
     {
-
         /// <summary>
-        /// The grant type. This value must be set to &quot;refresh_token&quot;.
+        /// The grant type. This value must be set to "refresh_token".
         /// </summary>
         [SpeakeasyMetadata("form:name=grant_type")]
         public GetTokenFromRefreshTokenGrantType? GrantType { get; set; } = Docusign.IAM.SDK.Models.Requests.GetTokenFromRefreshTokenGrantType.RefreshToken;

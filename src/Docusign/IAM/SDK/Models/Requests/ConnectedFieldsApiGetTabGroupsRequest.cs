@@ -10,10 +10,9 @@
 namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
-    
+
     public class ConnectedFieldsApiGetTabGroupsRequest
     {
-
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 

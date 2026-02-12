@@ -13,14 +13,13 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class Organization
     {
-
         [JsonProperty("organization_id")]
         public string OrganizationId { get; set; } = default!;
 
         [JsonProperty("links")]
-        public List<Link> Links { get; set; } = default!;
+        public List<UserInfoLink> Links { get; set; } = default!;
     }
 }

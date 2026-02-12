@@ -24,63 +24,124 @@ namespace Docusign.IAM.SDK
 
     public interface IWorkspaces2
     {
-
         /// <summary>
-        /// Gets workspaces available to the calling user
-        /// 
+        /// Gets workspaces available to the calling user.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves a list of workspaces available to the calling user. It returns basic information about each workspace, including its unique identifier (ID), name, and metadata such as when it was created and by whom.<br/>
         /// <br/>
         /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspacesResponse> GetWorkspacesAsync(string accountId, int? count = null, int? startPosition = null, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="count">Number of workspaces to return. Defaults to the maximum which is 100.</param>
+        /// <param name="startPosition">Position of the first item in the total results. Defaults to 0.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspacesResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspacesResponse> GetWorkspacesAsync(
+            string accountId,
+            int? count = null,
+            int? startPosition = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Creates a new workspace
-        /// 
+        /// Creates a new workspace.
+        /// </summary>
         /// <remarks>
         /// This operation creates a new workspace. The calling user is automatically added as a member of the workspace with the role of Manage.<br/>
         /// <br/>
         /// Once created, the `workspace_id` is utilized to associate tasks such as envelopes. Participants on tasks will automatically be added to the workspace with the Participate role.
         /// </remarks>
-        /// </summary>
-        Task<CreateWorkspaceResponse> CreateWorkspaceAsync(string accountId, CreateWorkspaceBody createWorkspaceBody, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="createWorkspaceBody">The details of the workspace to be created including the name.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWorkspaceResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="createWorkspaceBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateWorkspaceResponse> CreateWorkspaceAsync(
+            string accountId,
+            CreateWorkspaceBody createWorkspaceBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Updates an existing workspace
-        /// 
+        /// Updates an existing workspace.
+        /// </summary>
         /// <remarks>
-        /// This operation updates details about a specific workspace. It returns the workspace&apos;s unique identifier (ID), name, and metadata such as when it was created and by whom.
+        /// This operation updates details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
         /// </remarks>
-        /// </summary>
-        Task<UpdateWorkspaceResponse> UpdateWorkspaceAsync(string accountId, string workspaceId, UpdateWorkspaceBody updateWorkspaceBody, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="updateWorkspaceBody">A <see cref="UpdateWorkspaceBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The details of a single workspace.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="updateWorkspaceBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateWorkspaceResponse> UpdateWorkspaceAsync(
+            string accountId,
+            string workspaceId,
+            UpdateWorkspaceBody updateWorkspaceBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Returns details about the workspace
-        /// 
+        /// Returns details about the workspace.
+        /// </summary>
         /// <remarks>
-        /// This operation retrieves details about a specific workspace. It returns the workspace&apos;s unique identifier (ID), name, and metadata such as when it was created and by whom.
+        /// This operation retrieves details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceResponse> GetWorkspaceAsync(string accountId, string workspaceId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The details of a single workspace.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceResponse> GetWorkspaceAsync(
+            string accountId,
+            string workspaceId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Returns the roles the caller can assign to workspace users
-        /// 
+        /// Returns the roles the caller can assign to workspace users.
+        /// </summary>
         /// <remarks>
-        /// This operation returns roles that are assignable to users in the workspace based on the caller&apos;s role in the workspace. Roles available include Manage (internal) and Participate (external). Participate is the default role.<br/>
+        /// This operation returns roles that are assignable to users in the workspace based on the caller's role in the workspace. Roles available include Manage (internal) and Participate (external). Participate is the default role.<br/>
         /// <br/>
-        /// Users within the account are considered &quot;Internal&quot; and may be assigned any role. Users outside the account are considered &quot;External&quot; and may only be assigned &quot;External&quot; roles.<br/>
+        /// Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.<br/>
         /// <br/>
         /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceAssignableRolesResponse> GetWorkspaceAssignableRolesAsync(GetWorkspaceAssignableRolesRequest request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="GetWorkspaceAssignableRolesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceAssignableRolesResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceAssignableRolesResponse> GetWorkspaceAssignableRolesAsync(
+            GetWorkspaceAssignableRolesRequest request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Creates an envelope with the given documents. Returns the ID of the created envelope
-        /// 
+        /// Creates an envelope with the given documents. Returns the ID of the created envelope.
+        /// </summary>
         /// <remarks>
         /// This operation creates an envelope associated with the workspace. Using the `envelope_id` from the response, the <a href="https://developers.docusign.com/docs/esign-rest-api/">eSignature API</a> may be utilized to modify the envelope and ultimately send it.<br/>
         /// <br/>
@@ -92,44 +153,96 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// When `document_ids` is empty or excluded, the envelope is created without any documents from the workspace. eSignature API calls, including adding documents and templates, may be utilized to modify the envelope before it is sent. The eSignature API must be utilized to send the envelope.
         /// </remarks>
-        /// </summary>
-        Task<CreateWorkspaceEnvelopeResponse> CreateWorkspaceEnvelopeAsync(string accountId, string workspaceId, WorkspaceEnvelopeForCreate workspaceEnvelopeForCreate, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="workspaceEnvelopeForCreate">The details of the envelope to be created including the list of document IDs to add to the envelope.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWorkspaceEnvelopeResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="workspaceEnvelopeForCreate"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateWorkspaceEnvelopeResponse> CreateWorkspaceEnvelopeAsync(
+            string accountId,
+            string workspaceId,
+            WorkspaceEnvelopeForCreate workspaceEnvelopeForCreate,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Returns the envelopes associated with the given workspace
-        /// 
+        /// Returns the envelopes associated with the given workspace.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves a list of all associated workspace envelopes. The <a href="https://support.docusign.com/s/document-item?bundleId=oeq1643226594604&amp;topicId=wdm1578456348227.html">`status`</a> on each envelope can be used to track envelope progress. Statuses are formatted as ProperCase. e.g. `Sent`, `WaitingForOthers`, `Completed`, etc.<br/>
         /// <br/>
         /// Based on the permissions of the caller, additional envelope details may be retrieved from the <a href="https://developers.docusign.com/docs/esign-rest-api/">eSignature API</a> using the `envelope_id`.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceEnvelopesResponse> GetWorkspaceEnvelopesAsync(string accountId, string workspaceId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceEnvelopesResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceEnvelopesResponse> GetWorkspaceEnvelopesAsync(
+            string accountId,
+            string workspaceId,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class Workspaces2: IWorkspaces2
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public Workspaces2(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetWorkspacesResponse> GetWorkspacesAsync(string accountId, int? count = null, int? startPosition = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Gets workspaces available to the calling user.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves a list of workspaces available to the calling user. It returns basic information about each workspace, including its unique identifier (ID), name, and metadata such as when it was created and by whom.<br/>
+        /// <br/>
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="count">Number of workspaces to return. Defaults to the maximum which is 100.</param>
+        /// <param name="startPosition">Position of the first item in the total results. Defaults to 0.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspacesResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspacesResponse> GetWorkspacesAsync(
+            string accountId,
+            int? count = null,
+            int? startPosition = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+
             var request = new GetWorkspacesRequest()
             {
                 AccountId = accountId,
                 Count = count,
                 StartPosition = startPosition,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -183,7 +296,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -281,15 +394,41 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateWorkspaceResponse> CreateWorkspaceAsync(string accountId, CreateWorkspaceBody createWorkspaceBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Creates a new workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation creates a new workspace. The calling user is automatically added as a member of the workspace with the role of Manage.<br/>
+        /// <br/>
+        /// Once created, the `workspace_id` is utilized to associate tasks such as envelopes. Participants on tasks will automatically be added to the workspace with the Participate role.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="createWorkspaceBody">The details of the workspace to be created including the name.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWorkspaceResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="createWorkspaceBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateWorkspaceResponse> CreateWorkspaceAsync(
+            string accountId,
+            CreateWorkspaceBody createWorkspaceBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (createWorkspaceBody == null) throw new ArgumentNullException(nameof(createWorkspaceBody));
+
             var request = new CreateWorkspaceRequest()
             {
                 AccountId = accountId,
                 CreateWorkspaceBody = createWorkspaceBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -349,7 +488,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -447,16 +586,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateWorkspaceResponse> UpdateWorkspaceAsync(string accountId, string workspaceId, UpdateWorkspaceBody updateWorkspaceBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Updates an existing workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation updates details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="updateWorkspaceBody">A <see cref="UpdateWorkspaceBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The details of a single workspace.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="updateWorkspaceBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateWorkspaceResponse> UpdateWorkspaceAsync(
+            string accountId,
+            string workspaceId,
+            UpdateWorkspaceBody updateWorkspaceBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (updateWorkspaceBody == null) throw new ArgumentNullException(nameof(updateWorkspaceBody));
+
             var request = new UpdateWorkspaceRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 UpdateWorkspaceBody = updateWorkspaceBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -516,7 +682,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -614,15 +780,39 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWorkspaceResponse> GetWorkspaceAsync(string accountId, string workspaceId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Returns details about the workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The details of a single workspace.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceResponse> GetWorkspaceAsync(
+            string accountId,
+            string workspaceId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+
             var request = new GetWorkspaceRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -676,7 +866,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -774,10 +964,34 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWorkspaceAssignableRolesResponse> GetWorkspaceAssignableRolesAsync(GetWorkspaceAssignableRolesRequest request, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Returns the roles the caller can assign to workspace users.
+        /// </summary>
+        /// <remarks>
+        /// This operation returns roles that are assignable to users in the workspace based on the caller's role in the workspace. Roles available include Manage (internal) and Participate (external). Participate is the default role.<br/>
+        /// <br/>
+        /// Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.<br/>
+        /// <br/>
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetWorkspaceAssignableRolesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceAssignableRolesResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceAssignableRolesResponse> GetWorkspaceAssignableRolesAsync(
+            GetWorkspaceAssignableRolesRequest request,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/assignable-roles", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/assignable-roles", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -831,7 +1045,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -929,16 +1143,51 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateWorkspaceEnvelopeResponse> CreateWorkspaceEnvelopeAsync(string accountId, string workspaceId, WorkspaceEnvelopeForCreate workspaceEnvelopeForCreate, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Creates an envelope with the given documents. Returns the ID of the created envelope.
+        /// </summary>
+        /// <remarks>
+        /// This operation creates an envelope associated with the workspace. Using the `envelope_id` from the response, the <a href="https://developers.docusign.com/docs/esign-rest-api/">eSignature API</a> may be utilized to modify the envelope and ultimately send it.<br/>
+        /// <br/>
+        /// Envelope recipients will automatically be granted Participate access to the workspace. Envelope recipients will receive consolidated notifications from Docusign Workspaces rather than standard individual envelope notifications.<br/>
+        /// <br/>
+        /// Docusign Connect events may be utilized to receive updates to individual envelope events.<br/>
+        /// <br/>
+        /// The `envelopes` operation on the workspace may be utilized to query the status of all the envelopes in the workspace.<br/>
+        /// <br/>
+        /// When `document_ids` is empty or excluded, the envelope is created without any documents from the workspace. eSignature API calls, including adding documents and templates, may be utilized to modify the envelope before it is sent. The eSignature API must be utilized to send the envelope.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="workspaceEnvelopeForCreate">The details of the envelope to be created including the list of document IDs to add to the envelope.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWorkspaceEnvelopeResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="workspaceEnvelopeForCreate"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateWorkspaceEnvelopeResponse> CreateWorkspaceEnvelopeAsync(
+            string accountId,
+            string workspaceId,
+            WorkspaceEnvelopeForCreate workspaceEnvelopeForCreate,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (workspaceEnvelopeForCreate == null) throw new ArgumentNullException(nameof(workspaceEnvelopeForCreate));
+
             var request = new CreateWorkspaceEnvelopeRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 WorkspaceEnvelopeForCreate = workspaceEnvelopeForCreate,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -998,7 +1247,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1096,15 +1345,41 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWorkspaceEnvelopesResponse> GetWorkspaceEnvelopesAsync(string accountId, string workspaceId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Returns the envelopes associated with the given workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves a list of all associated workspace envelopes. The <a href="https://support.docusign.com/s/document-item?bundleId=oeq1643226594604&amp;topicId=wdm1578456348227.html">`status`</a> on each envelope can be used to track envelope progress. Statuses are formatted as ProperCase. e.g. `Sent`, `WaitingForOthers`, `Completed`, etc.<br/>
+        /// <br/>
+        /// Based on the permissions of the caller, additional envelope details may be retrieved from the <a href="https://developers.docusign.com/docs/esign-rest-api/">eSignature API</a> using the `envelope_id`.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceEnvelopesResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceEnvelopesResponse> GetWorkspaceEnvelopesAsync(
+            string accountId,
+            string workspaceId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+
             var request = new GetWorkspaceEnvelopesRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1158,7 +1433,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1255,5 +1530,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

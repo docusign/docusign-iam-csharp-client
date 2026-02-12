@@ -11,18 +11,17 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class TabConnectionInstance
     {
-
         /// <summary>
-        /// Identifies an extension app&apos;s unique connection key.
+        /// Identifies an extension app's unique connection key.
         /// </summary>
         [JsonProperty("connectionKey")]
         public string ConnectionKey { get; set; } = default!;
 
         /// <summary>
-        /// Identifies an extension app&apos;s connection instance.
+        /// Identifies an extension app's connection instance.
         /// </summary>
         [JsonProperty("connectionValue")]
         public string ConnectionValue { get; set; } = default!;

@@ -11,12 +11,11 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class WorkspaceUploadRequestOwner
     {
-
         /// <summary>
-        /// The ID of the upload request owner
+        /// The ID of the upload request owner.
         /// </summary>
         [JsonProperty("user_id")]
         public string UserId { get; set; } = default!;

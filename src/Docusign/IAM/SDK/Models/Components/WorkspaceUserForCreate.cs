@@ -11,30 +11,29 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class WorkspaceUserForCreate
     {
-
         /// <summary>
-        /// The email address of the added user. May be an internal user to the account or an external user
+        /// The email address of the added user. May be an internal user to the account or an external user.
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; } = default!;
 
         /// <summary>
-        /// The first name of the added user
+        /// The first name of the added user.
         /// </summary>
         [JsonProperty("first_name")]
         public string FirstName { get; set; } = default!;
 
         /// <summary>
-        /// The last name of the added user
+        /// The last name of the added user.
         /// </summary>
         [JsonProperty("last_name")]
         public string LastName { get; set; } = default!;
 
         /// <summary>
-        /// The optional Role ID to assign to the user. Defaults to the &quot;Participate&quot; role
+        /// The optional Role ID to assign to the user. Defaults to the "Participate" role.
         /// </summary>
         [JsonProperty("role_id")]
         public string? RoleId { get; set; } = null;

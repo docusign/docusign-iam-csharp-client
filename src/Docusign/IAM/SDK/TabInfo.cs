@@ -24,41 +24,74 @@ namespace Docusign.IAM.SDK
 
     public interface ITabInfo
     {
-
         /// <summary>
-        /// Returns all tabs associated with the given account
-        /// 
+        /// Returns all tabs associated with the given account.
+        /// </summary>
         /// <remarks>
         /// Returns all tabs associated with the given account. <br/>
         /// <br/>
-        ///  **Note**: Unlike the Connected Fields UI, this endpoint returns only fields that are either mandatory or have the **IsRequiredForVerifyingType** &lt;a href=&quot;https://concerto.accordproject.org/docs/design/specification/model-decorators/&quot; target=&quot;_blank&quot;&gt;decorator&lt;/a&gt;
+        ///  **Note**: Unlike the Connected Fields UI, this endpoint returns only fields that are either mandatory or have the **IsRequiredForVerifyingType** <a href="https://concerto.accordproject.org/docs/design/specification/model-decorators/" target="_blank">decorator</a>
         /// </remarks>
-        /// </summary>
-        Task<List<Models.Components.TabInfo>> GetConnectedFieldsTabGroupsAsync(string accountId, string? appId = null, RetryConfig? retryConfig = null);
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="appId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Successful response.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<List<Models.Components.TabInfo>> GetConnectedFieldsTabGroupsAsync(
+            string accountId,
+            string? appId = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class TabInfo: ITabInfo
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public TabInfo(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<List<Models.Components.TabInfo>> GetConnectedFieldsTabGroupsAsync(string accountId, string? appId = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Returns all tabs associated with the given account.
+        /// </summary>
+        /// <remarks>
+        /// Returns all tabs associated with the given account. <br/>
+        /// <br/>
+        ///  **Note**: Unlike the Connected Fields UI, this endpoint returns only fields that are either mandatory or have the **IsRequiredForVerifyingType** <a href="https://concerto.accordproject.org/docs/design/specification/model-decorators/" target="_blank">decorator</a>
+        /// </remarks>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="appId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Successful response.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<List<Models.Components.TabInfo>> GetConnectedFieldsTabGroupsAsync(
+            string accountId,
+            string? appId = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+
             var request = new ConnectedFieldsApiGetTabGroupsRequest()
             {
                 AccountId = accountId,
                 AppId = appId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/connected-fields/tab-groups", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/connected-fields/tab-groups", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -112,7 +145,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -158,7 +191,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400 || responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -169,5 +202,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

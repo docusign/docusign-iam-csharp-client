@@ -13,15 +13,18 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
-    /// <summary>
-    /// A collection of agreements.
-    /// </summary>
+
     public class AgreementsResponse
     {
+        /// <summary>
+        /// Hypermedia controls (HATEOAS) for navigating between pages in a paginated collection of results.<br/>
+        /// Links for the current page, next page, and previous page, with optional first and last page links.
+        /// </summary>
+        [JsonProperty("_links")]
+        public PageLinks? Links { get; set; } = null;
 
         /// <summary>
-        /// A list of agreements
+        /// A list of agreements.
         /// </summary>
         [JsonProperty("data")]
         public List<Agreement>? Data { get; set; }

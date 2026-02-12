@@ -11,13 +11,12 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Successful response.
     /// </summary>
     public class GetTokenFromRefreshTokenResponse
     {
-
         /// <summary>
         /// The value of the access token. This value will be added to the Authorization header of all Docusign API calls.
         /// </summary>

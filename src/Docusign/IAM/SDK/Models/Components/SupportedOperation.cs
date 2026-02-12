@@ -12,7 +12,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The operation that the field supports.
     /// </summary>
@@ -54,5 +54,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum SupportedOperation");
         }
     }
-
 }

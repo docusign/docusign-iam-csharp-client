@@ -13,15 +13,14 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Response containing a list of upload requests
+    /// Response containing a list of upload requests.
     /// </summary>
     public class GetWorkspaceUploadRequestsResponse
     {
-
         /// <summary>
-        /// The upload request list
+        /// The upload request list.
         /// </summary>
         [JsonProperty("data", NullValueHandling = NullValueHandling.Include)]
         public List<Models.Components.WorkspaceUploadRequest>? Data { get; set; }

@@ -24,10 +24,9 @@ namespace Docusign.IAM.SDK
 
     public interface IWorkflowInstanceManagement
     {
-
         /// <summary>
-        /// Retrieve All Workflow Instances
-        /// 
+        /// Retrieve All Workflow Instances.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves a list of all available Maestro workflow instances. It returns basic information<br/>
         /// about each workflow instance, including its unique identifier (`id`), name, status, timestamps, and<br/>
@@ -44,46 +43,29 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Comprehensive Instance Overview**: Provides a full list of workflow instances, giving visibility<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   into all ongoing and completed workflows within the Maestro platform<br/>
         /// - **Metadata for Tracking**: Includes helpful metadata like creation time, last modification date,<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   and user details to support audit trails<br/>
         /// - **Scalable and Future-Proof**: Designed to handle growing numbers of workflow instances as the<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        ///   platform scales<br/>
-        /// 
+        ///   platform scales.
         /// </remarks>
-        /// </summary>
-        Task<WorkflowInstanceCollection> GetWorkflowInstancesListAsync(string accountId, string workflowId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="WorkflowInstanceCollection"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<WorkflowInstanceCollection> GetWorkflowInstancesListAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve a Workflow Instance
-        /// 
+        /// Retrieve a Workflow Instance.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves a single Maestro workflow instance by its unique identifier (`id`).<br/>
         /// It returns the primary details of the workflow instance, including its name, status,<br/>
@@ -100,17 +82,30 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Single Workflow Instance**: Provides direct access to a specific workflow instance by `id`<br/>
-        /// - **Detailed Status Information**: Includes the workflow&apos;s start and end times, status, and other lifecycle timestamps<br/>
+        /// - **Detailed Status Information**: Includes the workflow's start and end times, status, and other lifecycle timestamps<br/>
         /// - **Metadata for Tracking**: Useful metadata like who initiated the workflow (`started_by`) and versioning details<br/>
-        /// - **Future-Proof**: Designed to be extensible if additional fields or nested information are required over time<br/>
-        /// 
+        /// - **Future-Proof**: Designed to be extensible if additional fields or nested information are required over time.
         /// </remarks>
-        /// </summary>
-        Task<WorkflowInstance> GetWorkflowInstanceAsync(string accountId, string workflowId, string instanceId, RetryConfig? retryConfig = null);
+        /// <param name="instanceId">Unique identifier for the workflow instance.</param>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="WorkflowInstance"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="instanceId"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<WorkflowInstance> GetWorkflowInstanceAsync(
+            string instanceId,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Cancel a Running Workflow Instance
-        /// 
+        /// Cancel a Running Workflow Instance.
+        /// </summary>
         /// <remarks>
         /// This operation cancels a running Maestro workflow instance by its unique identifier (`instanceId`).<br/>
         /// Once canceled, the workflow instance will no longer continue executing any remaining steps.<br/>
@@ -121,35 +116,89 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Immediate Termination**: Ensures the workflow instance no longer processes subsequent steps<br/>
-        /// - **Clear Feedback**: Returns a confirmation message including both the instance and workflow identifiers<br/>
-        /// 
+        /// - **Clear Feedback**: Returns a confirmation message including both the instance and workflow identifiers.
         /// </remarks>
-        /// </summary>
-        Task<CancelWorkflowInstanceResponse> CancelWorkflowInstanceAsync(string accountId, string workflowId, string instanceId, RetryConfig? retryConfig = null);
+        /// <param name="instanceId">Unique identifier for the workflow instance.</param>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A message confirming the instance was canceled, including the instance and workflow IDs.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="instanceId"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404, 409 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CancelWorkflowInstanceResponse> CancelWorkflowInstanceAsync(
+            string instanceId,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class WorkflowInstanceManagement: IWorkflowInstanceManagement
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public WorkflowInstanceManagement(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<WorkflowInstanceCollection> GetWorkflowInstancesListAsync(string accountId, string workflowId, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Retrieve All Workflow Instances.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves a list of all available Maestro workflow instances. It returns basic information<br/>
+        /// about each workflow instance, including its unique identifier (`id`), name, status, timestamps, and<br/>
+        /// additional metadata.<br/>
+        /// <br/>
+        /// The response provides key details that help users understand what workflow instances are in progress<br/>
+        /// or completed, and the relevant data for each. Each workflow instance entry also includes metadata, such<br/>
+        /// as who started it, when it was last modified, and how many steps have been completed.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - Listing all available workflow instances for manual or automated review<br/>
+        /// - Monitoring which workflow instances are currently running or have finished<br/>
+        /// - Gathering basic metadata about workflow instances for auditing, logging, or reporting purposes<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Comprehensive Instance Overview**: Provides a full list of workflow instances, giving visibility<br/>
+        ///   into all ongoing and completed workflows within the Maestro platform<br/>
+        /// - **Metadata for Tracking**: Includes helpful metadata like creation time, last modification date,<br/>
+        ///   and user details to support audit trails<br/>
+        /// - **Scalable and Future-Proof**: Designed to handle growing numbers of workflow instances as the<br/>
+        ///   platform scales.
+        /// </remarks>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="WorkflowInstanceCollection"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<WorkflowInstanceCollection> GetWorkflowInstancesListAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workflowId == null) throw new ArgumentNullException(nameof(workflowId));
+
             var request = new GetWorkflowInstancesListRequest()
             {
                 AccountId = accountId,
                 WorkflowId = workflowId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/instances", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/instances", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -261,16 +310,60 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<WorkflowInstance> GetWorkflowInstanceAsync(string accountId, string workflowId, string instanceId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a Workflow Instance.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves a single Maestro workflow instance by its unique identifier (`id`).<br/>
+        /// It returns the primary details of the workflow instance, including its name, status,<br/>
+        /// starting information, and other metadata.<br/>
+        /// <br/>
+        /// The response provides key details that help users understand the current state of the workflow<br/>
+        /// instance, when it was started, and who initiated it. Additional metadata is included to support<br/>
+        /// auditing and reporting within the system.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - Getting the details of a specific workflow instance for further processing or review<br/>
+        /// - Monitoring the status of a running workflow instance to determine completion or cancellation<br/>
+        /// - Accessing metadata for auditing, logging, or reporting on a single workflow instance<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Single Workflow Instance**: Provides direct access to a specific workflow instance by `id`<br/>
+        /// - **Detailed Status Information**: Includes the workflow's start and end times, status, and other lifecycle timestamps<br/>
+        /// - **Metadata for Tracking**: Useful metadata like who initiated the workflow (`started_by`) and versioning details<br/>
+        /// - **Future-Proof**: Designed to be extensible if additional fields or nested information are required over time.
+        /// </remarks>
+        /// <param name="instanceId">Unique identifier for the workflow instance.</param>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="WorkflowInstance"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="instanceId"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<WorkflowInstance> GetWorkflowInstanceAsync(
+            string instanceId,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
         {
+            if (instanceId == null) throw new ArgumentNullException(nameof(instanceId));
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workflowId == null) throw new ArgumentNullException(nameof(workflowId));
+
             var request = new GetWorkflowInstanceRequest()
             {
                 AccountId = accountId,
                 WorkflowId = workflowId,
                 InstanceId = instanceId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -324,7 +417,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -410,7 +503,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -422,16 +515,52 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CancelWorkflowInstanceResponse> CancelWorkflowInstanceAsync(string accountId, string workflowId, string instanceId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Cancel a Running Workflow Instance.
+        /// </summary>
+        /// <remarks>
+        /// This operation cancels a running Maestro workflow instance by its unique identifier (`instanceId`).<br/>
+        /// Once canceled, the workflow instance will no longer continue executing any remaining steps.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - Stopping a workflow execution when it is no longer needed or relevant<br/>
+        /// - Manually intervening in a workflow to prevent it from reaching completion if conditions change<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Immediate Termination**: Ensures the workflow instance no longer processes subsequent steps<br/>
+        /// - **Clear Feedback**: Returns a confirmation message including both the instance and workflow identifiers.
+        /// </remarks>
+        /// <param name="instanceId">Unique identifier for the workflow instance.</param>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A message confirming the instance was canceled, including the instance and workflow IDs.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="instanceId"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404, 409 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CancelWorkflowInstanceResponse> CancelWorkflowInstanceAsync(
+            string instanceId,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
         {
+            if (instanceId == null) throw new ArgumentNullException(nameof(instanceId));
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workflowId == null) throw new ArgumentNullException(nameof(workflowId));
+
             var request = new CancelWorkflowInstanceRequest()
             {
                 AccountId = accountId,
                 WorkflowId = workflowId,
                 InstanceId = instanceId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}/actions/cancel", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}/actions/cancel", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -485,7 +614,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 409 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -571,7 +700,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -582,5 +711,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

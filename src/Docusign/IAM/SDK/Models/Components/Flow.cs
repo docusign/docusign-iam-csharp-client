@@ -12,7 +12,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum Flow
     {
         [JsonProperty("confidential")]
@@ -51,5 +51,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum Flow");
         }
     }
-
 }

@@ -9,24 +9,16 @@
 #nullable enable
 namespace Docusign.IAM.SDK.Models.Components
 {
+    using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
-    /// <summary>
-    /// A high-level, AI-generated summary of an agreement document.
-    /// </summary>
-    public class AgreementSummary
-    {
 
-        /// <summary>
-        /// An AI-generated summary of the agreement. This summary is provided for convenience <br/>
-        /// 
-        /// <remarks>
-        /// and may not capture every detail of the original agreement. <br/>
-        /// 
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("summary")]
-        public string? Summary { get; set; }
+    public class BulkJobActionTemplates
+    {
+        [JsonProperty("upload_document")]
+        public BulkJobActionTemplate? UploadDocument { get; set; }
+
+        [JsonProperty("upload_metadata")]
+        public BulkJobActionTemplate? UploadMetadata { get; set; }
     }
 }

@@ -19,37 +19,56 @@ namespace Docusign.IAM.SDK
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-
     /// <summary>
-    /// Docusign IAM API: Docusign IAM API
+    /// Docusign IAM API: Docusign IAM API.
     /// </summary>
     public interface IIamClient
     {
         public IAuth Auth { get; }
+
         public IMaestro Maestro { get; }
+
         public INavigator Navigator { get; }
+
         public IConnectedFields ConnectedFields { get; }
+
         public IWorkspaces1 Workspaces { get; }
     }
 
-
     /// <summary>
-    /// Docusign IAM API: Docusign IAM API
+    /// Docusign IAM API: Docusign IAM API.
     /// </summary>
     public class IamClient: IIamClient
     {
+        /// <summary>
+        /// The main SDK Configuration.
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
+        /// <summary>
+        /// The Auth sub-SDK.
+        /// </summary>
         public IAuth Auth { get; private set; }
+        /// <summary>
+        /// The Maestro sub-SDK.
+        /// </summary>
         public IMaestro Maestro { get; private set; }
+        /// <summary>
+        /// The Navigator sub-SDK.
+        /// </summary>
         public INavigator Navigator { get; private set; }
+        /// <summary>
+        /// The ConnectedFields sub-SDK.
+        /// </summary>
         public IConnectedFields ConnectedFields { get; private set; }
+        /// <summary>
+        /// The Workspaces1 sub-SDK.
+        /// </summary>
         public IWorkspaces1 Workspaces { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the SDK based on a <see cref="SDKConfig"/> configuration object.
+        /// </summary>
+        /// <param name="config">The SDK configuration object.</param>
         public IamClient(SDKConfig config)
         {
             SDKConfiguration = config;
@@ -66,7 +85,25 @@ namespace Docusign.IAM.SDK
             Workspaces = new Workspaces1(SDKConfiguration);
         }
 
-        public IamClient(string? accessToken = null, Func<string>? accessTokenSource = null, SDKConfig.Server? server = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Initializes a new instance of the SDK with optional configuration parameters.
+        /// </summary>
+        /// <param name="accessToken">The security configuration to use for API requests. If provided, this will be used as a static security configuration.</param>
+        /// <param name="accessTokenSource">A function that returns the security configuration dynamically. This takes precedence over the static security parameter if both are provided.</param>
+        /// <param name="server">The server to use from the predefined server list.</param>
+        /// <param name="serverUrl">A custom server URL to use instead of the predefined server list. If provided with urlParams, the URL will be templated with the provided parameters.</param>
+        /// <param name="urlParams">A dictionary of parameters to use for templating the serverUrl. Only used when serverUrl is provided.</param>
+        /// <param name="client">A custom HTTP client implementation to use for making API requests. If not provided, the default SpeakeasyHttpClient will be used.</param>
+        /// <param name="retryConfig">Configuration for retry behavior when API requests fail. Defines retry strategies, backoff policies, and maximum retry attempts.</param>
+        public IamClient(
+            string? accessToken = null,
+            Func<string>? accessTokenSource = null,
+            SDKConfig.Server? server = null,
+            string? serverUrl = null,
+            Dictionary<string, string>? urlParams = null,
+            ISpeakeasyHttpClient? client = null,
+            RetryConfig? retryConfig = null
+        )
         {
 
             if (serverUrl != null)
@@ -113,18 +150,27 @@ namespace Docusign.IAM.SDK
             SDKConfiguration = SDKConfiguration.Hooks.SDKInit(SDKConfiguration);
         }
 
+        /// <summary>
+        /// Builder class for constructing an instance of the SDK.
+        /// </summary>
         public class SDKBuilder
         {
             private SDKConfig _sdkConfig = new SDKConfig(client: new SpeakeasyHttpClient());
 
             public SDKBuilder() { }
 
+            /// <summary>
+            /// Overrides the default server by name.
+            /// </summary>
             public SDKBuilder WithServer(SDKConfig.Server server)
             {
                 _sdkConfig.ServerName = server;
                 return this;
             }
 
+            /// <summary>
+            /// Overrides the default server URL for the SDK.
+            /// </summary>
             public SDKBuilder WithServerUrl(string serverUrl, Dictionary<string, string>? serverVariables = null)
             {
                 if (serverVariables != null)
@@ -135,30 +181,45 @@ namespace Docusign.IAM.SDK
                 return this;
             }
 
+            /// <summary>
+            /// Sets the accessTokenSource security parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithAccessTokenSource(Func<string> accessTokenSource)
             {
                 _sdkConfig.SecuritySource = () => new Docusign.IAM.SDK.Models.Components.Security() { AccessToken = accessTokenSource() };
                 return this;
             }
 
+            /// <summary>
+            /// Sets the accessToken security parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithAccessToken(string accessToken)
             {
                 _sdkConfig.SecuritySource = () => new Docusign.IAM.SDK.Models.Components.Security() { AccessToken = accessToken };
                 return this;
             }
 
+            /// <summary>
+            /// Sets a custom HTTP client to be used by the SDK.
+            /// </summary>
             public SDKBuilder WithClient(ISpeakeasyHttpClient client)
             {
                 _sdkConfig.Client = client;
                 return this;
             }
 
+            /// <summary>
+            /// Sets the retry configuration for the SDK.
+            /// </summary>
             public SDKBuilder WithRetryConfig(RetryConfig retryConfig)
             {
                 _sdkConfig.RetryConfig = retryConfig;
                 return this;
             }
 
+            /// <summary>
+            /// Builds and returns the SDK instance.
+            /// </summary>
             public IamClient Build()
             {
               return new IamClient(_sdkConfig);

@@ -24,94 +24,219 @@ namespace Docusign.IAM.SDK
 
     public interface IWorkspaceUploadRequest
     {
-
         /// <summary>
-        /// Creates a new upload request within a workspace
-        /// 
+        /// Creates a new upload request within a workspace.
+        /// </summary>
         /// <remarks>
         /// This operation creates a new upload request within a workspace. The upload request includes name, description, due date, and user assignments. Upload requests can be created as drafts or sent immediately based on the status field.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceUploadRequestResponse> CreateWorkspaceUploadRequestAsync(string accountId, string workspaceId, CreateWorkspaceUploadRequestBody createWorkspaceUploadRequestBody, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="createWorkspaceUploadRequestBody">The upload request details including name, description, assignments, and status.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Upload request details - single upload request response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="createWorkspaceUploadRequestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceUploadRequestResponse> CreateWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            CreateWorkspaceUploadRequestBody createWorkspaceUploadRequestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Gets upload requests within a workspace
-        /// 
+        /// Gets upload requests within a workspace.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves a list of upload requests within a workspace. Each upload request includes details such as ID, name, description, status, owner information, associated documents, assignments, and various dates.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceUploadRequestsResponse> GetWorkspaceUploadRequestsAsync(string accountId, string workspaceId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Response containing a list of upload requests.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceUploadRequestsResponse> GetWorkspaceUploadRequestsAsync(
+            string accountId,
+            string workspaceId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Gets details for a specific upload request
-        /// 
+        /// Gets details for a specific upload request.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves details about a specific upload request within a workspace. The response includes comprehensive information about the upload request including status, assigned users, associated documents, owner details, and various dates.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceUploadRequestResponse> GetWorkspaceUploadRequestAsync(string accountId, string workspaceId, string uploadRequestId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Upload request details - single upload request response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="uploadRequestId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceUploadRequestResponse> GetWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Updates a specific upload request
-        /// 
+        /// Updates a specific upload request.
+        /// </summary>
         /// <remarks>
         /// This operation updates a specific upload request within a workspace. Only draft upload requests can be edited. The editable fields are name, description, due date, and status. Status changes are restricted - only transitions from draft to in_progress are allowed. Attempting to update a non-draft upload request will result in an INVALID_STATUS error. Attempting an invalid status change will result in an INVALID_STATUS_CHANGE error.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceUploadRequestResponse> UpdateWorkspaceUploadRequestAsync(string accountId, string workspaceId, string uploadRequestId, UpdateWorkspaceUploadRequestBody updateWorkspaceUploadRequestBody, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request to update.</param>
+        /// <param name="updateWorkspaceUploadRequestBody">The upload request object with updated values.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Upload request details - single upload request response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/>, <paramref name="uploadRequestId"/> or <paramref name="updateWorkspaceUploadRequestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceUploadRequestResponse> UpdateWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            UpdateWorkspaceUploadRequestBody updateWorkspaceUploadRequestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Deletes a specific upload request
-        /// 
+        /// Deletes a specific upload request.
+        /// </summary>
         /// <remarks>
         /// This operation deletes a specific upload request within a workspace. Upload requests cannot be deleted if they are complete or have associated documents.
         /// </remarks>
-        /// </summary>
-        Task DeleteWorkspaceUploadRequestAsync(string accountId, string workspaceId, string uploadRequestId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="uploadRequestId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task DeleteWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Add a document to an upload request via file upload
-        /// 
+        /// Add a document to an upload request via file upload.
+        /// </summary>
         /// <remarks>
         /// This operation adds a document to a specific upload request within a workspace via file upload. The file is passed in the request body as multipart/form-data. The file name is used as the document name.
         /// </remarks>
-        /// </summary>
-        Task<AddWorkspaceUploadRequestDocumentResponse> AddWorkspaceUploadRequestDocumentAsync(string accountId, string workspaceId, string uploadRequestId, Models.Components.AddWorkspaceUploadRequestDocumentRequest? addWorkspaceUploadRequestDocumentRequest = null, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request.</param>
+        /// <param name="addWorkspaceUploadRequestDocumentRequest">A <see cref="Docusign.IAM.SDK.Models.Components.AddWorkspaceUploadRequestDocumentRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Response for adding a document to an upload request.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="uploadRequestId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<AddWorkspaceUploadRequestDocumentResponse> AddWorkspaceUploadRequestDocumentAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            Models.Components.AddWorkspaceUploadRequestDocumentRequest? addWorkspaceUploadRequestDocumentRequest = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Complete an upload request
-        /// 
+        /// Complete an upload request.
+        /// </summary>
         /// <remarks>
         /// This operation completes a specific upload request within a workspace and is intended to be called by the user completing the upload request. Only upload requests that are in progress can be completed.
         /// </remarks>
-        /// </summary>
-        Task CompleteWorkspaceUploadRequestAsync(string accountId, string workspaceId, string uploadRequestId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request to complete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="uploadRequestId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task CompleteWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class WorkspaceUploadRequest: IWorkspaceUploadRequest
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public WorkspaceUploadRequest(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetWorkspaceUploadRequestResponse> CreateWorkspaceUploadRequestAsync(string accountId, string workspaceId, CreateWorkspaceUploadRequestBody createWorkspaceUploadRequestBody, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Creates a new upload request within a workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation creates a new upload request within a workspace. The upload request includes name, description, due date, and user assignments. Upload requests can be created as drafts or sent immediately based on the status field.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="createWorkspaceUploadRequestBody">The upload request details including name, description, assignments, and status.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Upload request details - single upload request response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="createWorkspaceUploadRequestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceUploadRequestResponse> CreateWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            CreateWorkspaceUploadRequestBody createWorkspaceUploadRequestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (createWorkspaceUploadRequestBody == null) throw new ArgumentNullException(nameof(createWorkspaceUploadRequestBody));
+
             var request = new CreateWorkspaceUploadRequestRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 CreateWorkspaceUploadRequestBody = createWorkspaceUploadRequestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -171,7 +296,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -269,15 +394,39 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWorkspaceUploadRequestsResponse> GetWorkspaceUploadRequestsAsync(string accountId, string workspaceId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Gets upload requests within a workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves a list of upload requests within a workspace. Each upload request includes details such as ID, name, description, status, owner information, associated documents, assignments, and various dates.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Response containing a list of upload requests.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceUploadRequestsResponse> GetWorkspaceUploadRequestsAsync(
+            string accountId,
+            string workspaceId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+
             var request = new GetWorkspaceUploadRequestsRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -331,7 +480,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -429,16 +578,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWorkspaceUploadRequestResponse> GetWorkspaceUploadRequestAsync(string accountId, string workspaceId, string uploadRequestId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Gets details for a specific upload request.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves details about a specific upload request within a workspace. The response includes comprehensive information about the upload request including status, assigned users, associated documents, owner details, and various dates.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Upload request details - single upload request response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="uploadRequestId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceUploadRequestResponse> GetWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (uploadRequestId == null) throw new ArgumentNullException(nameof(uploadRequestId));
+
             var request = new GetWorkspaceUploadRequestRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 UploadRequestId = uploadRequestId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -492,7 +668,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -590,8 +766,37 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWorkspaceUploadRequestResponse> UpdateWorkspaceUploadRequestAsync(string accountId, string workspaceId, string uploadRequestId, UpdateWorkspaceUploadRequestBody updateWorkspaceUploadRequestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Updates a specific upload request.
+        /// </summary>
+        /// <remarks>
+        /// This operation updates a specific upload request within a workspace. Only draft upload requests can be edited. The editable fields are name, description, due date, and status. Status changes are restricted - only transitions from draft to in_progress are allowed. Attempting to update a non-draft upload request will result in an INVALID_STATUS error. Attempting an invalid status change will result in an INVALID_STATUS_CHANGE error.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request to update.</param>
+        /// <param name="updateWorkspaceUploadRequestBody">The upload request object with updated values.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Upload request details - single upload request response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/>, <paramref name="uploadRequestId"/> or <paramref name="updateWorkspaceUploadRequestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceUploadRequestResponse> UpdateWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            UpdateWorkspaceUploadRequestBody updateWorkspaceUploadRequestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (uploadRequestId == null) throw new ArgumentNullException(nameof(uploadRequestId));
+            if (updateWorkspaceUploadRequestBody == null) throw new ArgumentNullException(nameof(updateWorkspaceUploadRequestBody));
+
             var request = new UpdateWorkspaceUploadRequestRequest()
             {
                 AccountId = accountId,
@@ -599,8 +804,9 @@ namespace Docusign.IAM.SDK
                 UploadRequestId = uploadRequestId,
                 UpdateWorkspaceUploadRequestBody = updateWorkspaceUploadRequestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -660,7 +866,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -758,16 +964,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task DeleteWorkspaceUploadRequestAsync(string accountId, string workspaceId, string uploadRequestId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Deletes a specific upload request.
+        /// </summary>
+        /// <remarks>
+        /// This operation deletes a specific upload request within a workspace. Upload requests cannot be deleted if they are complete or have associated documents.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="uploadRequestId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task DeleteWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (uploadRequestId == null) throw new ArgumentNullException(nameof(uploadRequestId));
+
             var request = new DeleteWorkspaceUploadRequestRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 UploadRequestId = uploadRequestId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -821,7 +1054,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -883,8 +1116,36 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<AddWorkspaceUploadRequestDocumentResponse> AddWorkspaceUploadRequestDocumentAsync(string accountId, string workspaceId, string uploadRequestId, Models.Components.AddWorkspaceUploadRequestDocumentRequest? addWorkspaceUploadRequestDocumentRequest = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Add a document to an upload request via file upload.
+        /// </summary>
+        /// <remarks>
+        /// This operation adds a document to a specific upload request within a workspace via file upload. The file is passed in the request body as multipart/form-data. The file name is used as the document name.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request.</param>
+        /// <param name="addWorkspaceUploadRequestDocumentRequest">A <see cref="Docusign.IAM.SDK.Models.Components.AddWorkspaceUploadRequestDocumentRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Response for adding a document to an upload request.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="uploadRequestId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<AddWorkspaceUploadRequestDocumentResponse> AddWorkspaceUploadRequestDocumentAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            Models.Components.AddWorkspaceUploadRequestDocumentRequest? addWorkspaceUploadRequestDocumentRequest = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (uploadRequestId == null) throw new ArgumentNullException(nameof(uploadRequestId));
+
             var request = new Models.Requests.AddWorkspaceUploadRequestDocumentRequest()
             {
                 AccountId = accountId,
@@ -892,8 +1153,9 @@ namespace Docusign.IAM.SDK
                 UploadRequestId = uploadRequestId,
                 AddWorkspaceUploadRequestDocumentRequestValue = addWorkspaceUploadRequestDocumentRequest,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/documents", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/documents", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -953,7 +1215,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1051,16 +1313,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task CompleteWorkspaceUploadRequestAsync(string accountId, string workspaceId, string uploadRequestId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Complete an upload request.
+        /// </summary>
+        /// <remarks>
+        /// This operation completes a specific upload request within a workspace and is intended to be called by the user completing the upload request. Only upload requests that are in progress can be completed.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="uploadRequestId">The ID of the upload request to complete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="uploadRequestId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task CompleteWorkspaceUploadRequestAsync(
+            string accountId,
+            string workspaceId,
+            string uploadRequestId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (uploadRequestId == null) throw new ArgumentNullException(nameof(uploadRequestId));
+
             var request = new CompleteWorkspaceUploadRequestRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 UploadRequestId = uploadRequestId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/actions/complete", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/actions/complete", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1114,7 +1403,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1175,5 +1464,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

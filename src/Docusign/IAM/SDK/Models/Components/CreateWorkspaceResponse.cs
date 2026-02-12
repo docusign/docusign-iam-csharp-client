@@ -13,36 +13,35 @@ namespace Docusign.IAM.SDK.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class CreateWorkspaceResponse
     {
-
         /// <summary>
-        /// The ID of the workspace
+        /// The ID of the workspace.
         /// </summary>
         [JsonProperty("workspace_id")]
         public string? WorkspaceId { get; set; }
 
         /// <summary>
-        /// The name of the workspace
+        /// The name of the workspace.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// The date the workspace was created
+        /// The date the workspace was created.
         /// </summary>
         [JsonProperty("created_date")]
         public DateTime? CreatedDate { get; set; } = null;
 
         /// <summary>
-        /// The ID of the user who created the workspace
+        /// The ID of the user who created the workspace.
         /// </summary>
         [JsonProperty("created_by_user_id")]
         public string? CreatedByUserId { get; set; } = null;
 
         /// <summary>
-        /// The list of user IDs of the workspace owners
+        /// The list of user IDs of the workspace owners.
         /// </summary>
         [JsonProperty("workspace_owner_ids")]
         public List<string>? WorkspaceOwnerIds { get; set; } = null;

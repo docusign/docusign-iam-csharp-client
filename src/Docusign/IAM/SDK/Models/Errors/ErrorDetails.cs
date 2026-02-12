@@ -17,20 +17,20 @@ namespace Docusign.IAM.SDK.Models.Errors
     public class ErrorDetailsPayload
     {
         /// <summary>
-        /// A brief message describing the error condition
+        /// A brief message describing the error condition.
         /// </summary>
         [JsonProperty("message")]
         public string? Message { get; set; }
 
         /// <summary>
-        /// A standardized code that generalizes the specific error
+        /// A standardized code that generalizes the specific error.
         /// </summary>
         [JsonProperty("error_code")]
         public string? ErrorCode { get; set; }
     }
 
     /// <summary>
-    /// The error response object for the Workspaces API
+    /// The error response object for the Workspaces API.
     /// </summary>
     public class ErrorDetails : IamClientError
     {
@@ -70,5 +70,4 @@ namespace Docusign.IAM.SDK.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

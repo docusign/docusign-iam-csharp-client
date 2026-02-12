@@ -12,45 +12,44 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The summary of the envelope in the workspace
+    /// The summary of the envelope in the workspace.
     /// </summary>
     public class WorkspaceEnvelopeSummary
     {
-
         /// <summary>
-        /// The ID of the envelope
+        /// The ID of the envelope.
         /// </summary>
         [JsonProperty("envelope_id", NullValueHandling = NullValueHandling.Include)]
         public string? EnvelopeId { get; set; }
 
         /// <summary>
-        /// The status of the envelope in the workspace
+        /// The status of the envelope in the workspace.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Include)]
         public string? Status { get; set; }
 
         /// <summary>
-        /// The envelope name
+        /// The envelope name.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// The envelope subject
+        /// The envelope subject.
         /// </summary>
         [JsonProperty("subject")]
         public string? Subject { get; set; } = null;
 
         /// <summary>
-        /// The date the envelope was created
+        /// The date the envelope was created.
         /// </summary>
         [JsonProperty("created_date")]
         public DateTime? CreatedDate { get; set; } = null;
 
         /// <summary>
-        /// The date the envelope was last updated
+        /// The date the envelope was last updated.
         /// </summary>
         [JsonProperty("last_updated_date")]
         public DateTime? LastUpdatedDate { get; set; } = null;

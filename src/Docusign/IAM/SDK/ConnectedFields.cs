@@ -21,11 +21,16 @@ namespace Docusign.IAM.SDK
 
     public class ConnectedFields: IConnectedFields
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
+
+        /// <summary>
+        /// TabInfo SubSDK.
+        /// <see cref="ITabInfo"/>
+        /// </summary>
         public ITabInfo TabInfo { get; private set; }
 
         public ConnectedFields(SDKConfig config)

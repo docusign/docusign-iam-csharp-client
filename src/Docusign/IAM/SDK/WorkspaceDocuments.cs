@@ -24,74 +24,160 @@ namespace Docusign.IAM.SDK
 
     public interface IWorkspaceDocuments
     {
-
         /// <summary>
-        /// Get documents in the workspace accessible to the calling user
-        /// 
+        /// Get documents in the workspace accessible to the calling user.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves the documents in the workspace that are accessible to the calling user. Documents may be added directly or automatically through tasks such as envelopes. Documents may be used to create envelopes.<br/>
         /// <br/>
         /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceDocumentsResponse> GetWorkspaceDocumentsAsync(GetWorkspaceDocumentsRequest request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="GetWorkspaceDocumentsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceDocumentsResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceDocumentsResponse> GetWorkspaceDocumentsAsync(
+            GetWorkspaceDocumentsRequest request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Add a document to a workspace via file contents upload
-        /// 
+        /// Add a document to a workspace via file contents upload.
+        /// </summary>
         /// <remarks>
         /// This operation adds a document to a workspace via file contents upload. The file is passed in the request body as a multipart/form-data file. The file name is used as the document name.<br/>
         /// <br/>
         /// Once added, it may be used to create an envelope associated with the workspace.
         /// </remarks>
-        /// </summary>
-        Task<CreateWorkspaceDocumentResponse> AddWorkspaceDocumentAsync(string accountId, string workspaceId, Models.Components.AddWorkspaceDocumentRequest? addWorkspaceDocumentRequest = null, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="addWorkspaceDocumentRequest">A <see cref="Docusign.IAM.SDK.Models.Components.AddWorkspaceDocumentRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWorkspaceDocumentResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateWorkspaceDocumentResponse> AddWorkspaceDocumentAsync(
+            string accountId,
+            string workspaceId,
+            Models.Components.AddWorkspaceDocumentRequest? addWorkspaceDocumentRequest = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Get information about the document
-        /// 
+        /// Get information about the document.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves information about the document. The response includes the document ID, name, and metadata.
         /// </remarks>
-        /// </summary>
-        Task<GetWorkspaceDocumentResponse> GetWorkspaceDocumentAsync(string accountId, string workspaceId, string documentId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="documentId">The ID of the document.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceDocumentResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="documentId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetWorkspaceDocumentResponse> GetWorkspaceDocumentAsync(
+            string accountId,
+            string workspaceId,
+            string documentId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Deletes a document in the workspace
-        /// 
+        /// Deletes a document in the workspace.
+        /// </summary>
         /// <remarks>
         /// This operation permanently deletes a document by ID.
         /// </remarks>
-        /// </summary>
-        Task DeleteWorkspaceDocumentAsync(string accountId, string workspaceId, string documentId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="documentId">The ID of the document.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="documentId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task DeleteWorkspaceDocumentAsync(
+            string accountId,
+            string workspaceId,
+            string documentId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Get the file contents of the document
-        /// 
+        /// Get the file contents of the document.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves the file contents of the document. The file is returned as a stream in the response body. The Content-Disposition response header contains the document name as the `filename`.
         /// </remarks>
-        /// </summary>
-        Task<byte[]> GetWorkspaceDocumentContentsAsync(string accountId, string workspaceId, string documentId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="documentId">The ID of the document.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Document successfully retrieved.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="documentId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<byte[]> GetWorkspaceDocumentContentsAsync(
+            string accountId,
+            string workspaceId,
+            string documentId,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class WorkspaceDocuments: IWorkspaceDocuments
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public WorkspaceDocuments(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetWorkspaceDocumentsResponse> GetWorkspaceDocumentsAsync(GetWorkspaceDocumentsRequest request, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Get documents in the workspace accessible to the calling user.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves the documents in the workspace that are accessible to the calling user. Documents may be added directly or automatically through tasks such as envelopes. Documents may be used to create envelopes.<br/>
+        /// <br/>
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetWorkspaceDocumentsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceDocumentsResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceDocumentsResponse> GetWorkspaceDocumentsAsync(
+            GetWorkspaceDocumentsRequest request,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -145,7 +231,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -243,16 +329,44 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateWorkspaceDocumentResponse> AddWorkspaceDocumentAsync(string accountId, string workspaceId, Models.Components.AddWorkspaceDocumentRequest? addWorkspaceDocumentRequest = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Add a document to a workspace via file contents upload.
+        /// </summary>
+        /// <remarks>
+        /// This operation adds a document to a workspace via file contents upload. The file is passed in the request body as a multipart/form-data file. The file name is used as the document name.<br/>
+        /// <br/>
+        /// Once added, it may be used to create an envelope associated with the workspace.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="addWorkspaceDocumentRequest">A <see cref="Docusign.IAM.SDK.Models.Components.AddWorkspaceDocumentRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWorkspaceDocumentResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workspaceId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateWorkspaceDocumentResponse> AddWorkspaceDocumentAsync(
+            string accountId,
+            string workspaceId,
+            Models.Components.AddWorkspaceDocumentRequest? addWorkspaceDocumentRequest = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+
             var request = new Models.Requests.AddWorkspaceDocumentRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 AddWorkspaceDocumentRequestValue = addWorkspaceDocumentRequest,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -312,7 +426,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -410,16 +524,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetWorkspaceDocumentResponse> GetWorkspaceDocumentAsync(string accountId, string workspaceId, string documentId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Get information about the document.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves information about the document. The response includes the document ID, name, and metadata.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="documentId">The ID of the document.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetWorkspaceDocumentResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="documentId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetWorkspaceDocumentResponse> GetWorkspaceDocumentAsync(
+            string accountId,
+            string workspaceId,
+            string documentId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (documentId == null) throw new ArgumentNullException(nameof(documentId));
+
             var request = new GetWorkspaceDocumentRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 DocumentId = documentId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -473,7 +614,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -571,16 +712,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task DeleteWorkspaceDocumentAsync(string accountId, string workspaceId, string documentId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Deletes a document in the workspace.
+        /// </summary>
+        /// <remarks>
+        /// This operation permanently deletes a document by ID.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="documentId">The ID of the document.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="documentId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task DeleteWorkspaceDocumentAsync(
+            string accountId,
+            string workspaceId,
+            string documentId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (documentId == null) throw new ArgumentNullException(nameof(documentId));
+
             var request = new DeleteWorkspaceDocumentRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 DocumentId = documentId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -634,7 +802,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -696,16 +864,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<byte[]> GetWorkspaceDocumentContentsAsync(string accountId, string workspaceId, string documentId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Get the file contents of the document.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves the file contents of the document. The file is returned as a stream in the response body. The Content-Disposition response header contains the document name as the `filename`.
+        /// </remarks>
+        /// <param name="accountId">The ID of the account.</param>
+        /// <param name="workspaceId">The ID of the workspace.</param>
+        /// <param name="documentId">The ID of the document.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Document successfully retrieved.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/>, <paramref name="workspaceId"/> or <paramref name="documentId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrorDetails">Bad request. See ErrorCode and Message for details. Thrown when the API returns a 400, 401 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<byte[]> GetWorkspaceDocumentContentsAsync(
+            string accountId,
+            string workspaceId,
+            string documentId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workspaceId == null) throw new ArgumentNullException(nameof(workspaceId));
+            if (documentId == null) throw new ArgumentNullException(nameof(documentId));
+
             var request = new GetWorkspaceDocumentContentsRequest()
             {
                 AccountId = accountId,
                 WorkspaceId = workspaceId,
                 DocumentId = documentId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}/contents", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}/contents", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -759,7 +954,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -845,5 +1040,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

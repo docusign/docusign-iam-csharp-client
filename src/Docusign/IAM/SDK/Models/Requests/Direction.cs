@@ -12,7 +12,7 @@ namespace Docusign.IAM.SDK.Models.Requests
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Direction of sorting (ascending or descending).
     /// </summary>
@@ -56,5 +56,4 @@ namespace Docusign.IAM.SDK.Models.Requests
             throw new Exception($"Unknown value {value} for enum Direction");
         }
     }
-
 }

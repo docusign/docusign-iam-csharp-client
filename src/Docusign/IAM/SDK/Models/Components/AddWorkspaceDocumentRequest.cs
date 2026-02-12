@@ -11,12 +11,11 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
-    
+
     public class AddWorkspaceDocumentRequest
     {
-
         /// <summary>
-        /// The file within the multipart/form-data
+        /// The file within the multipart/form-data.
         /// </summary>
         [SpeakeasyMetadata("multipartForm:file,name=file")]
         public AddWorkspaceDocumentRequestFile? File { get; set; }

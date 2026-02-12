@@ -11,12 +11,11 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateWorkspaceBrandBody
     {
-
         /// <summary>
-        /// A GUID value that identifies a brand. For more information, see &lt;a href=&quot;https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/branding/&quot;&gt;Branding&lt;/a&gt;
+        /// A GUID value that identifies a brand. For more information, see <a href="https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/branding/">Branding</a>
         /// </summary>
         [JsonProperty("brand_id")]
         public string? BrandId { get; set; } = null;

@@ -12,41 +12,40 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// The Agreement component represents a comprehensive overview of a contractual document, detailing its unique identifiers, key properties, parties involved, <br/>
-    /// 
-    /// <remarks>
-    /// and specific provisions. It includes general information such as the title, type, status, and important dates like effective and expiration dates. <br/>
-    /// The component also incorporates various provisions—legal, financial, lifecycle, and custom—along with metadata, external references, and related documents <br/>
-    /// to offer a full representation of the structure and context of an agreement.<br/>
-    /// 
-    /// </remarks>
+    /// The Agreement component represents a comprehensive overview of a contractual document, detailing its unique identifiers, key properties, parties involved,<br/>
+    /// and specific provisions. It includes general information such as the title, type, status, and important dates like effective and expiration dates.<br/>
+    /// The component also incorporates various provisions—legal, financial, lifecycle, and custom—along with metadata, external references, and related documents<br/>
+    /// to offer a full representation of the structure and context of an agreement.
     /// </summary>
     public class Agreement
     {
-
-        [JsonProperty("id")]
-        public string Id { get; set; } = default!;
+        /// <summary>
+        /// Hypermedia controls (HATEOAS) for agreement specific links to resources.
+        /// </summary>
+        [JsonProperty("_links")]
+        public AgreementLinks? Links { get; set; } = null;
 
         /// <summary>
-        /// Title of the agreement document, summarizing its purpose.
+        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects.
         /// </summary>
-        [JsonProperty("title")]
-        public string? Title { get; set; } = null;
+        [JsonProperty("additional_custom_clm_data")]
+        public Dictionary<string, CustomProperty>? AdditionalCustomClmData { get; set; } = null;
 
         /// <summary>
-        /// The file name of the agreement.
+        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects.
         /// </summary>
-        [JsonProperty("file_name")]
-        public string? FileName { get; set; } = null;
+        [JsonProperty("additional_custom_esign_data")]
+        public Dictionary<string, CustomProperty>? AdditionalCustomEsignData { get; set; } = null;
 
         /// <summary>
-        /// The type of agreement.
+        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects.
         /// </summary>
-        [JsonProperty("type")]
-        public string? Type { get; set; } = null;
+        [JsonProperty("additional_user_defined_data")]
+        public Dictionary<string, CustomProperty>? AdditionalUserDefinedData { get; set; } = null;
 
         /// <summary>
         /// Server-defined category based on the agreement type.
@@ -55,16 +54,37 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? Category { get; set; } = null;
 
         /// <summary>
-        /// A detailed summary of the agreement&apos;s key provisions and scope.
+        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects.
         /// </summary>
-        [JsonProperty("summary")]
-        public string? Summary { get; set; } = null;
+        [JsonProperty("custom_provisions")]
+        public Dictionary<string, CustomProperty>? CustomProvisions { get; set; } = null;
 
         /// <summary>
-        /// Current status of the agreement (e.g., PENDING, COMPLETE, INACTIVE)
+        /// The id the original agreement document.
         /// </summary>
-        [JsonProperty("status")]
-        public string? Status { get; set; } = null;
+        [JsonProperty("document_id")]
+        public string? DocumentId { get; set; } = null;
+
+        /// <summary>
+        /// The file name of the agreement.
+        /// </summary>
+        [JsonProperty("file_name")]
+        public string? FileName { get; set; } = null;
+
+        [JsonProperty("id")]
+        public string? Id { get; set; } = "00000000-0000-0000-0000-000000000000";
+
+        /// <summary>
+        /// List of languages applicable to the agreement, identified using BCP-47 language codes.
+        /// </summary>
+        [JsonProperty("languages")]
+        public List<string?>? Languages { get; set; } = null;
+
+        [JsonProperty("linked_data")]
+        public List<LinkedData>? LinkedData { get; set; }
+
+        [JsonProperty("metadata")]
+        public ResourceMetadata? Metadata { get; set; }
 
         /// <summary>
         /// A list of parties involved in the agreement.
@@ -73,53 +93,31 @@ namespace Docusign.IAM.SDK.Models.Components
         public List<Party>? Parties { get; set; } = null;
 
         /// <summary>
-        /// &quot;The conditions or rules written in a legal agreement. The set of possible provisions is determined by the agreement type.&quot;<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// "The conditions or rules written in a legal agreement. The set of possible provisions is determined by the agreement type."
         /// </summary>
         [JsonProperty("provisions")]
         public Provisions? Provisions { get; set; } = null;
-
-        /// <summary>
-        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects
-        /// </summary>
-        [JsonProperty("custom_provisions")]
-        public Dictionary<string, CustomProperty>? CustomProvisions { get; set; } = null;
-
-        /// <summary>
-        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects
-        /// </summary>
-        [JsonProperty("additional_user_defined_data")]
-        public Dictionary<string, CustomProperty>? AdditionalUserDefinedData { get; set; } = null;
-
-        /// <summary>
-        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects
-        /// </summary>
-        [JsonProperty("additional_custom_clm_data")]
-        public Dictionary<string, CustomProperty>? AdditionalCustomClmData { get; set; } = null;
-
-        /// <summary>
-        /// A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects
-        /// </summary>
-        [JsonProperty("additional_custom_esign_data")]
-        public Dictionary<string, CustomProperty>? AdditionalCustomEsignData { get; set; } = null;
 
         [JsonProperty("related_agreement_documents")]
         public RelatedAgreementDocuments? RelatedAgreementDocuments { get; set; }
 
         /// <summary>
-        /// List of languages applicable to the agreement, identified using BCP-47 language codes.
+        /// The date when the agreement extraction review was completed.
         /// </summary>
-        [JsonProperty("languages")]
-        public List<string?>? Languages { get; set; } = null;
+        [JsonProperty("review_completed_at")]
+        public DateTime? ReviewCompletedAt { get; set; } = null;
 
         /// <summary>
-        /// The name of the source system who creates this entity, e.g. eSign, CLM, or Salesforce.
+        /// The review status of the agreement, indicating whether it has been complete or pending.
         /// </summary>
-        [JsonProperty("source_name")]
-        public string? SourceName { get; set; } = null;
+        [JsonProperty("review_status")]
+        public string? ReviewStatus { get; set; } = null;
+
+        /// <summary>
+        /// The Account ID of the source system who creates this entity, e.g. eSign Account ID.
+        /// </summary>
+        [JsonProperty("source_account_id")]
+        public string? SourceAccountId { get; set; } = null;
 
         /// <summary>
         /// The ID of the entity in the source system that this entity is associated with. For example, it could be an ID of the envelope in eSign.
@@ -128,12 +126,33 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? SourceId { get; set; } = null;
 
         /// <summary>
-        /// The Account ID of the source system who creates this entity, e.g. eSign Account ID
+        /// The name of the source system which created this agreement, e.g. eSign, CLM, or Salesforce.
         /// </summary>
-        [JsonProperty("source_account_id")]
-        public string? SourceAccountId { get; set; } = null;
+        [JsonProperty("source_name")]
+        public string? SourceName { get; set; } = null;
 
-        [JsonProperty("metadata")]
-        public ResourceMetadata? Metadata { get; set; }
+        /// <summary>
+        /// Current status of the agreement (e.g., PENDING, COMPLETE, INACTIVE).
+        /// </summary>
+        [JsonProperty("status")]
+        public string? Status { get; set; } = null;
+
+        /// <summary>
+        /// A detailed summary of the agreement's key provisions and scope.
+        /// </summary>
+        [JsonProperty("summary")]
+        public string? Summary { get; set; } = null;
+
+        /// <summary>
+        /// Title of the agreement document, summarizing its purpose.
+        /// </summary>
+        [JsonProperty("title")]
+        public string? Title { get; set; } = null;
+
+        /// <summary>
+        /// The type of agreement.
+        /// </summary>
+        [JsonProperty("type")]
+        public string? Type { get; set; } = null;
     }
 }

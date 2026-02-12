@@ -10,10 +10,9 @@
 namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
-    
+
     public class AddWorkspaceUploadRequestDocumentRequestFile
     {
-
         [SpeakeasyMetadata("multipartForm:name=fileName")]
         public string FileName { get; set; } = default!;
 

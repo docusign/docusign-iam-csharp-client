@@ -17,17 +17,28 @@ namespace Docusign.IAM.SDK
     public interface IMaestro
     {
         public IWorkflows Workflows { get; }
+
         public IWorkflowInstanceManagement WorkflowInstanceManagement { get; }
     }
 
     public class Maestro: IMaestro
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
+
+        /// <summary>
+        /// Workflows SubSDK.
+        /// <see cref="IWorkflows"/>
+        /// </summary>
         public IWorkflows Workflows { get; private set; }
+
+        /// <summary>
+        /// WorkflowInstanceManagement SubSDK.
+        /// <see cref="IWorkflowInstanceManagement"/>
+        /// </summary>
         public IWorkflowInstanceManagement WorkflowInstanceManagement { get; private set; }
 
         public Maestro(SDKConfig config)

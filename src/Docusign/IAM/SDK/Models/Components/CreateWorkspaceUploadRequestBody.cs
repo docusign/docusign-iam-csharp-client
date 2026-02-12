@@ -14,36 +14,35 @@ namespace Docusign.IAM.SDK.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class CreateWorkspaceUploadRequestBody
     {
-
         /// <summary>
-        /// The name of the upload request
+        /// The name of the upload request.
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Include)]
         public string? Name { get; set; }
 
         /// <summary>
-        /// The description of the upload request
+        /// The description of the upload request.
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Include)]
         public string? Description { get; set; }
 
         /// <summary>
-        /// The due date for the upload request
+        /// The due date for the upload request.
         /// </summary>
         [JsonProperty("due_date")]
         public DateTime DueDate { get; set; } = default!;
 
         /// <summary>
-        /// List of user assignments for the upload request
+        /// List of user assignments for the upload request.
         /// </summary>
         [JsonProperty("assignments", NullValueHandling = NullValueHandling.Include)]
         public List<CreateWorkspaceUploadRequestAssignment>? Assignments { get; set; }
 
         /// <summary>
-        /// Enum representing the status of a workspace upload request
+        /// Enum representing the status of a workspace upload request.
         /// </summary>
         [JsonProperty("status")]
         public WorkspaceUploadRequestStatus Status { get; set; } = default!;

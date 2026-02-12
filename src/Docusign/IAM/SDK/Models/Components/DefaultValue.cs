@@ -60,15 +60,10 @@ namespace Docusign.IAM.SDK.Models.Components
         }
     }
 
-
     /// <summary>
     /// The default value for the input field if one is provided. This can be a string, number,<br/>
-    /// 
-    /// <remarks>
     /// boolean, object, or array. If no value is provided during the trigger, the workflow may<br/>
-    /// use this default value.<br/>
-    /// 
-    /// </remarks>
+    /// use this default value.
     /// </summary>
     [JsonConverter(typeof(DefaultValue.DefaultValueConverter))]
     public class DefaultValue

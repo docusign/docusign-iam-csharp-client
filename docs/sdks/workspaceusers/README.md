@@ -1,5 +1,4 @@
-# WorkspaceUsers
-(*Workspaces.WorkspaceUsers*)
+# Workspaces.WorkspaceUsers
 
 ## Overview
 

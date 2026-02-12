@@ -11,30 +11,29 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
-    
+
     public class UpdateWorkspaceUserRequest
     {
-
         /// <summary>
-        /// The ID of the account
+        /// The ID of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the workspace
+        /// The ID of the workspace.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=workspaceId")]
         public string WorkspaceId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the user to update
+        /// The ID of the user to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=userId")]
         public string UserId { get; set; } = default!;
 
         /// <summary>
-        /// The user details to update to including the RoleId
+        /// The user details to update to including the RoleId.
         /// </summary>
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public WorkspaceUserForUpdate? WorkspaceUserForUpdate { get; set; }

@@ -1,9 +1,11 @@
 # Link
 
+A URL that references a specific resource. 
+
+
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `Rel`              | *string*           | :heavy_check_mark: | N/A                |
-| `Href`             | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Href`                                                                          | *string*                                                                        | :heavy_check_mark:                                                              | The URL for the referenced page.                                                | https://api.docusign.com/v1/accounts/12345678/agreements?limit=10&ctoken=abc123 |

@@ -14,133 +14,128 @@ namespace Docusign.IAM.SDK.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class WorkflowInstance
     {
-
         /// <summary>
-        /// Unique identifier for the workflow instance
+        /// Unique identifier for the workflow instance.
         /// </summary>
         [JsonProperty("id")]
         public string? Id { get; set; }
 
         /// <summary>
-        /// Human-readable name for the workflow instance
+        /// Human-readable name for the workflow instance.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// Current status of the workflow (e.g. In Progress, Completed, Canceled)
+        /// Current status of the workflow (e.g. In Progress, Completed, Canceled).
         /// </summary>
         [JsonProperty("workflow_status")]
         public string? WorkflowStatus { get; set; }
 
         /// <summary>
-        /// Identifier linking this instance to a workflow template
+        /// Identifier linking this instance to a workflow template.
         /// </summary>
         [JsonProperty("template_id")]
         public string? TemplateId { get; set; }
 
         /// <summary>
-        /// Account under which this workflow instance was initiated
+        /// Account under which this workflow instance was initiated.
         /// </summary>
         [JsonProperty("account_id")]
         public string? AccountId { get; set; }
 
         /// <summary>
-        /// Date and time when the workflow was started
+        /// Date and time when the workflow was started.
         /// </summary>
         [JsonProperty("started_at")]
         public DateTime? StartedAt { get; set; }
 
         /// <summary>
-        /// User or system identifier that started this workflow
+        /// User or system identifier that started this workflow.
         /// </summary>
         [JsonProperty("started_by")]
         public string? StartedBy { get; set; }
 
         /// <summary>
-        /// Display name of the user who started this workflow
+        /// Display name of the user who started this workflow.
         /// </summary>
         [JsonProperty("started_by_name")]
         public string? StartedByName { get; set; }
 
         /// <summary>
-        /// Role of the user who started this workflow (e.g. Preparer)
+        /// Role of the user who started this workflow (e.g. Preparer).
         /// </summary>
         [JsonProperty("started_by_role")]
         public string? StartedByRole { get; set; }
 
         /// <summary>
-        /// Date and time when the workflow completed
+        /// Date and time when the workflow completed.
         /// </summary>
         [JsonProperty("ended_at")]
         public DateTime? EndedAt { get; set; } = null;
 
         /// <summary>
-        /// Date and time after which the workflow expires
+        /// Date and time after which the workflow expires.
         /// </summary>
         [JsonProperty("expires_at")]
         public DateTime? ExpiresAt { get; set; } = null;
 
         /// <summary>
-        /// Date and time when the workflow instance was last modified
+        /// Date and time when the workflow instance was last modified.
         /// </summary>
         [JsonProperty("last_modified_at")]
         public DateTime? LastModifiedAt { get; set; }
 
         /// <summary>
-        /// Date and time when the workflow was canceled (if applicable)
+        /// Date and time when the workflow was canceled (if applicable).
         /// </summary>
         [JsonProperty("canceled_at")]
         public DateTime? CanceledAt { get; set; } = null;
 
         /// <summary>
-        /// User or system identifier that canceled this workflow (if applicable)
+        /// User or system identifier that canceled this workflow (if applicable).
         /// </summary>
         [JsonProperty("canceled_by")]
         public string? CanceledBy { get; set; } = null;
 
         /// <summary>
         /// Key-value pairs representing the input data required to trigger the workflow.<br/>
-        /// 
-        /// <remarks>
         /// The keys correspond to the `field_name` values defined in the `trigger_input_schema` of the workflow definition.<br/>
         /// The values should match the specified `field_data_type` (e.g., string, number, boolean).<br/>
-        /// Example: {&quot;name&quot;: &quot;John Doe&quot;, &quot;email&quot;: &quot;johndoe@example.com&quot;}<br/>
-        /// 
-        /// </remarks>
+        /// Example: {"name": "John Doe", "email": "johndoe@example.com"}
         /// </summary>
         [JsonProperty("trigger_inputs")]
         public Dictionary<string, TriggerInputs>? TriggerInputs { get; set; }
 
         /// <summary>
-        /// Total number of steps configured in the workflow
+        /// Total number of steps configured in the workflow.
         /// </summary>
         [JsonProperty("total_steps")]
         public long? TotalSteps { get; set; }
 
         /// <summary>
-        /// The index of the most recently completed step
+        /// The index of the most recently completed step.
         /// </summary>
         [JsonProperty("last_completed_step")]
         public long? LastCompletedStep { get; set; }
 
         /// <summary>
-        /// The name of the most recently completed step
+        /// The name of the most recently completed step.
         /// </summary>
         [JsonProperty("last_completed_step_name")]
         public string? LastCompletedStepName { get; set; } = null;
 
         /// <summary>
-        /// Custom tags for organization or filtering
+        /// Custom tags for organization or filtering.
         /// </summary>
         [JsonProperty("tags")]
         public List<string>? Tags { get; set; }
 
         /// <summary>
-        /// Additional metadata related to this workflow instance
+        /// Additional metadata related to this workflow instance.
         /// </summary>
         [JsonProperty("metadata")]
         public Metadata? Metadata { get; set; }

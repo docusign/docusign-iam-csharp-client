@@ -11,27 +11,26 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Response for adding a document to an upload request
+    /// Response for adding a document to an upload request.
     /// </summary>
     public class AddWorkspaceUploadRequestDocumentResponse
     {
-
         /// <summary>
-        /// The ID of the upload request
+        /// The ID of the upload request.
         /// </summary>
         [JsonProperty("upload_request_id")]
         public string UploadRequestId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the document that was added
+        /// The ID of the document that was added.
         /// </summary>
         [JsonProperty("document_id")]
         public string DocumentId { get; set; } = default!;
 
         /// <summary>
-        /// The name of the document
+        /// The name of the document.
         /// </summary>
         [JsonProperty("document_name", NullValueHandling = NullValueHandling.Include)]
         public string? DocumentName { get; set; }

@@ -11,15 +11,14 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
-    
+
     /// <summary>
     /// This grant uses Proof Key for Code Exchange (PKCE) to authenticate securely without requiring a client secret.
     /// </summary>
     public class PublicAuthCodeGrantRequestBody
     {
-
         /// <summary>
-        /// The grant type. This value must be set to &quot;authorization_code&quot;.
+        /// The grant type. This value must be set to "authorization_code".
         /// </summary>
         [SpeakeasyMetadata("form:name=grant_type")]
         public PublicAuthCodeGrantRequestBodyGrantType? GrantType { get; set; } = Docusign.IAM.SDK.Models.Components.PublicAuthCodeGrantRequestBodyGrantType.AuthorizationCode;

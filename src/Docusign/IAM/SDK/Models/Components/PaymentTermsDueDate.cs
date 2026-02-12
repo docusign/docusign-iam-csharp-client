@@ -12,7 +12,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Terms specifying the payment due date, based on a defined number of days or other conditions.
     /// </summary>
@@ -74,5 +74,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum PaymentTermsDueDate");
         }
     }
-
 }

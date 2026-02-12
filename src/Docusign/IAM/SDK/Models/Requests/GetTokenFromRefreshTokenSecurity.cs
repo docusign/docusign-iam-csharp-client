@@ -11,10 +11,9 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class GetTokenFromRefreshTokenSecurity
     {
-
         [JsonProperty("clientId")]
         [SpeakeasyMetadata("security:scheme=true,type=http,subType=custom,name=clientId")]
         public string? ClientId { get; set; }

@@ -11,13 +11,15 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
+    /// <summary>
+    /// A URL that references a specific resource.
+    /// </summary>
     public class Link
     {
-
-        [JsonProperty("rel")]
-        public string Rel { get; set; } = default!;
-
+        /// <summary>
+        /// The URL for the referenced page.
+        /// </summary>
         [JsonProperty("href")]
         public string Href { get; set; } = default!;
     }

@@ -11,27 +11,26 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Additional metadata related to this workflow instance
+    /// Additional metadata related to this workflow instance.
     /// </summary>
     public class Metadata
     {
-
         /// <summary>
-        /// Identifier of the user who originally created the workflow definition
+        /// Identifier of the user who originally created the workflow definition.
         /// </summary>
         [JsonProperty("workflow_created_by")]
         public string? WorkflowCreatedBy { get; set; }
 
         /// <summary>
-        /// Version string of the deployed workflow
+        /// Version string of the deployed workflow.
         /// </summary>
         [JsonProperty("workflow_version")]
         public string? WorkflowVersion { get; set; }
 
         /// <summary>
-        /// Identifier for workflow definition metadata in the system
+        /// Identifier for workflow definition metadata in the system.
         /// </summary>
         [JsonProperty("workflow_metadata_id")]
         public string? WorkflowMetadataId { get; set; }

@@ -11,25 +11,39 @@ namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Models.Requests;
     using Docusign.IAM.SDK.Utils;
-    using System.Collections.Generic;
-    
+
     public class GetAgreementsListRequest
     {
-
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
-        public string AccountId { get; set; } = default!;
+        public string AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
         /// <summary>
         /// The maximum number of items that can be returned in a single page.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
-        public int? Limit { get; set; } = null;
+        public int? Limit { get; set; } = 25;
 
         /// <summary>
         /// An opaque token that helps retrieve the a page of data.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=ctoken")]
         public string? Ctoken { get; set; } = null;
+
+        /// <summary>
+        /// OData filter expression for complex queries. Supports:<br/>
+        /// - Comparison operators: `eq`, `ne`, `gt`, `ge`, `lt`, `le`<br/>
+        /// - Logical operators: `and`, `or`<br/>
+        /// - In operator: `in` (e.g., `type in ('Msa','Sow')`)<br/>
+        /// <br/>
+        /// **Note**: Use forward slash `/` to navigate nested properties (e.g., `provisions/effective_date`), not dot notation.<br/>
+        /// <br/>
+        /// Examples:<br/>
+        /// - `status eq 'COMPLETE' and provisions/effective_date ge 2025-01-01`<br/>
+        /// - `parties/name_in_agreement eq 'Acme Corp' or parties/name_in_agreement eq 'Beta Ltd'`<br/>
+        /// - `provisions/renewal_type in ('EVERGREEN','AUTO_RENEW')`
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=$filter")]
+        public string? DollarFilter { get; set; }
 
         /// <summary>
         /// Field to sort the agreements by.
@@ -50,10 +64,30 @@ namespace Docusign.IAM.SDK.Models.Requests
         public string? Id { get; set; }
 
         /// <summary>
+        /// List of document IDs to filter by (comma-separated), use operators (=, [in]) with an UUID format.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=document_id")]
+        public string? DocumentId { get; set; }
+
+        /// <summary>
         /// Status of the agreement.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
         public string? Status { get; set; }
+
+        /// <summary>
+        /// Review status of the agreement Supported values include:<br/>
+        /// - COMPLETE<br/>
+        /// - PENDING.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=review_status")]
+        public string? ReviewStatus { get; set; }
+
+        /// <summary>
+        /// Extraction review completed at date. Use operators (`=`, `gte`, `gt`, `lte`, `le`, `ne`) with an ISO 8601 DateTime string (e.g., `YYYY-MM-DD`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=review_completed_at")]
+        public string? ReviewCompletedAt { get; set; }
 
         /// <summary>
         /// Filter by party display name in the agreement.
@@ -80,10 +114,10 @@ namespace Docusign.IAM.SDK.Models.Requests
         public string? RelatedAgreementDocumentsParentAgreementDocumentId { get; set; }
 
         /// <summary>
-        /// List of BCP-47 language tags
+        /// List of BCP-47 language tags (comma-separated). Use operators (`=`) with a string format.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=languages")]
-        public List<string>? Languages { get; set; }
+        public string? Languages { get; set; }
 
         /// <summary>
         /// Filter by effective date range (also available via `effective_date` key). Use operators (`=`, `gte`, `gt`, `lte`, `le`, `ne`) with an ISO 8601 DateTime string (e.g., `YYYY-MM-DD`).

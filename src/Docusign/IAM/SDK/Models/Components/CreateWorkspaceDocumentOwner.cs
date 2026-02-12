@@ -11,10 +11,9 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateWorkspaceDocumentOwner
     {
-
         [JsonProperty("user_id")]
         public string? UserId { get; set; } = null;
 

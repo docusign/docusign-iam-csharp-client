@@ -10,14 +10,13 @@
 namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
-    
-    public class CreateAgreementSummaryRequest
+
+    public class UploadCompleteBulkJobRequest
     {
-
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
-        public string AccountId { get; set; } = default!;
+        public string AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
-        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=agreementId")]
-        public string AgreementId { get; set; } = default!;
+        [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=jobId")]
+        public string JobId { get; set; } = "00000000-0000-0000-0000-000000000000";
     }
 }

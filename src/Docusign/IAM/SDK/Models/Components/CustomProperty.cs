@@ -60,7 +60,6 @@ namespace Docusign.IAM.SDK.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(CustomProperty.CustomPropertyConverter))]
     public class CustomProperty
     {

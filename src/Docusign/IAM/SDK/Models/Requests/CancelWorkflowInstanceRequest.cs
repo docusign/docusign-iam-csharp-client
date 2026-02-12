@@ -10,21 +10,20 @@
 namespace Docusign.IAM.SDK.Models.Requests
 {
     using Docusign.IAM.SDK.Utils;
-    
+
     public class CancelWorkflowInstanceRequest
     {
-
         /// <summary>
         /// The unique identifier of the account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
-        public string AccountId { get; set; } = default!;
+        public string AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=workflowId")]
-        public string WorkflowId { get; set; } = default!;
+        public string WorkflowId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
         /// <summary>
-        /// Unique identifier for the workflow instance
+        /// Unique identifier for the workflow instance.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=instanceId")]
         public string InstanceId { get; set; } = default!;

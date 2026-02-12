@@ -12,48 +12,47 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public class GetWorkspaceDocumentResponse
     {
-
         /// <summary>
-        /// The ID of the workspace
+        /// The ID of the workspace.
         /// </summary>
         [JsonProperty("workspace_id")]
         public string? WorkspaceId { get; set; } = null;
 
         /// <summary>
-        /// The ID of the document
+        /// The ID of the document.
         /// </summary>
         [JsonProperty("document_id")]
         public string DocumentId { get; set; } = default!;
 
         /// <summary>
-        /// The name of the document
+        /// The name of the document.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the owner of the document
+        /// The ID of the owner of the document.
         /// </summary>
         [JsonProperty("owner_id")]
         public string? OwnerId { get; set; } = null;
 
         /// <summary>
-        /// The size of the document in bytes
+        /// The size of the document in bytes.
         /// </summary>
         [JsonProperty("size")]
         public long? Size { get; set; } = null;
 
         /// <summary>
-        /// The date the document was created
+        /// The date the document was created.
         /// </summary>
         [JsonProperty("created_date")]
         public DateTime? CreatedDate { get; set; } = null;
 
         /// <summary>
-        /// The document content type
+        /// The document content type.
         /// </summary>
         [JsonProperty("content_type")]
         public string? ContentType { get; set; } = null;

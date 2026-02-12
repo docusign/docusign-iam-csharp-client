@@ -1,5 +1,4 @@
-# Agreements
-(*Navigator.Agreements*)
+# Navigator.Agreements
 
 ## Overview
 
@@ -8,7 +7,6 @@
 * [GetAgreementsList](#getagreementslist) - Retrieve a list of agreements
 * [GetAgreement](#getagreement) - Retrieve detailed information about a specific agreement
 * [DeleteAgreement](#deleteagreement) - Delete a specific agreement
-* [CreateAgreementSummary](#createagreementsummary) - Create an AI-generated summary of an agreement document
 
 ## GetAgreementsList
 
@@ -18,9 +16,11 @@ Each agreement entry includes essential details that allow users to quickly asse
 
 The response also includes provisions that outline the key legal, financial, and lifecycle conditions, along with custom user-defined fields, providing a comprehensive understanding of each agreement.
 
+[Required scopes](/docs/navigator-api/auth/): `adm_store_unified_repo_read`
+
 ### Use Cases:
 - **Retrieving a list of agreements for integration into external systems**: Export or sync agreement data into other platforms (e.g., CRM, ERP systems) to align business processes across different tools.
-- **Providing data for RAG (Retrieval-Augmented Generation) applications or Copilots**: The list of agreements can be a valuable data source for AI/LLM-based applications that answer user queries about agreements. 
+- **Providing data for RAG (Retrieval-Augmented Generation) applications or Copilots**: The list of agreements can be a valuable data source for AI/LLM-based applications that answer user queries about agreements.
   It allows Copilots to understand what agreements exist and offer insights based on their details.
 - **Filtering agreements by type or status**: Determine which agreements are active, pending, or completed, and gather a summary of key provisions across multiple agreements.
 - **Auditing or reporting**: Generate a report on agreements based on type, status, or date created, helping with compliance tracking and internal reviews.
@@ -46,9 +46,9 @@ var sdk = IamClient.Builder()
     .Build();
 
 GetAgreementsListRequest req = new GetAgreementsListRequest() {
-    AccountId = "00000000-0000-0000-0000-000000000000",
     Limit = 10,
     Ctoken = "abc123",
+    DollarFilter = "parties/name_in_agreement eq 'HEALTHEON CORPORATION'",
 };
 
 var res = await sdk.Navigator.Agreements.GetAgreementsListAsync(req);
@@ -70,8 +70,8 @@ var res = await sdk.Navigator.Agreements.GetAgreementsListAsync(req);
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## GetAgreement
@@ -81,6 +81,8 @@ This operation retrieves detailed information about a specific agreement, identi
 In addition to general details, the operation returns provisions that define the agreement's legal, financial, lifecycle, and custom conditions. It also provides key metadata, such as creation and modification timestamps, related agreements, and user-defined or custom attributes, which help represent the structure and context of the agreement.
 
 The operation is essential for retrieving the full context of an agreement, enabling users to understand the contract's scope, key provisions, and the legal or financial obligations that have been agreed upon.
+
+[Required scopes](/docs/navigator-api/auth/): `adm_store_unified_repo_read`
 
 ### Use Cases:
 - **Integrating agreement data into external systems**: Sync detailed agreement information, such as legal and financial provisions, into external systems like ERP, CRM, or contract management tools to streamline workflows.
@@ -95,7 +97,7 @@ The operation is essential for retrieving the full context of an agreement, enab
 - **Provisions for Legal, Financial, and Lifecycle Conditions**: Includes the full set of provisions that define the terms and conditions of the agreement, making it ideal for compliance and auditing purposes.
 - **Metadata and History**: Tracks the agreement’s history through metadata such as creation and modification dates and user-defined fields.
 - **Data Source for AI Applications**: Enables LLM-based applications to access granular agreement data, providing AI/ML-based solutions (such as Copilots) with the necessary context to answer detailed queries about an agreement.
-- **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.   
+- **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.
 
 
 ### Example Usage
@@ -132,13 +134,15 @@ var res = await sdk.Navigator.Agreements.GetAgreementAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## DeleteAgreement
 
 This operation safely deletes an agreement. This action conforms to GDPR and CCPA compliance requirements.
+
+[Required scopes](/docs/navigator-api/auth/): `adm_store_unified_repo_write`, `adm_store_unified_repo_read`
 
 
 ### Example Usage
@@ -171,55 +175,6 @@ await sdk.Navigator.Agreements.DeleteAgreementAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
-
-## CreateAgreementSummary
-
-This operation request an AI-generated summary of the specified agreement document. 
-The summary is intended to provide a concise overview of the original agreement’s content 
-and key points; however, it may not capture all details or legal nuances. 
-
-**Important**: By invoking this operation, you acknowledge and accept the 
-[Docusign AI Terms and Conditions](https://www.docusign.com/legal/terms-and-conditions/ai-attachment-docusign-services). 
-Please refer to the original agreement for any legally binding information.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="csharp" operationID="CreateAgreementSummary" method="post" path="/v1/accounts/{accountId}/agreements/{agreementId}/ai/actions/summarize" -->
-```csharp
-using Docusign.IAM.SDK;
-using Docusign.IAM.SDK.Models.Components;
-
-var sdk = IamClient.Builder()
-    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
-    .Build();
-
-var res = await sdk.Navigator.Agreements.CreateAgreementSummaryAsync(
-    accountId: "00000000-0000-0000-0000-000000000000",
-    agreementId: "00000000-0000-0000-0000-000000000000"
-);
-
-// handle response
-```
-
-### Parameters
-
-| Parameter          | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `AccountId`        | *string*           | :heavy_check_mark: | N/A                |
-| `AgreementId`      | *string*           | :heavy_check_mark: | N/A                |
-
-### Response
-
-**[AgreementSummary](../../Models/Components/AgreementSummary.md)**
-
-### Errors
-
-| Error Type                                  | Status Code                                 | Content Type                                |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |

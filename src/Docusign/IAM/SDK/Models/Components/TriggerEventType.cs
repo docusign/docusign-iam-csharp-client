@@ -12,14 +12,10 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The type of event that triggers the workflow. In this case, the workflow is initiated<br/>
-    /// 
-    /// <remarks>
-    /// by an HTTP request. Future iterations may support additional event types beyond HTTP.<br/>
-    /// 
-    /// </remarks>
+    /// by an HTTP request. Future iterations may support additional event types beyond HTTP.
     /// </summary>
     public enum TriggerEventType
     {
@@ -59,5 +55,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum TriggerEventType");
         }
     }
-
 }

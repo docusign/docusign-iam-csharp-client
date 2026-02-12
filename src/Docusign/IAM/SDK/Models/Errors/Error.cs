@@ -17,16 +17,16 @@ namespace Docusign.IAM.SDK.Models.Errors
     public class ErrorPayload
     {
         /// <summary>
+        /// HTTP status code for the error.
+        /// </summary>
+        [JsonProperty("code")]
+        public long? Code { get; set; }
+
+        /// <summary>
         /// A message describing the error.
         /// </summary>
         [JsonProperty("error")]
         public string? ErrorValue { get; set; }
-
-        /// <summary>
-        /// HTTP status code for the error.
-        /// </summary>
-        [JsonProperty("code")]
-        public string? Code { get; set; }
 
         /// <summary>
         /// The timestamp when the error occurred.
@@ -45,11 +45,11 @@ namespace Docusign.IAM.SDK.Models.Errors
         /// </summary>
         public ErrorPayload Payload { get; }
 
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use Error.Payload.Code instead.")]
+        public long? Code { get; set; }
+
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use Error.Payload.ErrorValue instead.")]
         public string? ErrorValue { get; set; }
-
-        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use Error.Payload.Code instead.")]
-        public string? Code { get; set; }
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use Error.Payload.Timestamp instead.")]
         public DateTime? Timestamp { get; set; }
@@ -63,11 +63,10 @@ namespace Docusign.IAM.SDK.Models.Errors
            Payload = payload;
 
            #pragma warning disable CS0618
-           ErrorValue = payload.ErrorValue;
            Code = payload.Code;
+           ErrorValue = payload.ErrorValue;
            Timestamp = payload.Timestamp;
            #pragma warning restore CS0618
         }
     }
-
 }

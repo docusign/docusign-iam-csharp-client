@@ -24,34 +24,59 @@ namespace Docusign.IAM.SDK
 
     public interface IAuth
     {
-
         /// <summary>
         /// Obtains an access token from the Docusign API using an authorization code.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Obtains an access token from the Docusign API using the confidential flow.<br/>
         /// For the developer environment, the URI is https://account-d.docusign.com/oauth/token<br/>
         /// For the production environment, the URI is https://account.docusign.com/oauth/token<br/>
         /// You do not need an integration key to obtain an access token.
         /// </remarks>
-        /// </summary>
-        Task<AuthorizationCodeGrantResponse> GetTokenFromConfidentialAuthCodeAsync(GetTokenFromConfidentialAuthCodeSecurity security, ConfidentialAuthCodeGrantRequestBody request, string? serverUrl = null, RetryConfig? retryConfig = null);
+        /// <param name="security">A <see cref="GetTokenFromConfidentialAuthCodeSecurity"/> parameter.</param>
+        /// <param name="request">A <see cref="ConfidentialAuthCodeGrantRequestBody"/> parameter.</param>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AuthorizationCodeGrantResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="security"/> or <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Bad Request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<AuthorizationCodeGrantResponse> GetTokenFromConfidentialAuthCodeAsync(
+            GetTokenFromConfidentialAuthCodeSecurity security,
+            ConfidentialAuthCodeGrantRequestBody request,
+            string? serverUrl = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
         /// Obtains an access token from the Docusign API using an authorization code.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Obtains an access token from the Docusign API using the confidential flow.<br/>
         /// For the developer environment, the URI is https://account-d.docusign.com/oauth/token<br/>
         /// For the production environment, the URI is https://account.docusign.com/oauth/token<br/>
         /// You do not need an integration key to obtain an access token.
         /// </remarks>
-        /// </summary>
-        Task<AuthorizationCodeGrantResponse> GetTokenFromPublicAuthCodeAsync(PublicAuthCodeGrantRequestBody request, string? serverUrl = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="PublicAuthCodeGrantRequestBody"/> parameter.</param>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AuthorizationCodeGrantResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Bad Request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<AuthorizationCodeGrantResponse> GetTokenFromPublicAuthCodeAsync(
+            PublicAuthCodeGrantRequestBody request,
+            string? serverUrl = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
         /// Obtains an access token from the Docusign API using a JWT grant.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Obtains an access token from the Docusign API.<br/>
         ///                                                                                                                       <br/>
@@ -62,12 +87,24 @@ namespace Docusign.IAM.SDK
         ///                                                                                                                       <br/>
         /// You do not need an integration key to obtain an access token.
         /// </remarks>
-        /// </summary>
-        Task<JWTGrantResponse> GetTokenFromJwtGrantAsync(JWTGrant request, string? serverUrl = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="JWTGrant"/> parameter.</param>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="JWTGrantResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Error encountered. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<JWTGrantResponse> GetTokenFromJwtGrantAsync(
+            JWTGrant request,
+            string? serverUrl = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
         /// Obtains an access token from the Docusign API using an authorization code.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Obtains an access token from the Docusign API.<br/>
         /// For the developer environment, the URI is https://account-d.docusign.com/oauth/token<br/>
@@ -75,19 +112,39 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// You do not need an integration key to obtain an access token.
         /// </remarks>
-        /// </summary>
-        Task<GetTokenFromRefreshTokenResponse> GetTokenFromRefreshTokenAsync(AuthorizationCodeGrant request, GetTokenFromRefreshTokenSecurity? security = null, string? serverUrl = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="AuthorizationCodeGrant"/> parameter.</param>
+        /// <param name="security">A <see cref="GetTokenFromRefreshTokenSecurity"/> parameter.</param>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Successful response.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Error encountered. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetTokenFromRefreshTokenResponse> GetTokenFromRefreshTokenAsync(
+            AuthorizationCodeGrant request,
+            GetTokenFromRefreshTokenSecurity? security = null,
+            string? serverUrl = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Get user information
-        /// 
+        /// Get user information.
+        /// </summary>
         /// <remarks>
         /// This endpoint retrieves user information from the Docusign API using an access token.<br/>
         /// For the developer environment, the URI is https://account-d.docusign.com/oauth/userinfo<br/>
-        /// For the production environment, the URI is https://account.docusign.com/oauth/userinfo
+        /// For the production environment, the URI is https://account.docusign.com/oauth/userinfo.
         /// </remarks>
-        /// </summary>
-        Task<UserInfo> GetUserInfoAsync(string? serverUrl = null, RetryConfig? retryConfig = null);
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UserInfo"/> object when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Bad Request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UserInfo> GetUserInfoAsync(string? serverUrl = null, RetryConfig? retryConfig = null);
     }
 
     public class Auth: IAuth
@@ -99,6 +156,7 @@ namespace Docusign.IAM.SDK
             "https://account-d.docusign.com",
             "https://account.docusign.com",
         };
+
         /// <summary>
         /// List of server URLs available for the GetTokenFromPublicAuthCode operation.
         /// </summary>
@@ -106,6 +164,7 @@ namespace Docusign.IAM.SDK
             "https://account-d.docusign.com",
             "https://account.docusign.com",
         };
+
         /// <summary>
         /// List of server URLs available for the GetTokenFromJWTGrant operation.
         /// </summary>
@@ -113,6 +172,7 @@ namespace Docusign.IAM.SDK
             "https://account-d.docusign.com",
             "https://account.docusign.com",
         };
+
         /// <summary>
         /// List of server URLs available for the GetTokenFromRefreshToken operation.
         /// </summary>
@@ -120,6 +180,7 @@ namespace Docusign.IAM.SDK
             "https://account-d.docusign.com",
             "https://account.docusign.com",
         };
+
         /// <summary>
         /// List of server URLs available for the GetUserInfo operation.
         /// </summary>
@@ -127,26 +188,53 @@ namespace Docusign.IAM.SDK
             "https://account-d.docusign.com",
             "https://account.docusign.com",
         };
+
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public Auth(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<AuthorizationCodeGrantResponse> GetTokenFromConfidentialAuthCodeAsync(GetTokenFromConfidentialAuthCodeSecurity security, ConfidentialAuthCodeGrantRequestBody request, string? serverUrl = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Obtains an access token from the Docusign API using an authorization code.
+        /// </summary>
+        /// <remarks>
+        /// Obtains an access token from the Docusign API using the confidential flow.<br/>
+        /// For the developer environment, the URI is https://account-d.docusign.com/oauth/token<br/>
+        /// For the production environment, the URI is https://account.docusign.com/oauth/token<br/>
+        /// You do not need an integration key to obtain an access token.
+        /// </remarks>
+        /// <param name="security">A <see cref="GetTokenFromConfidentialAuthCodeSecurity"/> parameter.</param>
+        /// <param name="request">A <see cref="ConfidentialAuthCodeGrantRequestBody"/> parameter.</param>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AuthorizationCodeGrantResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="security"/> or <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Bad Request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<AuthorizationCodeGrantResponse> GetTokenFromConfidentialAuthCodeAsync(
+            GetTokenFromConfidentialAuthCodeSecurity security,
+            ConfidentialAuthCodeGrantRequestBody request,
+            string? serverUrl = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (security == null) throw new ArgumentNullException(nameof(security));
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = Utilities.TemplateUrl(GetTokenFromConfidentialAuthCodeServerList[0], new Dictionary<string, string>(){
             });
             if (serverUrl != null)
             {
                 baseUrl = serverUrl;
             }
-
             var urlString = baseUrl + "/oauth/token#FromConfidentialAuthCode";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -208,7 +296,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -286,15 +374,39 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<AuthorizationCodeGrantResponse> GetTokenFromPublicAuthCodeAsync(PublicAuthCodeGrantRequestBody request, string? serverUrl = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Obtains an access token from the Docusign API using an authorization code.
+        /// </summary>
+        /// <remarks>
+        /// Obtains an access token from the Docusign API using the confidential flow.<br/>
+        /// For the developer environment, the URI is https://account-d.docusign.com/oauth/token<br/>
+        /// For the production environment, the URI is https://account.docusign.com/oauth/token<br/>
+        /// You do not need an integration key to obtain an access token.
+        /// </remarks>
+        /// <param name="request">A <see cref="PublicAuthCodeGrantRequestBody"/> parameter.</param>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AuthorizationCodeGrantResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Bad Request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<AuthorizationCodeGrantResponse> GetTokenFromPublicAuthCodeAsync(
+            PublicAuthCodeGrantRequestBody request,
+            string? serverUrl = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = Utilities.TemplateUrl(GetTokenFromPublicAuthCodeServerList[0], new Dictionary<string, string>(){
             });
             if (serverUrl != null)
             {
                 baseUrl = serverUrl;
             }
-
             var urlString = baseUrl + "/oauth/token#FromPublicAuthCode";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -355,7 +467,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -433,15 +545,43 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<JWTGrantResponse> GetTokenFromJwtGrantAsync(JWTGrant request, string? serverUrl = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Obtains an access token from the Docusign API using a JWT grant.
+        /// </summary>
+        /// <remarks>
+        /// Obtains an access token from the Docusign API.<br/>
+        ///                                                                                                                       <br/>
+        /// For the developer environment, the URI is https://account-d.docusign.com/oauth/token<br/>
+        ///                                                                                                                       <br/>
+        /// For the production environment, the URI is https://account.docusign.com/oauth/token<br/>
+        ///                                                                                                                       <br/>
+        ///                                                                                                                       <br/>
+        /// You do not need an integration key to obtain an access token.
+        /// </remarks>
+        /// <param name="request">A <see cref="JWTGrant"/> parameter.</param>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="JWTGrantResponse"/> object when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Error encountered. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<JWTGrantResponse> GetTokenFromJwtGrantAsync(
+            JWTGrant request,
+            string? serverUrl = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = Utilities.TemplateUrl(GetTokenFromJWTGrantServerList[0], new Dictionary<string, string>(){
             });
             if (serverUrl != null)
             {
                 baseUrl = serverUrl;
             }
-
             var urlString = baseUrl + "/oauth/token#FromJWTGrant";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -502,7 +642,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -580,15 +720,42 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetTokenFromRefreshTokenResponse> GetTokenFromRefreshTokenAsync(AuthorizationCodeGrant request, GetTokenFromRefreshTokenSecurity? security = null, string? serverUrl = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Obtains an access token from the Docusign API using an authorization code.
+        /// </summary>
+        /// <remarks>
+        /// Obtains an access token from the Docusign API.<br/>
+        /// For the developer environment, the URI is https://account-d.docusign.com/oauth/token<br/>
+        /// For the production environment, the URI is https://account.docusign.com/oauth/token<br/>
+        /// <br/>
+        /// You do not need an integration key to obtain an access token.
+        /// </remarks>
+        /// <param name="request">A <see cref="AuthorizationCodeGrant"/> parameter.</param>
+        /// <param name="security">A <see cref="GetTokenFromRefreshTokenSecurity"/> parameter.</param>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Successful response.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Error encountered. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetTokenFromRefreshTokenResponse> GetTokenFromRefreshTokenAsync(
+            AuthorizationCodeGrant request,
+            GetTokenFromRefreshTokenSecurity? security = null,
+            string? serverUrl = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = Utilities.TemplateUrl(GetTokenFromRefreshTokenServerList[0], new Dictionary<string, string>(){
             });
             if (serverUrl != null)
             {
                 baseUrl = serverUrl;
             }
-
             var urlString = baseUrl + "/oauth/token#FromRefreshToken";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -651,7 +818,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -729,7 +896,23 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UserInfo> GetUserInfoAsync(string? serverUrl = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Get user information.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint retrieves user information from the Docusign API using an access token.<br/>
+        /// For the developer environment, the URI is https://account-d.docusign.com/oauth/userinfo<br/>
+        /// For the production environment, the URI is https://account.docusign.com/oauth/userinfo.
+        /// </remarks>
+        /// <param name="serverUrl">The server URL to use for this operation. If not provided, the default server URL will be used.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UserInfo"/> object when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="OAuthErrorResponse">Bad Request. Thrown when the API returns a 400 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UserInfo> GetUserInfoAsync(string? serverUrl = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = Utilities.TemplateUrl(GetUserInfoServerList[0], new Dictionary<string, string>(){
             });
@@ -737,7 +920,6 @@ namespace Docusign.IAM.SDK
             {
                 baseUrl = serverUrl;
             }
-
             var urlString = baseUrl + "/oauth/userinfo";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -792,7 +974,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -869,5 +1051,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

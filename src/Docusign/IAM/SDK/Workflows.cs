@@ -24,10 +24,9 @@ namespace Docusign.IAM.SDK
 
     public interface IWorkflows
     {
-
         /// <summary>
-        /// Retrieve a list of available Maestro workflows
-        /// 
+        /// Retrieve a list of available Maestro workflows.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves a list of all available Maestro workflows. It returns basic information<br/>
         /// about each workflow, including its unique identifier (`id`), name, description, and the input<br/>
@@ -48,57 +47,40 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Comprehensive Workflow Overview**: Provides a full list of workflows, giving visibility<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   into all the automated processes available within the Maestro platform.<br/>
         /// - **Input Schema Information**: Each workflow includes its trigger input schema, showing<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   what data must be provided when triggering the workflow.<br/>
         /// - **Metadata for Tracking**: Useful metadata like creation time, last modification date,<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   and user details are included to support tracking and auditing workflows.<br/>
         /// - **Future-Proof**: The operation is designed to be expandable as more workflows are added<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        ///   or the platform grows, ensuring scalability in the workflow management process.<br/>
-        /// 
+        ///   or the platform grows, ensuring scalability in the workflow management process.
         /// </remarks>
-        /// </summary>
-        Task<WorkflowsListSuccess> GetWorkflowsListAsync(string accountId, Status? status = null, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="status">
+        /// Filter workflows by their status. If provided, only workflows with the specified status will be returned.<br/>
+        /// - `active`: Returns only active workflows.<br/>
+        /// - `inactive`: Returns only inactive workflows.<br/>
+        /// - `publishing`: Returns workflows currently being published.<br/>
+        /// - `unpublishing`: Returns workflows currently being unpublished.<br/>
+        /// - `archived`: Returns workflows that have been archived.<br/>
+        /// - `archiving`: Returns workflows currently being archived.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A list of workflows has been successfully returned.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<WorkflowsListSuccess> GetWorkflowsListAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            Status? status = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve trigger requirements for a specific Maestro workflow
-        /// 
+        /// Retrieve trigger requirements for a specific Maestro workflow.
+        /// </summary>
         /// <remarks>
         /// This operation retrieves the configuration and input requirements necessary to trigger a specific<br/>
         /// Maestro workflow. It provides detailed information about the `trigger_event_type`, such as HTTP<br/>
@@ -116,53 +98,37 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Detailed Trigger Input Requirements**: Provides an exhaustive schema of required fields,<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   their data types, and optional default values for easy reference and data validation.<br/>
         /// - **Trigger Event Type Information**: Specifies the type of event required to initiate the workflow<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   (e.g., HTTP), helping developers configure their systems to invoke the workflow appropriately.<br/>
         /// - **Configurable for Custom Triggers**: Suitable for custom configurations, enabling flexibility<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        ///   in how workflows can be triggered according to system needs.<br/>
-        /// 
+        ///   in how workflows can be triggered according to system needs.
         /// </remarks>
-        /// </summary>
-        Task<WorkflowTriggerRequirementsSuccess> GetWorkflowTriggerRequirementsAsync(string accountId, string workflowId, RetryConfig? retryConfig = null);
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Control information and metadata for the response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<WorkflowTriggerRequirementsSuccess> GetWorkflowTriggerRequirementsAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Trigger a new instance of a Maestro workflow
-        /// 
+        /// Trigger a new instance of a Maestro workflow.
+        /// </summary>
         /// <remarks>
         /// This operation triggers a new instance of a specified Maestro workflow. When invoked,<br/>
         /// the workflow is started based on the provided input data, and the workflow instance<br/>
         /// begins executing according to its defined logic and configuration.<br/>
         /// <br/>
         /// The request requires an `instance_name` and any input data necessary to start the workflow,<br/>
-        /// as described by the workflow&apos;s `trigger_input_schema`. The `instance_name` is a user-defined<br/>
+        /// as described by the workflow's `trigger_input_schema`. The `instance_name` is a user-defined<br/>
         /// label for tracking the workflow run, while the input data fields should match the schema defined<br/>
         /// in the workflow.<br/>
         /// <br/>
@@ -181,86 +147,155 @@ namespace Docusign.IAM.SDK
         /// ### Key Features:<br/>
         /// - **Automated Execution**: Once triggered, the workflow runs until a step requires manual intervention.<br/>
         /// - **Input-Driven**: Workflow execution is based on the provided input data, which is validated<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        ///   against the workflow&apos;s input schema.<br/>
+        ///   against the workflow's input schema.<br/>
         /// - **Real-Time Triggering**: Designed to be invoked as part of an event-driven architecture,<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
         ///   allowing for workflows to respond to external events.<br/>
         /// - **Tracking and Interaction**: The response includes a URL that allows users to check the status<br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        /// <br/>
-        ///   of the workflow instance or take further actions while it runs.<br/>
-        /// 
+        ///   of the workflow instance or take further actions while it runs.
         /// </remarks>
-        /// </summary>
-        Task<TriggerWorkflowSuccess> TriggerWorkflowAsync(string accountId, string workflowId, TriggerWorkflow triggerWorkflow, RetryConfig? retryConfig = null);
+        /// <param name="triggerWorkflow">A <see cref="TriggerWorkflow"/> parameter.</param>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Control information and metadata for the response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="triggerWorkflow"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<TriggerWorkflowSuccess> TriggerWorkflowAsync(
+            TriggerWorkflow triggerWorkflow,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Pause an Active Workflow
-        /// 
-        /// <remarks>
-        /// This operation pauses new workflow instances from being created. Any running workflows instances will be unaffected.<br/>
-        /// 
-        /// </remarks>
+        /// Pause an Active Workflow.
         /// </summary>
-        Task<PauseNewWorkflowInstancesSuccess> PauseNewWorkflowInstancesAsync(string accountId, string workflowId, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// This operation pauses new workflow instances from being created. Any running workflows instances will be unaffected.
+        /// </remarks>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>
+        /// Indicates that a workflow has been successfully paused. New instances of this workflow will not be created.<br/>
+        /// Existing workflow instances will be unaffected.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404, 409 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<PauseNewWorkflowInstancesSuccess> PauseNewWorkflowInstancesAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Resume a Paused Workflow
-        /// 
-        /// <remarks>
-        /// This operation enables new workflow instances to be created<br/>
-        /// 
-        /// </remarks>
+        /// Resume a Paused Workflow.
         /// </summary>
-        Task<ResumeNewWorkflowInstancesSuccess> ResumePausedWorkflowAsync(string accountId, string workflowId, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// This operation enables new workflow instances to be created.
+        /// </remarks>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>
+        /// Indicates that the ability to create new workflow instances from this workflow has been resumed.<br/>
+        /// Existing workflow instances will be unaffected.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404, 409 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ResumeNewWorkflowInstancesSuccess> ResumePausedWorkflowAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class Workflows: IWorkflows
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
 
         public Workflows(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<WorkflowsListSuccess> GetWorkflowsListAsync(string accountId, Status? status = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Retrieve a list of available Maestro workflows.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves a list of all available Maestro workflows. It returns basic information<br/>
+        /// about each workflow, including its unique identifier (`id`), name, description, and the input<br/>
+        /// schema required to trigger the workflow.<br/>
+        /// <br/>
+        /// The response provides key details that help users identify which workflows are available<br/>
+        /// and understand the input requirements for triggering each one. Each workflow entry also includes<br/>
+        /// metadata, such as when it was created, last modified, and by whom.<br/>
+        /// <br/>
+        /// This operation is useful for obtaining an overview of all workflows within the system, helping<br/>
+        /// users and systems know what workflows are defined, what inputs they require, and how they can<br/>
+        /// be triggered.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - Listing all available workflows in a system for manual or automated workflow initiation.<br/>
+        /// - Reviewing the input requirements for a workflow before triggering it programmatically.<br/>
+        /// - Gathering basic metadata about workflows for auditing, logging, or reporting purposes.<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Comprehensive Workflow Overview**: Provides a full list of workflows, giving visibility<br/>
+        ///   into all the automated processes available within the Maestro platform.<br/>
+        /// - **Input Schema Information**: Each workflow includes its trigger input schema, showing<br/>
+        ///   what data must be provided when triggering the workflow.<br/>
+        /// - **Metadata for Tracking**: Useful metadata like creation time, last modification date,<br/>
+        ///   and user details are included to support tracking and auditing workflows.<br/>
+        /// - **Future-Proof**: The operation is designed to be expandable as more workflows are added<br/>
+        ///   or the platform grows, ensuring scalability in the workflow management process.
+        /// </remarks>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="status">
+        /// Filter workflows by their status. If provided, only workflows with the specified status will be returned.<br/>
+        /// - `active`: Returns only active workflows.<br/>
+        /// - `inactive`: Returns only inactive workflows.<br/>
+        /// - `publishing`: Returns workflows currently being published.<br/>
+        /// - `unpublishing`: Returns workflows currently being unpublished.<br/>
+        /// - `archived`: Returns workflows that have been archived.<br/>
+        /// - `archiving`: Returns workflows currently being archived.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A list of workflows has been successfully returned.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<WorkflowsListSuccess> GetWorkflowsListAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            Status? status = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+
             var request = new GetWorkflowsListRequest()
             {
                 AccountId = accountId,
                 Status = status,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -314,7 +349,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -400,7 +435,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -412,15 +447,59 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<WorkflowTriggerRequirementsSuccess> GetWorkflowTriggerRequirementsAsync(string accountId, string workflowId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve trigger requirements for a specific Maestro workflow.
+        /// </summary>
+        /// <remarks>
+        /// This operation retrieves the configuration and input requirements necessary to trigger a specific<br/>
+        /// Maestro workflow. It provides detailed information about the `trigger_event_type`, such as HTTP<br/>
+        /// or other supported types, and specifies the required input schema, including field names, data types,<br/>
+        /// and any default values.<br/>
+        /// <br/>
+        /// This information is essential for understanding the data and parameters required to initiate the<br/>
+        /// workflow. It enables developers to prepare the necessary inputs and configuration before triggering<br/>
+        /// the workflow instance, ensuring seamless execution and compliance with workflow requirements.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - Identifying the required input fields and their data types to successfully trigger the workflow.<br/>
+        /// - Reviewing the trigger configuration for validation and compliance with expected input.<br/>
+        /// - Preparing and validating data in advance of triggering the workflow, minimizing runtime errors.<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Detailed Trigger Input Requirements**: Provides an exhaustive schema of required fields,<br/>
+        ///   their data types, and optional default values for easy reference and data validation.<br/>
+        /// - **Trigger Event Type Information**: Specifies the type of event required to initiate the workflow<br/>
+        ///   (e.g., HTTP), helping developers configure their systems to invoke the workflow appropriately.<br/>
+        /// - **Configurable for Custom Triggers**: Suitable for custom configurations, enabling flexibility<br/>
+        ///   in how workflows can be triggered according to system needs.
+        /// </remarks>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Control information and metadata for the response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<WorkflowTriggerRequirementsSuccess> GetWorkflowTriggerRequirementsAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workflowId == null) throw new ArgumentNullException(nameof(workflowId));
+
             var request = new GetWorkflowTriggerRequirementsRequest()
             {
                 AccountId = accountId,
                 WorkflowId = workflowId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/trigger-requirements", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/trigger-requirements", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -474,7 +553,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -560,7 +639,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -572,16 +651,71 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<TriggerWorkflowSuccess> TriggerWorkflowAsync(string accountId, string workflowId, TriggerWorkflow triggerWorkflow, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Trigger a new instance of a Maestro workflow.
+        /// </summary>
+        /// <remarks>
+        /// This operation triggers a new instance of a specified Maestro workflow. When invoked,<br/>
+        /// the workflow is started based on the provided input data, and the workflow instance<br/>
+        /// begins executing according to its defined logic and configuration.<br/>
+        /// <br/>
+        /// The request requires an `instance_name` and any input data necessary to start the workflow,<br/>
+        /// as described by the workflow's `trigger_input_schema`. The `instance_name` is a user-defined<br/>
+        /// label for tracking the workflow run, while the input data fields should match the schema defined<br/>
+        /// in the workflow.<br/>
+        /// <br/>
+        /// The operation is event-driven and typically triggered by an external HTTP event or system call,<br/>
+        /// allowing for the automatic execution of complex processes that span multiple systems or components.<br/>
+        /// <br/>
+        /// Upon successful execution, the response returns the unique identifier (`id`) for the newly<br/>
+        /// created workflow instance, along with a URL (`workflow_instance_url`) that can be used to<br/>
+        /// interact with or track the running instance.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - Automating user registration workflows where input fields like `name` and `email` are provided.<br/>
+        /// - Processing financial transactions where details such as `amount` and `currency` are required.<br/>
+        /// - Sending notifications based on user interactions in other systems.<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Automated Execution**: Once triggered, the workflow runs until a step requires manual intervention.<br/>
+        /// - **Input-Driven**: Workflow execution is based on the provided input data, which is validated<br/>
+        ///   against the workflow's input schema.<br/>
+        /// - **Real-Time Triggering**: Designed to be invoked as part of an event-driven architecture,<br/>
+        ///   allowing for workflows to respond to external events.<br/>
+        /// - **Tracking and Interaction**: The response includes a URL that allows users to check the status<br/>
+        ///   of the workflow instance or take further actions while it runs.
+        /// </remarks>
+        /// <param name="triggerWorkflow">A <see cref="TriggerWorkflow"/> parameter.</param>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>Control information and metadata for the response.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="triggerWorkflow"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<TriggerWorkflowSuccess> TriggerWorkflowAsync(
+            TriggerWorkflow triggerWorkflow,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
         {
+            if (triggerWorkflow == null) throw new ArgumentNullException(nameof(triggerWorkflow));
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workflowId == null) throw new ArgumentNullException(nameof(workflowId));
+
             var request = new TriggerWorkflowRequest()
             {
                 AccountId = accountId,
                 WorkflowId = workflowId,
                 TriggerWorkflow = triggerWorkflow,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/actions/trigger", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/actions/trigger", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -641,7 +775,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -727,7 +861,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -739,15 +873,42 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<PauseNewWorkflowInstancesSuccess> PauseNewWorkflowInstancesAsync(string accountId, string workflowId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Pause an Active Workflow.
+        /// </summary>
+        /// <remarks>
+        /// This operation pauses new workflow instances from being created. Any running workflows instances will be unaffected.
+        /// </remarks>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>
+        /// Indicates that a workflow has been successfully paused. New instances of this workflow will not be created.<br/>
+        /// Existing workflow instances will be unaffected.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404, 409 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<PauseNewWorkflowInstancesSuccess> PauseNewWorkflowInstancesAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workflowId == null) throw new ArgumentNullException(nameof(workflowId));
+
             var request = new PauseNewWorkflowInstancesRequest()
             {
                 AccountId = accountId,
                 WorkflowId = workflowId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/actions/pause", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/actions/pause", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -801,7 +962,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 409 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -887,7 +1048,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -899,15 +1060,42 @@ namespace Docusign.IAM.SDK
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ResumeNewWorkflowInstancesSuccess> ResumePausedWorkflowAsync(string accountId, string workflowId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Resume a Paused Workflow.
+        /// </summary>
+        /// <remarks>
+        /// This operation enables new workflow instances to be created.
+        /// </remarks>
+        /// <param name="accountId">The unique identifier of the account.</param>
+        /// <param name="workflowId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>
+        /// Indicates that the ability to create new workflow instances from this workflow has been resumed.<br/>
+        /// Existing workflow instances will be unaffected.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404, 409 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ResumeNewWorkflowInstancesSuccess> ResumePausedWorkflowAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string workflowId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
         {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (workflowId == null) throw new ArgumentNullException(nameof(workflowId));
+
             var request = new ResumePausedWorkflowRequest()
             {
                 AccountId = accountId,
                 WorkflowId = workflowId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/actions/resume", request);
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/workflows/{workflowId}/actions/resume", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -961,7 +1149,7 @@ namespace Docusign.IAM.SDK
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 409 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1047,7 +1235,7 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 401 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -1058,5 +1246,6 @@ namespace Docusign.IAM.SDK
 
             throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

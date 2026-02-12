@@ -17,6 +17,9 @@ namespace Docusign.IAM.SDK
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Main configuration for the SDK.
+    /// </summary>
     public struct SDKConfig
     {
         /// <summary>
@@ -52,7 +55,7 @@ namespace Docusign.IAM.SDK
             Client = client ?? new SpeakeasyHttpClient();
             ServerUrl = "";
             ServerName = null;
-            UserAgent = "speakeasy-sdk/csharp 1.0.0-beta.6 2.727.4 v1 Docusign.IAM.SDK";
+            UserAgent = "speakeasy-sdk/csharp 1.0.0-beta.7 2.803.3 v1 Docusign.IAM.SDK";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

@@ -11,12 +11,11 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateWorkspaceBody
     {
-
         /// <summary>
-        /// The updated name of the workspace
+        /// The updated name of the workspace.
         /// </summary>
         [JsonProperty("name", NullValueHandling = NullValueHandling.Include)]
         public string? Name { get; set; }

@@ -12,9 +12,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Enum representing the responsibility type for a workspace upload request assignment
+    /// Enum representing the responsibility type for a workspace upload request assignment.
     /// </summary>
     public enum WorkspaceUploadRequestResponsibilityType
     {
@@ -56,5 +56,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum WorkspaceUploadRequestResponsibilityType");
         }
     }
-
 }

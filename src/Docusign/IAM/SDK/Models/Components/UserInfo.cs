@@ -13,10 +13,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UserInfo
     {
-
         [JsonProperty("sub")]
         public string Sub { get; set; } = default!;
 

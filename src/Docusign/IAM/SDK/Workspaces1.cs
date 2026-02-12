@@ -17,23 +17,52 @@ namespace Docusign.IAM.SDK
     public interface IWorkspaces1
     {
         public IWorkspaceBrands WorkspaceBrands { get; }
+
         public IWorkspaceDocuments WorkspaceDocuments { get; }
+
         public IWorkspaceUploadRequest WorkspaceUploadRequest { get; }
+
         public IWorkspaceUsers WorkspaceUsers { get; }
+
         public IWorkspaces2 Workspaces { get; }
     }
 
     public class Workspaces1: IWorkspaces1
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "1.0.0-beta.6";
-        private const string _sdkGenVersion = "2.727.4";
-        private const string _openapiDocVersion = "v1";
+
+        /// <summary>
+        /// WorkspaceBrands SubSDK.
+        /// <see cref="IWorkspaceBrands"/>
+        /// </summary>
         public IWorkspaceBrands WorkspaceBrands { get; private set; }
+
+        /// <summary>
+        /// WorkspaceDocuments SubSDK.
+        /// <see cref="IWorkspaceDocuments"/>
+        /// </summary>
         public IWorkspaceDocuments WorkspaceDocuments { get; private set; }
+
+        /// <summary>
+        /// WorkspaceUploadRequest SubSDK.
+        /// <see cref="IWorkspaceUploadRequest"/>
+        /// </summary>
         public IWorkspaceUploadRequest WorkspaceUploadRequest { get; private set; }
+
+        /// <summary>
+        /// WorkspaceUsers SubSDK.
+        /// <see cref="IWorkspaceUsers"/>
+        /// </summary>
         public IWorkspaceUsers WorkspaceUsers { get; private set; }
+
+        /// <summary>
+        /// Workspaces SubSDK.
+        /// <see cref="IWorkspaces2"/>
+        /// </summary>
         public IWorkspaces2 Workspaces { get; private set; }
 
         public Workspaces1(SDKConfig config)

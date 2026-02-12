@@ -13,43 +13,30 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// The input information needed to trigger a new instance of a Maestro workflow.<br/>
-    /// 
-    /// <remarks>
     /// This request body contains the metadata to describe the instance being created,<br/>
     /// along with the input data required to trigger the workflow.<br/>
     /// <br/>
     /// - `instance_name` provides a user-defined name for the workflow instance.<br/>
-    /// - `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.<br/>
-    /// 
-    /// </remarks>
+    /// - `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.
     /// </summary>
     public class TriggerWorkflow
     {
-
         /// <summary>
         /// A descriptive name for the specific instance of the workflow being triggered.<br/>
-        /// 
-        /// <remarks>
         /// This is typically used for identification and tracking purposes.<br/>
-        /// Example: &quot;User Registration Workflow Instance&quot;<br/>
-        /// 
-        /// </remarks>
+        /// Example: "User Registration Workflow Instance"
         /// </summary>
         [JsonProperty("instance_name")]
         public string InstanceName { get; set; } = default!;
 
         /// <summary>
         /// Key-value pairs representing the input data required to trigger the workflow.<br/>
-        /// 
-        /// <remarks>
         /// The keys correspond to the `field_name` values defined in the `trigger_input_schema` of the workflow definition.<br/>
         /// The values should match the specified `field_data_type` (e.g., string, number, boolean).<br/>
-        /// Example: {&quot;name&quot;: &quot;John Doe&quot;, &quot;email&quot;: &quot;johndoe@example.com&quot;}<br/>
-        /// 
-        /// </remarks>
+        /// Example: {"name": "John Doe", "email": "johndoe@example.com"}
         /// </summary>
         [JsonProperty("trigger_inputs")]
         public Dictionary<string, TriggerInputs> TriggerInputs { get; set; } = default!;

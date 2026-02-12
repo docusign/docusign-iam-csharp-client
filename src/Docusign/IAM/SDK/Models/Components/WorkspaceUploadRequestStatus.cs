@@ -12,9 +12,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Enum representing the status of a workspace upload request
+    /// Enum representing the status of a workspace upload request.
     /// </summary>
     public enum WorkspaceUploadRequestStatus
     {
@@ -62,5 +62,4 @@ namespace Docusign.IAM.SDK.Models.Components
             throw new Exception($"Unknown value {value} for enum WorkspaceUploadRequestStatus");
         }
     }
-
 }

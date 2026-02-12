@@ -11,18 +11,17 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
-    
+
     /// <summary>
     /// The request body for the confidential authorization code grant type.
     /// </summary>
     public class ConfidentialAuthCodeGrantRequestBody
     {
-
         [SpeakeasyMetadata("form:name=flow")]
         public Flow Flow { get; } = Docusign.IAM.SDK.Models.Components.Flow.Confidential;
 
         /// <summary>
-        /// The grant type. This value must be set to &quot;authorization_code&quot;.
+        /// The grant type. This value must be set to "authorization_code".
         /// </summary>
         [SpeakeasyMetadata("form:name=grant_type")]
         public ConfidentialAuthCodeGrantRequestBodyGrantType? GrantType { get; set; } = Docusign.IAM.SDK.Models.Components.ConfidentialAuthCodeGrantRequestBodyGrantType.AuthorizationCode;

@@ -11,10 +11,9 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class BrandLogos
     {
-
         [JsonProperty("primary")]
         public string? Primary { get; set; } = null;
 

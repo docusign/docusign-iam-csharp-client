@@ -12,10 +12,9 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    
+
     public class TabConnectedFieldsData
     {
-
         /// <summary>
         /// The fully qualified namespace for the type system being verified.
         /// </summary>

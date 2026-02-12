@@ -13,42 +13,41 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class GetWorkspaceAssignableRolesResponse
     {
-
         /// <summary>
-        /// The list of roles that can be assigned to the workspace
+        /// The list of roles that can be assigned to the workspace.
         /// </summary>
         [JsonProperty("roles", NullValueHandling = NullValueHandling.Include)]
         public List<WorkspaceRoleSummary>? Roles { get; set; }
 
         /// <summary>
-        /// The number of roles returned in the response. Always equal or less than the `count` of the request
+        /// The number of roles returned in the response. Always equal or less than the `count` of the request.
         /// </summary>
         [JsonProperty("result_set_size")]
         public int? ResultSetSize { get; set; } = null;
 
         /// <summary>
-        /// Position of the first item in the total results
+        /// Position of the first item in the total results.
         /// </summary>
         [JsonProperty("start_position")]
         public int? StartPosition { get; set; } = null;
 
         /// <summary>
-        /// Position of the last item in the total results
+        /// Position of the last item in the total results.
         /// </summary>
         [JsonProperty("end_position")]
         public int? EndPosition { get; set; } = null;
 
         /// <summary>
-        /// The total number of roles applicable to the request regardless of pagination. It may not always be computed
+        /// The total number of roles applicable to the request regardless of pagination. It may not always be computed.
         /// </summary>
         [JsonProperty("total_row_count")]
         public int? TotalRowCount { get; set; } = null;
 
         /// <summary>
-        /// The optional ID of the current role. It may not always be computed
+        /// The optional ID of the current role. It may not always be computed.
         /// </summary>
         [JsonProperty("current_role_id")]
         public string? CurrentRoleId { get; set; } = null;
