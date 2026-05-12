@@ -9,6 +9,14 @@ Job lifecycle states:
 * CANCELED - User initiated request to cancel a job
 
 
+## Example Usage
+
+```csharp
+using Docusign.IAM.SDK.Models.Components;
+
+var value = BulkJobStatus.Open;
+```
+
 
 ## Values
 
@@ -19,4 +27,4 @@ Job lifecycle states:
 | `InProgress`     | IN_PROGRESS      |
 | `Complete`       | COMPLETE         |
 | `Failed`         | FAILED           |
-| `Cancelled`      | CANCELLED        |
+| `Canceled`       | CANCELED         |

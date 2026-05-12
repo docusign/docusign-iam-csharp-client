@@ -1,0 +1,10 @@
+# ChangeAgreementTypeRequest
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `AccountId`                                                                                           | *string*                                                                                              | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `AgreementId`                                                                                         | *string*                                                                                              | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `ChangeAgreementTypeRequestValue`                                                                     | [Models.Components.ChangeAgreementTypeRequest](../../Models/Components/ChangeAgreementTypeRequest.md) | :heavy_check_mark:                                                                                    | JSON payload specifying the target agreement type.                                                    |

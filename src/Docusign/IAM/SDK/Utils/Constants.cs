@@ -22,12 +22,12 @@ namespace Docusign.IAM.SDK.Utils
         /// <summary>
         /// The version of the SDK.
         /// </summary>
-        public const string SdkVersion = "1.0.0-beta.7";
+        public const string SdkVersion = "1.0.0-beta.8";
 
         /// <summary>
         /// The version of the SDK generator used to create this SDK.
         /// </summary>
-        public const string SdkGenVersion = "2.803.3";
+        public const string SdkGenVersion = "2.882.0";
 
         /// <summary>
         /// The version of the OpenAPI document used to generate this SDK.

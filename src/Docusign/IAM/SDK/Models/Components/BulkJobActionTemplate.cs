@@ -16,27 +16,6 @@ namespace Docusign.IAM.SDK.Models.Components
     public class BulkJobActionTemplate
     {
         /// <summary>
-        /// Describes the limits of a bulk job, or an action associated with a bulk job.
-        /// </summary>
-        [JsonProperty("constraints")]
-        public BulkJobConstraints? Constraints { get; set; }
-
-        [JsonProperty("description")]
-        public string? Description { get; set; }
-
-        /// <summary>
-        /// Key value pairs of error response codes and explanations of those codes.
-        /// </summary>
-        [JsonProperty("error_status_codes")]
-        public ErrorStatusCodes? ErrorStatusCodes { get; set; }
-
-        /// <summary>
-        /// Key value pairs of header names and example values.
-        /// </summary>
-        [JsonProperty("headers")]
-        public Headers? Headers { get; set; }
-
-        /// <summary>
         /// HTTP method used for this template.
         /// </summary>
         [JsonProperty("method")]
@@ -48,13 +27,34 @@ namespace Docusign.IAM.SDK.Models.Components
         [JsonProperty("required")]
         public bool? Required { get; set; }
 
-        [JsonProperty("success_status_code")]
-        public long? SuccessStatusCode { get; set; }
+        [JsonProperty("description")]
+        public string? Description { get; set; }
 
         /// <summary>
         /// Key value pairs of variable names and descriptions, explaining how they are to be used.
         /// </summary>
         [JsonProperty("template_variables")]
         public TemplateVariables? TemplateVariables { get; set; }
+
+        /// <summary>
+        /// Key value pairs of header names and example values.
+        /// </summary>
+        [JsonProperty("headers")]
+        public Headers? Headers { get; set; }
+
+        /// <summary>
+        /// Describes the limits of a bulk job, or an action associated with a bulk job.
+        /// </summary>
+        [JsonProperty("constraints")]
+        public BulkJobConstraints? Constraints { get; set; }
+
+        [JsonProperty("success_status_code")]
+        public long? SuccessStatusCode { get; set; }
+
+        /// <summary>
+        /// Key value pairs of error response codes and explanations of those codes.
+        /// </summary>
+        [JsonProperty("error_status_codes")]
+        public ErrorStatusCodes? ErrorStatusCodes { get; set; }
     }
 }

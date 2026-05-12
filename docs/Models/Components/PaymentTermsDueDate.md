@@ -2,6 +2,14 @@
 
 Terms specifying the payment due date, based on a defined number of days or other conditions.
 
+## Example Usage
+
+```csharp
+using Docusign.IAM.SDK.Models.Components;
+
+var value = PaymentTermsDueDate.UnderSevenDays;
+```
+
 
 ## Values
 

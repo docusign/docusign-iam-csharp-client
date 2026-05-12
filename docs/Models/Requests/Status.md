@@ -9,6 +9,14 @@ Filter workflows by their status. If provided, only workflows with the specified
 - `archiving`: Returns workflows currently being archived.        
 
 
+## Example Usage
+
+```csharp
+using Docusign.IAM.SDK.Models.Requests;
+
+var value = Status.Active;
+```
+
 
 ## Values
 

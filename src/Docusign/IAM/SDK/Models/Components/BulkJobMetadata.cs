@@ -22,15 +22,15 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? RequestId { get; set; }
 
         /// <summary>
-        /// Time in ms to process this request.
-        /// </summary>
-        [JsonProperty("response_duration")]
-        public int? ResponseDuration { get; set; }
-
-        /// <summary>
         /// When this response was generated.
         /// </summary>
         [JsonProperty("response_timestamp")]
         public DateTime? ResponseTimestamp { get; set; }
+
+        /// <summary>
+        /// Time in ms to process this request.
+        /// </summary>
+        [JsonProperty("response_duration")]
+        public int? ResponseDuration { get; set; }
     }
 }

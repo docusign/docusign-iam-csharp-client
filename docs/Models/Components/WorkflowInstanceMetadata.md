@@ -1,4 +1,4 @@
-# Metadata
+# WorkflowInstanceMetadata
 
 Additional metadata related to this workflow instance
 

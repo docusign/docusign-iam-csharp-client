@@ -30,6 +30,21 @@ namespace Docusign.IAM.SDK.Models.Requests
         public string? Ctoken { get; set; } = null;
 
         /// <summary>
+        /// OData full-text search expression. Performs a case-insensitive search across agreement text fields including title, type, parties, and provisions.<br/>
+        /// <br/>
+        /// The search term is matched as a substring against searchable fields. Enclose multi-word terms in double quotes for exact phrase matching.<br/>
+        /// <br/>
+        /// Examples:<br/>
+        /// - `$search=Acme` — matches agreements mentioning "Acme" in any searchable field<br/>
+        /// - `$search="Non-Disclosure Agreement"` — exact phrase match<br/>
+        /// - `$search=renewal` — matches agreements with "renewal" in title, type, or provisions<br/>
+        /// <br/>
+        /// **Note**: `$search` can be combined with `$filter` for more targeted results (e.g., `$search=Acme&amp;$filter=status eq 'COMPLETE'`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=$search")]
+        public string? DollarSearch { get; set; }
+
+        /// <summary>
         /// OData filter expression for complex queries. Supports:<br/>
         /// - Comparison operators: `eq`, `ne`, `gt`, `ge`, `lt`, `le`<br/>
         /// - Logical operators: `and`, `or`<br/>
@@ -154,5 +169,11 @@ namespace Docusign.IAM.SDK.Models.Requests
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=source_id")]
         public string? SourceId { get; set; }
+
+        /// <summary>
+        /// Include linked data from external systems that correlate with agreements.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include_linked_data")]
+        public bool? IncludeLinkedData { get; set; } = false;
     }
 }

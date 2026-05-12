@@ -30,7 +30,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operations retrieves the users in a workspace. Users sent envelopes or assigned tasks will automatically be added to the workspace with the Participate role.<br/>
         /// <br/>
-        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetWorkspaceUsersRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -51,7 +52,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation manually adds an internal or external user to a specific workspace by email address. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned the Participate role. This operation is not typically needed for adding external participants to a Workspace as they will be automatically added as tasks are assigned.<br/>
         /// <br/>
-        /// Available role IDs can be retrieved via the Assignable Roles operation on a workspace. If the `role_id` is not passed, the user is added with the Participate role.
+        /// Available role IDs can be retrieved via the Assignable Roles operation on a workspace. If the `role_id` is not passed, the user is added with the Participate role.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -74,7 +76,8 @@ namespace Docusign.IAM.SDK
         /// Updates the specified user's role.
         /// </summary>
         /// <remarks>
-        /// This operation updates the specified user's role in the workspace. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.
+        /// This operation updates the specified user's role in the workspace. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -99,7 +102,8 @@ namespace Docusign.IAM.SDK
         /// Revokes the specified user's access to the workspace.
         /// </summary>
         /// <remarks>
-        /// This operation revokes the specified user's access to the workspace. The optional `revocation_date` may be set to schedule revocation in the future. If not specified, the revocation will be immediate.
+        /// This operation revokes the specified user's access to the workspace. The optional `revocation_date` may be set to schedule revocation in the future. If not specified, the revocation will be immediate.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace to revoke access from.</param>
@@ -124,7 +128,8 @@ namespace Docusign.IAM.SDK
         /// Restores the specified user's access to the workspace.
         /// </summary>
         /// <remarks>
-        /// This operation restores the specified user's access to the workspace. The user must have been previously revoked from the workspace. The access is immediately restored.
+        /// This operation restores the specified user's access to the workspace. The user must have been previously revoked from the workspace. The access is immediately restored.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace to restore access.</param>
@@ -163,7 +168,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operations retrieves the users in a workspace. Users sent envelopes or assigned tasks will automatically be added to the workspace with the Participate role.<br/>
         /// <br/>
-        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetWorkspaceUsersRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -186,9 +192,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkspaceUsers", null, SDKConfiguration.SecuritySource);
@@ -244,9 +255,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -340,7 +351,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation manually adds an internal or external user to a specific workspace by email address. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned the Participate role. This operation is not typically needed for adding external participants to a Workspace as they will be automatically added as tasks are assigned.<br/>
         /// <br/>
-        /// Available role IDs can be retrieved via the Assignable Roles operation on a workspace. If the `role_id` is not passed, the user is added with the Participate role.
+        /// Available role IDs can be retrieved via the Assignable Roles operation on a workspace. If the `role_id` is not passed, the user is added with the Participate role.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -375,6 +387,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "WorkspaceUserForCreate", "json", false, true);
             if (serializedBody != null)
             {
@@ -383,7 +400,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "addWorkspaceUser", null, SDKConfiguration.SecuritySource);
@@ -439,9 +456,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -533,7 +550,8 @@ namespace Docusign.IAM.SDK
         /// Updates the specified user's role.
         /// </summary>
         /// <remarks>
-        /// This operation updates the specified user's role in the workspace. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.
+        /// This operation updates the specified user's role in the workspace. Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -572,6 +590,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "WorkspaceUserForUpdate", "json", false, true);
             if (serializedBody != null)
             {
@@ -580,7 +603,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "updateWorkspaceUser", null, SDKConfiguration.SecuritySource);
@@ -636,9 +659,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -730,7 +753,8 @@ namespace Docusign.IAM.SDK
         /// Revokes the specified user's access to the workspace.
         /// </summary>
         /// <remarks>
-        /// This operation revokes the specified user's access to the workspace. The optional `revocation_date` may be set to schedule revocation in the future. If not specified, the revocation will be immediate.
+        /// This operation revokes the specified user's access to the workspace. The optional `revocation_date` may be set to schedule revocation in the future. If not specified, the revocation will be immediate.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace to revoke access from.</param>
@@ -769,6 +793,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "RevokeWorkspaceUserDetails", "json", false, true);
             if (serializedBody != null)
             {
@@ -777,7 +806,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "revokeWorkspaceUserAccess", null, SDKConfiguration.SecuritySource);
@@ -833,9 +862,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -891,7 +920,8 @@ namespace Docusign.IAM.SDK
         /// Restores the specified user's access to the workspace.
         /// </summary>
         /// <remarks>
-        /// This operation restores the specified user's access to the workspace. The user must have been previously revoked from the workspace. The access is immediately restored.
+        /// This operation restores the specified user's access to the workspace. The user must have been previously revoked from the workspace. The access is immediately restored.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace to restore access.</param>
@@ -927,9 +957,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "restoreWorkspaceUserAccess", null, SDKConfiguration.SecuritySource);
@@ -985,9 +1020,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;

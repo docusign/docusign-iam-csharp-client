@@ -34,8 +34,6 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// The response also includes provisions that outline the key legal, financial, and lifecycle conditions, along with custom user-defined fields, providing a comprehensive understanding of each agreement.<br/>
         /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `adm_store_unified_repo_read`<br/>
-        /// <br/>
         /// ### Use Cases:<br/>
         /// - **Retrieving a list of agreements for integration into external systems**: Export or sync agreement data into other platforms (e.g., CRM, ERP systems) to align business processes across different tools.<br/>
         /// - **Providing data for RAG (Retrieval-Augmented Generation) applications or Copilots**: The list of agreements can be a valuable data source for AI/LLM-based applications that answer user queries about agreements.<br/>
@@ -48,18 +46,86 @@ namespace Docusign.IAM.SDK
         /// - **Comprehensive Agreement Overview**: Provides high-level visibility into all agreements, with essential details for each one, including status, type, and involved parties.<br/>
         /// - **Metadata and Provisions**: Returns important metadata and provisions (legal, financial, and custom) for each agreement, helping users understand their obligations and contract terms.<br/>
         /// - **Source System Information**: Captures details about where the agreement originated (e.g., eSign, CLM), making it easier to integrate and track agreements across different business systems.<br/>
-        /// - **Data for AI Applications**: The operation is designed to support LLM-powered apps, making it ideal for use in RAG-based applications and Copilots that query agreements for decision-making or information purposes.
+        /// - **Data for AI Applications**: The operation is designed to support LLM-powered apps, making it ideal for use in RAG-based applications and Copilots that query agreements for decision-making or information purposes.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetAgreementsListRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
-        /// <returns>An awaitable task that returns a <see cref="AgreementsResponse"/> object when completed.</returns>
+        /// <returns>A collection of agreements.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<AgreementsResponse> GetAgreementsListAsync(
             GetAgreementsListRequest request,
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
+        /// Update an agreement by locating it via document ID.
+        /// </summary>
+        /// <remarks>
+        /// This operation updates a specific agreement by first locating it using its associated `document_id`. <br/>
+        /// This is useful when the client knows the document storage identifier but not the agreement ID.<br/>
+        /// <br/>
+        /// The operation accepts a `document_id` query parameter to uniquely identify the agreement, then applies the partial updates specified in the request body. <br/>
+        /// The system will search for an agreement containing the specified document ID, and if found, apply the requested modifications. <br/>
+        /// The operation returns a `204 No Content` response on success.<br/>
+        /// <br/>
+        /// This endpoint provides an alternative way to update agreements when the agreement ID is not readily available, making it convenient for systems that primarily work with document references rather than agreement identifiers.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - **Updating agreements referenced by document storage ID**: When integration points provide document IDs but not agreement IDs, this endpoint allows direct updates without a prior lookup.<br/>
+        /// - **Batch updating via external document references**: Systems that track agreements through external document management systems can update agreements using their document storage identifiers.<br/>
+        /// - **Cross-system synchronization**: Update agreements based on document references from external systems (e.g., content management systems, document repositories) without maintaining agreement ID mappings.<br/>
+        /// - **Document-centric workflows**: In document-first business processes, update agreements using the document reference that users are familiar with.<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Document ID Based Lookup**: Locate agreements by their associated document storage identifier rather than requiring the agreement ID upfront.<br/>
+        /// - **Automatic Resolution**: The system automatically finds the agreement associated with the provided document ID.<br/>
+        /// - **Partial Updates**: Modify only the fields you need; other agreement data remains unchanged.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="agreement">JSON payload containing the fields to be updated in the agreement.</param>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="documentId">The unique document storage identifier associated with the agreement to be updated. This ID is used to locate the agreement.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="agreement"/> or <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task PatchAgreementByDocumentIdAsync(
+            Agreement agreement,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string? documentId = null,
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
+        /// List configured agreement types for the account.
+        /// </summary>
+        /// <remarks>
+        /// Returns the list of agreement type names configured for the specified account as a simple array of strings.<br/>
+        /// <br/>
+        /// Use this endpoint to discover the available agreement types so that users can see the options to choose from. The returned type names can then be used with the change type endpoint (`PATCH /v1/accounts/{accountId}/agreements/{agreementId}/actions/change-type`) to change the type of an existing agreement.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A list of configured agreement types for the account.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<List<string>> GetAgreementTypesAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
             RetryConfig? retryConfig = null
         );
 
@@ -72,8 +138,6 @@ namespace Docusign.IAM.SDK
         /// In addition to general details, the operation returns provisions that define the agreement's legal, financial, lifecycle, and custom conditions. It also provides key metadata, such as creation and modification timestamps, related agreements, and user-defined or custom attributes, which help represent the structure and context of the agreement.<br/>
         /// <br/>
         /// The operation is essential for retrieving the full context of an agreement, enabling users to understand the contract's scope, key provisions, and the legal or financial obligations that have been agreed upon.<br/>
-        /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `adm_store_unified_repo_read`<br/>
         /// <br/>
         /// ### Use Cases:<br/>
         /// - **Integrating agreement data into external systems**: Sync detailed agreement information, such as legal and financial provisions, into external systems like ERP, CRM, or contract management tools to streamline workflows.<br/>
@@ -88,10 +152,13 @@ namespace Docusign.IAM.SDK
         /// - **Provisions for Legal, Financial, and Lifecycle Conditions**: Includes the full set of provisions that define the terms and conditions of the agreement, making it ideal for compliance and auditing purposes.<br/>
         /// - **Metadata and History**: Tracks the agreement’s history through metadata such as creation and modification dates and user-defined fields.<br/>
         /// - **Data Source for AI Applications**: Enables LLM-based applications to access granular agreement data, providing AI/ML-based solutions (such as Copilots) with the necessary context to answer detailed queries about an agreement.<br/>
-        /// - **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.
+        /// - **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">Description not available.</param>
         /// <param name="agreementId">Description not available.</param>
+        /// <param name="includeLinkedData">Include linked data from external systems that correlate with this agreement.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>
         /// The Agreement component represents a comprehensive overview of a contractual document, detailing its unique identifiers, key properties, parties involved,<br/>
@@ -102,11 +169,12 @@ namespace Docusign.IAM.SDK
         /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="agreementId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<Agreement> GetAgreementAsync(
             string accountId = "00000000-0000-0000-0000-000000000000",
             string agreementId = "00000000-0000-0000-0000-000000000000",
+            bool? includeLinkedData = false,
             RetryConfig? retryConfig = null
         );
 
@@ -116,7 +184,7 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation safely deletes an agreement. This action conforms to GDPR and CCPA compliance requirements.<br/>
         /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `adm_store_unified_repo_write`, `adm_store_unified_repo_read`
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">Description not available.</param>
         /// <param name="agreementId">Description not available.</param>
@@ -125,9 +193,78 @@ namespace Docusign.IAM.SDK
         /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="agreementId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task DeleteAgreementAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string agreementId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
+        /// Update specific fields of an agreement.
+        /// </summary>
+        /// <remarks>
+        /// This operation updates one or more fields of a specific agreement identified by its `agreementId`. <br/>
+        /// The operation supports partial updates, allowing clients to modify only the fields they need without affecting the rest of the agreement data.<br/>
+        /// <br/>
+        /// The request body should contain a JSON payload with the fields to be updated. Only the fields provided in the request body will be modified; all other fields remain unchanged. The operation returns a `204 No Content` response on success.<br/>
+        /// <br/>
+        /// This operation is essential for maintaining and evolving agreement data throughout the agreement's lifecycle, such as updating status, provisions, custom fields, or metadata based on business events or reviews.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - **Updating agreement status or review completion**: Mark agreements as reviewed, completed, or pending further action based on internal workflows.<br/>
+        /// - **Modifying provision details**: Update agreement terms, effective dates, expiration dates, or renewal conditions as circumstances change.<br/>
+        /// - **Managing custom attributes**: Add or modify user-defined fields and custom metadata to capture additional business context for the agreement.<br/>
+        /// - **Recording business events**: Update agreements to reflect changes such as amendments, renewals, or termination notices.<br/>
+        /// - **Synchronizing agreements across systems**: Update agreements in response to changes detected in external systems (e.g., ERP, CRM) to maintain data integrity.<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Partial Updates**: Modify only the fields you need; other agreement data remains intact.<br/>
+        /// - **Flexible Payload**: Accept JSON objects with any combination of updateable agreement fields, including provisions, metadata, and custom attributes.<br/>
+        /// - **Data Integrity**: Validates all input data to ensure compliance with agreement structure and data constraints.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="agreement">JSON payload containing the fields to be updated in the agreement.</param>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="agreementId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="agreement"/>, <paramref name="accountId"/> or <paramref name="agreementId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task PatchAgreementAsync(
+            Agreement agreement,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string agreementId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
+        /// Change the type of an agreement.
+        /// </summary>
+        /// <remarks>
+        /// Changes the type of an existing agreement to a different configured type.<br/>
+        /// The target type must exist in the account's agreement-types collection.<br/>
+        /// Upon successful change, the server recomputes the category based on the new type.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="changeAgreementTypeRequest">JSON payload specifying the target agreement type.</param>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="agreementId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The updated agreement after a type change.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="changeAgreementTypeRequest"/>, <paramref name="accountId"/> or <paramref name="agreementId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404, 422 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ChangeAgreementTypeResponse> ChangeAgreementTypeAsync(
+            Models.Components.ChangeAgreementTypeRequest changeAgreementTypeRequest,
             string accountId = "00000000-0000-0000-0000-000000000000",
             string agreementId = "00000000-0000-0000-0000-000000000000",
             RetryConfig? retryConfig = null
@@ -157,8 +294,6 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// The response also includes provisions that outline the key legal, financial, and lifecycle conditions, along with custom user-defined fields, providing a comprehensive understanding of each agreement.<br/>
         /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `adm_store_unified_repo_read`<br/>
-        /// <br/>
         /// ### Use Cases:<br/>
         /// - **Retrieving a list of agreements for integration into external systems**: Export or sync agreement data into other platforms (e.g., CRM, ERP systems) to align business processes across different tools.<br/>
         /// - **Providing data for RAG (Retrieval-Augmented Generation) applications or Copilots**: The list of agreements can be a valuable data source for AI/LLM-based applications that answer user queries about agreements.<br/>
@@ -171,15 +306,17 @@ namespace Docusign.IAM.SDK
         /// - **Comprehensive Agreement Overview**: Provides high-level visibility into all agreements, with essential details for each one, including status, type, and involved parties.<br/>
         /// - **Metadata and Provisions**: Returns important metadata and provisions (legal, financial, and custom) for each agreement, helping users understand their obligations and contract terms.<br/>
         /// - **Source System Information**: Captures details about where the agreement originated (e.g., eSign, CLM), making it easier to integrate and track agreements across different business systems.<br/>
-        /// - **Data for AI Applications**: The operation is designed to support LLM-powered apps, making it ideal for use in RAG-based applications and Copilots that query agreements for decision-making or information purposes.
+        /// - **Data for AI Applications**: The operation is designed to support LLM-powered apps, making it ideal for use in RAG-based applications and Copilots that query agreements for decision-making or information purposes.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetAgreementsListRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
-        /// <returns>An awaitable task that returns a <see cref="AgreementsResponse"/> object when completed.</returns>
+        /// <returns>A collection of agreements.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<AgreementsResponse> GetAgreementsListAsync(
             GetAgreementsListRequest request,
@@ -194,9 +331,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetAgreementsList", null, SDKConfiguration.SecuritySource);
@@ -252,9 +394,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -289,22 +431,22 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ErrorPayload payload;
+                    ErrDetailsPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ErrorPayload.", httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
                     }
 
-                    throw new Error(payload, httpResponse, httpResponseBody);
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -314,17 +456,388 @@ namespace Docusign.IAM.SDK
                 if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ErrorPayload payload;
+                    ErrDetailsPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ErrorPayload.", httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
                     }
 
-                    throw new Error(payload, httpResponse, httpResponseBody);
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Update an agreement by locating it via document ID.
+        /// </summary>
+        /// <remarks>
+        /// This operation updates a specific agreement by first locating it using its associated `document_id`. <br/>
+        /// This is useful when the client knows the document storage identifier but not the agreement ID.<br/>
+        /// <br/>
+        /// The operation accepts a `document_id` query parameter to uniquely identify the agreement, then applies the partial updates specified in the request body. <br/>
+        /// The system will search for an agreement containing the specified document ID, and if found, apply the requested modifications. <br/>
+        /// The operation returns a `204 No Content` response on success.<br/>
+        /// <br/>
+        /// This endpoint provides an alternative way to update agreements when the agreement ID is not readily available, making it convenient for systems that primarily work with document references rather than agreement identifiers.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - **Updating agreements referenced by document storage ID**: When integration points provide document IDs but not agreement IDs, this endpoint allows direct updates without a prior lookup.<br/>
+        /// - **Batch updating via external document references**: Systems that track agreements through external document management systems can update agreements using their document storage identifiers.<br/>
+        /// - **Cross-system synchronization**: Update agreements based on document references from external systems (e.g., content management systems, document repositories) without maintaining agreement ID mappings.<br/>
+        /// - **Document-centric workflows**: In document-first business processes, update agreements using the document reference that users are familiar with.<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Document ID Based Lookup**: Locate agreements by their associated document storage identifier rather than requiring the agreement ID upfront.<br/>
+        /// - **Automatic Resolution**: The system automatically finds the agreement associated with the provided document ID.<br/>
+        /// - **Partial Updates**: Modify only the fields you need; other agreement data remains unchanged.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="agreement">JSON payload containing the fields to be updated in the agreement.</param>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="documentId">The unique document storage identifier associated with the agreement to be updated. This ID is used to locate the agreement.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="agreement"/> or <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task PatchAgreementByDocumentIdAsync(
+            Agreement agreement,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string? documentId = null,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (agreement == null) throw new ArgumentNullException(nameof(agreement));
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+
+            var request = new PatchAgreementByDocumentIdRequest()
+            {
+                AccountId = accountId,
+                Agreement = agreement,
+                DocumentId = documentId,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/agreements", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/problem+json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "Agreement", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "PatchAgreementByDocumentId", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 30000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+                "429",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Docusign.IAM.SDK.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 204)
+            {
+                return;
+            }
+            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
+                {
+
+                    return;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
+                {
+
+                    return;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// List configured agreement types for the account.
+        /// </summary>
+        /// <remarks>
+        /// Returns the list of agreement type names configured for the specified account as a simple array of strings.<br/>
+        /// <br/>
+        /// Use this endpoint to discover the available agreement types so that users can see the options to choose from. The returned type names can then be used with the change type endpoint (`PATCH /v1/accounts/{accountId}/agreements/{agreementId}/actions/change-type`) to change the type of an existing agreement.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A list of configured agreement types for the account.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="accountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<List<string>> GetAgreementTypesAsync(
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+
+            var request = new GetAgreementTypesRequest()
+            {
+                AccountId = accountId,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/agreement-types", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetAgreementTypes", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 30000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+                "429",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Docusign.IAM.SDK.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    List<string> obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<List<string>>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into List<string>.", httpResponse, httpResponseBody, ex);
+                    }
+
+                    return obj!;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrDetailsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrDetailsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -352,8 +865,6 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// The operation is essential for retrieving the full context of an agreement, enabling users to understand the contract's scope, key provisions, and the legal or financial obligations that have been agreed upon.<br/>
         /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `adm_store_unified_repo_read`<br/>
-        /// <br/>
         /// ### Use Cases:<br/>
         /// - **Integrating agreement data into external systems**: Sync detailed agreement information, such as legal and financial provisions, into external systems like ERP, CRM, or contract management tools to streamline workflows.<br/>
         /// - **Providing detailed data for RAG (Retrieval-Augmented Generation) applications or Copilots**: Retrieve detailed agreement data for use in LLM-based applications that answer specific user queries about their agreements, such as the status of a contract, its provisions, or involved parties.<br/>
@@ -367,10 +878,13 @@ namespace Docusign.IAM.SDK
         /// - **Provisions for Legal, Financial, and Lifecycle Conditions**: Includes the full set of provisions that define the terms and conditions of the agreement, making it ideal for compliance and auditing purposes.<br/>
         /// - **Metadata and History**: Tracks the agreement’s history through metadata such as creation and modification dates and user-defined fields.<br/>
         /// - **Data Source for AI Applications**: Enables LLM-based applications to access granular agreement data, providing AI/ML-based solutions (such as Copilots) with the necessary context to answer detailed queries about an agreement.<br/>
-        /// - **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.
+        /// - **Involved Parties and Related Agreements**: Lists all parties involved and related agreements, allowing users to see all associated legal documents and relationships between agreements.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">Description not available.</param>
         /// <param name="agreementId">Description not available.</param>
+        /// <param name="includeLinkedData">Include linked data from external systems that correlate with this agreement.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>
         /// The Agreement component represents a comprehensive overview of a contractual document, detailing its unique identifiers, key properties, parties involved,<br/>
@@ -381,11 +895,12 @@ namespace Docusign.IAM.SDK
         /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="agreementId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<Agreement> GetAgreementAsync(
             string accountId = "00000000-0000-0000-0000-000000000000",
             string agreementId = "00000000-0000-0000-0000-000000000000",
+            bool? includeLinkedData = false,
             RetryConfig? retryConfig = null
         )
         {
@@ -396,6 +911,7 @@ namespace Docusign.IAM.SDK
             {
                 AccountId = accountId,
                 AgreementId = agreementId,
+                IncludeLinkedData = includeLinkedData,
             };
 
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -404,9 +920,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetAgreement", null, SDKConfiguration.SecuritySource);
@@ -462,9 +983,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -499,22 +1020,22 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ErrorPayload payload;
+                    ErrDetailsPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ErrorPayload.", httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
                     }
 
-                    throw new Error(payload, httpResponse, httpResponseBody);
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -524,17 +1045,17 @@ namespace Docusign.IAM.SDK
                 if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ErrorPayload payload;
+                    ErrDetailsPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ErrorPayload.", httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
                     }
 
-                    throw new Error(payload, httpResponse, httpResponseBody);
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -558,7 +1079,7 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation safely deletes an agreement. This action conforms to GDPR and CCPA compliance requirements.<br/>
         /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `adm_store_unified_repo_write`, `adm_store_unified_repo_read`
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">Description not available.</param>
         /// <param name="agreementId">Description not available.</param>
@@ -567,7 +1088,7 @@ namespace Docusign.IAM.SDK
         /// <exception cref="ArgumentNullException">One of <paramref name="accountId"/> or <paramref name="agreementId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task DeleteAgreementAsync(
             string accountId = "00000000-0000-0000-0000-000000000000",
@@ -590,9 +1111,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/problem+json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "DeleteAgreement", null, SDKConfiguration.SecuritySource);
@@ -648,9 +1174,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -669,7 +1195,7 @@ namespace Docusign.IAM.SDK
             {
                 return;
             }
-            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
@@ -685,6 +1211,391 @@ namespace Docusign.IAM.SDK
                 {
 
                     return;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Update specific fields of an agreement.
+        /// </summary>
+        /// <remarks>
+        /// This operation updates one or more fields of a specific agreement identified by its `agreementId`. <br/>
+        /// The operation supports partial updates, allowing clients to modify only the fields they need without affecting the rest of the agreement data.<br/>
+        /// <br/>
+        /// The request body should contain a JSON payload with the fields to be updated. Only the fields provided in the request body will be modified; all other fields remain unchanged. The operation returns a `204 No Content` response on success.<br/>
+        /// <br/>
+        /// This operation is essential for maintaining and evolving agreement data throughout the agreement's lifecycle, such as updating status, provisions, custom fields, or metadata based on business events or reviews.<br/>
+        /// <br/>
+        /// ### Use Cases:<br/>
+        /// - **Updating agreement status or review completion**: Mark agreements as reviewed, completed, or pending further action based on internal workflows.<br/>
+        /// - **Modifying provision details**: Update agreement terms, effective dates, expiration dates, or renewal conditions as circumstances change.<br/>
+        /// - **Managing custom attributes**: Add or modify user-defined fields and custom metadata to capture additional business context for the agreement.<br/>
+        /// - **Recording business events**: Update agreements to reflect changes such as amendments, renewals, or termination notices.<br/>
+        /// - **Synchronizing agreements across systems**: Update agreements in response to changes detected in external systems (e.g., ERP, CRM) to maintain data integrity.<br/>
+        /// <br/>
+        /// ### Key Features:<br/>
+        /// - **Partial Updates**: Modify only the fields you need; other agreement data remains intact.<br/>
+        /// - **Flexible Payload**: Accept JSON objects with any combination of updateable agreement fields, including provisions, metadata, and custom attributes.<br/>
+        /// - **Data Integrity**: Validates all input data to ensure compliance with agreement structure and data constraints.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="agreement">JSON payload containing the fields to be updated in the agreement.</param>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="agreementId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="agreement"/>, <paramref name="accountId"/> or <paramref name="agreementId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task PatchAgreementAsync(
+            Agreement agreement,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string agreementId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (agreement == null) throw new ArgumentNullException(nameof(agreement));
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (agreementId == null) throw new ArgumentNullException(nameof(agreementId));
+
+            var request = new PatchAgreementRequest()
+            {
+                AccountId = accountId,
+                AgreementId = agreementId,
+                Agreement = agreement,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/agreements/{agreementId}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/problem+json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "Agreement", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "PatchAgreement", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 30000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+                "429",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Docusign.IAM.SDK.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 204)
+            {
+                return;
+            }
+            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
+                {
+
+                    return;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
+                {
+
+                    return;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Change the type of an agreement.
+        /// </summary>
+        /// <remarks>
+        /// Changes the type of an existing agreement to a different configured type.<br/>
+        /// The target type must exist in the account's agreement-types collection.<br/>
+        /// Upon successful change, the server recomputes the category based on the new type.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
+        /// </remarks>
+        /// <param name="changeAgreementTypeRequest">JSON payload specifying the target agreement type.</param>
+        /// <param name="accountId">Description not available.</param>
+        /// <param name="agreementId">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>The updated agreement after a type change.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="changeAgreementTypeRequest"/>, <paramref name="accountId"/> or <paramref name="agreementId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404, 422 or 500 response.</exception>
+        /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ChangeAgreementTypeResponse> ChangeAgreementTypeAsync(
+            Models.Components.ChangeAgreementTypeRequest changeAgreementTypeRequest,
+            string accountId = "00000000-0000-0000-0000-000000000000",
+            string agreementId = "00000000-0000-0000-0000-000000000000",
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (changeAgreementTypeRequest == null) throw new ArgumentNullException(nameof(changeAgreementTypeRequest));
+            if (accountId == null) throw new ArgumentNullException(nameof(accountId));
+            if (agreementId == null) throw new ArgumentNullException(nameof(agreementId));
+
+            var request = new Models.Requests.ChangeAgreementTypeRequest()
+            {
+                AccountId = accountId,
+                AgreementId = agreementId,
+                ChangeAgreementTypeRequestValue = changeAgreementTypeRequest,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/v1/accounts/{accountId}/agreements/{agreementId}/actions/change-type", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "ChangeAgreementTypeRequestValue", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "ChangeAgreementType", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 5000L,
+                        maxElapsedTimeMs: 30000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+                "429",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Docusign.IAM.SDK.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ChangeAgreementTypeResponse obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<ChangeAgreementTypeResponse>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ChangeAgreementTypeResponse.", httpResponse, httpResponseBody, ex);
+                    }
+
+                    return obj!;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 401, 403, 404, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrDetailsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ErrDetailsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());

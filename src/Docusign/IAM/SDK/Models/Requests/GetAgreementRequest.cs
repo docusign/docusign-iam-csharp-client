@@ -18,5 +18,11 @@ namespace Docusign.IAM.SDK.Models.Requests
 
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=agreementId")]
         public string AgreementId { get; set; } = "00000000-0000-0000-0000-000000000000";
+
+        /// <summary>
+        /// Include linked data from external systems that correlate with this agreement.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include_linked_data")]
+        public bool? IncludeLinkedData { get; set; } = false;
     }
 }

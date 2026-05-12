@@ -30,7 +30,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation retrieves a list of workspaces available to the calling user. It returns basic information about each workspace, including its unique identifier (ID), name, and metadata such as when it was created and by whom.<br/>
         /// <br/>
-        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="count">Number of workspaces to return. Defaults to the maximum which is 100.</param>
@@ -55,7 +56,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation creates a new workspace. The calling user is automatically added as a member of the workspace with the role of Manage.<br/>
         /// <br/>
-        /// Once created, the `workspace_id` is utilized to associate tasks such as envelopes. Participants on tasks will automatically be added to the workspace with the Participate role.
+        /// Once created, the `workspace_id` is utilized to associate tasks such as envelopes. Participants on tasks will automatically be added to the workspace with the Participate role.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="createWorkspaceBody">The details of the workspace to be created including the name.</param>
@@ -76,7 +78,8 @@ namespace Docusign.IAM.SDK
         /// Updates an existing workspace.
         /// </summary>
         /// <remarks>
-        /// This operation updates details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
+        /// This operation updates details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -99,7 +102,8 @@ namespace Docusign.IAM.SDK
         /// Returns details about the workspace.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
+        /// This operation retrieves details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -124,7 +128,8 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.<br/>
         /// <br/>
-        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetWorkspaceAssignableRolesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -151,7 +156,8 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// The `envelopes` operation on the workspace may be utilized to query the status of all the envelopes in the workspace.<br/>
         /// <br/>
-        /// When `document_ids` is empty or excluded, the envelope is created without any documents from the workspace. eSignature API calls, including adding documents and templates, may be utilized to modify the envelope before it is sent. The eSignature API must be utilized to send the envelope.
+        /// When `document_ids` is empty or excluded, the envelope is created without any documents from the workspace. eSignature API calls, including adding documents and templates, may be utilized to modify the envelope before it is sent. The eSignature API must be utilized to send the envelope.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -176,7 +182,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation retrieves a list of all associated workspace envelopes. The <a href="https://support.docusign.com/s/document-item?bundleId=oeq1643226594604&amp;topicId=wdm1578456348227.html">`status`</a> on each envelope can be used to track envelope progress. Statuses are formatted as ProperCase. e.g. `Sent`, `WaitingForOthers`, `Completed`, etc.<br/>
         /// <br/>
-        /// Based on the permissions of the caller, additional envelope details may be retrieved from the <a href="https://developers.docusign.com/docs/esign-rest-api/">eSignature API</a> using the `envelope_id`.
+        /// Based on the permissions of the caller, additional envelope details may be retrieved from the <a href="https://developers.docusign.com/docs/esign-rest-api/">eSignature API</a> using the `envelope_id`.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -213,7 +220,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation retrieves a list of workspaces available to the calling user. It returns basic information about each workspace, including its unique identifier (ID), name, and metadata such as when it was created and by whom.<br/>
         /// <br/>
-        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="count">Number of workspaces to return. Defaults to the maximum which is 100.</param>
@@ -247,9 +255,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkspaces", null, SDKConfiguration.SecuritySource);
@@ -305,9 +318,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -401,7 +414,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation creates a new workspace. The calling user is automatically added as a member of the workspace with the role of Manage.<br/>
         /// <br/>
-        /// Once created, the `workspace_id` is utilized to associate tasks such as envelopes. Participants on tasks will automatically be added to the workspace with the Participate role.
+        /// Once created, the `workspace_id` is utilized to associate tasks such as envelopes. Participants on tasks will automatically be added to the workspace with the Participate role.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="createWorkspaceBody">The details of the workspace to be created including the name.</param>
@@ -433,6 +447,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "CreateWorkspaceBody", "json", false, false);
             if (serializedBody != null)
             {
@@ -441,7 +460,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createWorkspace", null, SDKConfiguration.SecuritySource);
@@ -497,9 +516,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -591,7 +610,8 @@ namespace Docusign.IAM.SDK
         /// Updates an existing workspace.
         /// </summary>
         /// <remarks>
-        /// This operation updates details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
+        /// This operation updates details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -627,6 +647,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "UpdateWorkspaceBody", "json", false, false);
             if (serializedBody != null)
             {
@@ -635,7 +660,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "updateWorkspace", null, SDKConfiguration.SecuritySource);
@@ -691,9 +716,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -785,7 +810,8 @@ namespace Docusign.IAM.SDK
         /// Returns details about the workspace.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.
+        /// This operation retrieves details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -817,9 +843,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkspace", null, SDKConfiguration.SecuritySource);
@@ -875,9 +906,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -973,7 +1004,8 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// Users within the account are considered "Internal" and may be assigned any role. Users outside the account are considered "External" and may only be assigned "External" roles.<br/>
         /// <br/>
-        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.
+        /// Pagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="GetWorkspaceAssignableRolesRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -996,9 +1028,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkspaceAssignableRoles", null, SDKConfiguration.SecuritySource);
@@ -1054,9 +1091,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1156,7 +1193,8 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// The `envelopes` operation on the workspace may be utilized to query the status of all the envelopes in the workspace.<br/>
         /// <br/>
-        /// When `document_ids` is empty or excluded, the envelope is created without any documents from the workspace. eSignature API calls, including adding documents and templates, may be utilized to modify the envelope before it is sent. The eSignature API must be utilized to send the envelope.
+        /// When `document_ids` is empty or excluded, the envelope is created without any documents from the workspace. eSignature API calls, including adding documents and templates, may be utilized to modify the envelope before it is sent. The eSignature API must be utilized to send the envelope.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -1192,6 +1230,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "WorkspaceEnvelopeForCreate", "json", false, false);
             if (serializedBody != null)
             {
@@ -1200,7 +1243,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createWorkspaceEnvelope", null, SDKConfiguration.SecuritySource);
@@ -1256,9 +1299,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1352,7 +1395,8 @@ namespace Docusign.IAM.SDK
         /// <remarks>
         /// This operation retrieves a list of all associated workspace envelopes. The <a href="https://support.docusign.com/s/document-item?bundleId=oeq1643226594604&amp;topicId=wdm1578456348227.html">`status`</a> on each envelope can be used to track envelope progress. Statuses are formatted as ProperCase. e.g. `Sent`, `WaitingForOthers`, `Completed`, etc.<br/>
         /// <br/>
-        /// Based on the permissions of the caller, additional envelope details may be retrieved from the <a href="https://developers.docusign.com/docs/esign-rest-api/">eSignature API</a> using the `envelope_id`.
+        /// Based on the permissions of the caller, additional envelope details may be retrieved from the <a href="https://developers.docusign.com/docs/esign-rest-api/">eSignature API</a> using the `envelope_id`.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -1384,9 +1428,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkspaceEnvelopes", null, SDKConfiguration.SecuritySource);
@@ -1442,9 +1491,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;

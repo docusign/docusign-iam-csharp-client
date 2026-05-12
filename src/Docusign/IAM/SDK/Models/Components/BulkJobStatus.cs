@@ -34,8 +34,8 @@ namespace Docusign.IAM.SDK.Models.Components
         Complete,
         [JsonProperty("FAILED")]
         Failed,
-        [JsonProperty("CANCELLED")]
-        Cancelled,
+        [JsonProperty("CANCELED")]
+        Canceled,
     }
 
     public static class BulkJobStatusExtension

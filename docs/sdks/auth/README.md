@@ -78,7 +78,7 @@ using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
 
 var sdk = IamClient.Builder()
-    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
+
     .Build();
 
 PublicAuthCodeGrantRequestBody req = new PublicAuthCodeGrantRequestBody() {
@@ -126,11 +126,10 @@ You do not need an integration key to obtain an access token.
 <!-- UsageSnippet language="csharp" operationID="GetTokenFromJWTGrant" method="post" path="/oauth/token#FromJWTGrant" -->
 ```csharp
 using Docusign.IAM.SDK;
-using Docusign.IAM.SDK.Models.Components;
 using Docusign.IAM.SDK.Models.Requests;
 
 var sdk = IamClient.Builder()
-    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
+
     .Build();
 
 JWTGrant req = new JWTGrant() {

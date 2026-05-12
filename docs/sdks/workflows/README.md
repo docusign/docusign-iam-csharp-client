@@ -1,18 +1,18 @@
-# Maestro.Workflows
+# WorkflowBuilder.Workflows
 
 ## Overview
 
 ### Available Operations
 
-* [GetWorkflowsList](#getworkflowslist) - Retrieve a list of available Maestro workflows
-* [GetWorkflowTriggerRequirements](#getworkflowtriggerrequirements) - Retrieve trigger requirements for a specific Maestro workflow
-* [TriggerWorkflow](#triggerworkflow) - Trigger a new instance of a Maestro workflow
+* [GetWorkflowsList](#getworkflowslist) - Retrieve a list of available Workflow Builder workflows
+* [GetWorkflowTriggerRequirements](#getworkflowtriggerrequirements) - Retrieve trigger requirements for a specific Workflow Builder workflow
+* [TriggerWorkflow](#triggerworkflow) - Trigger a new instance of a Workflow Builder workflow
 * [PauseNewWorkflowInstances](#pausenewworkflowinstances) - Pause an Active Workflow
 * [ResumePausedWorkflow](#resumepausedworkflow) - Resume a Paused Workflow
 
 ## GetWorkflowsList
 
-This operation retrieves a list of all available Maestro workflows. It returns basic information
+This operation retrieves a list of all available Workflow Builder workflows. It returns basic information
 about each workflow, including its unique identifier (`id`), name, description, and the input
 schema required to trigger the workflow.
 
@@ -31,7 +31,7 @@ be triggered.
 
 ### Key Features:
 - **Comprehensive Workflow Overview**: Provides a full list of workflows, giving visibility
-  into all the automated processes available within the Maestro platform.
+  into all the automated processes available within the Workflow Builder platform.
 - **Input Schema Information**: Each workflow includes its trigger input schema, showing
   what data must be provided when triggering the workflow.
 - **Metadata for Tracking**: Useful metadata like creation time, last modification date,
@@ -42,7 +42,7 @@ be triggered.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="GetWorkflowsList" method="get" path="/v1/accounts/{accountId}/workflows" -->
+<!-- UsageSnippet language="csharp" operationID="GetWorkflowsList" method="get" path="/v1/accounts/{accountId}/workflows" example="WorkflowCollectionExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -52,7 +52,7 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.Workflows.GetWorkflowsListAsync(
+var res = await sdk.WorkflowBuilder.Workflows.GetWorkflowsListAsync(
     accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
     status: Status.Active
 );
@@ -75,14 +75,14 @@ var res = await sdk.Maestro.Workflows.GetWorkflowsListAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404                          | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## GetWorkflowTriggerRequirements
 
 This operation retrieves the configuration and input requirements necessary to trigger a specific
-Maestro workflow. It provides detailed information about the `trigger_event_type`, such as HTTP
+Workflow Builder workflow. It provides detailed information about the `trigger_event_type`, such as HTTP
 or other supported types, and specifies the required input schema, including field names, data types,
 and any default values.
 
@@ -106,7 +106,7 @@ the workflow instance, ensuring seamless execution and compliance with workflow 
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="GetWorkflowTriggerRequirements" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/trigger-requirements" -->
+<!-- UsageSnippet language="csharp" operationID="GetWorkflowTriggerRequirements" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/trigger-requirements" example="WorkflowTriggerRequirementsSuccessExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -115,9 +115,9 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.Workflows.GetWorkflowTriggerRequirementsAsync(
+var res = await sdk.WorkflowBuilder.Workflows.GetWorkflowTriggerRequirementsAsync(
     accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
-    workflowId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb"
+    workflowId: "00000000-0000-0000-0000-000000000000"
 );
 
 // handle response
@@ -138,13 +138,13 @@ var res = await sdk.Maestro.Workflows.GetWorkflowTriggerRequirementsAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404                          | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## TriggerWorkflow
 
-This operation triggers a new instance of a specified Maestro workflow. When invoked,
+This operation triggers a new instance of a specified Workflow Builder workflow. When invoked,
 the workflow is started based on the provided input data, and the workflow instance
 begins executing according to its defined logic and configuration.
 
@@ -177,7 +177,7 @@ interact with or track the running instance.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="TriggerWorkflow" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/trigger" -->
+<!-- UsageSnippet language="csharp" operationID="TriggerWorkflow" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/trigger" example="WorkflowTriggerSuccessExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -187,9 +187,9 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.Workflows.TriggerWorkflowAsync(
+var res = await sdk.WorkflowBuilder.Workflows.TriggerWorkflowAsync(
     accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
-    workflowId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
+    workflowId: "00000000-0000-0000-0000-000000000000",
     triggerWorkflow: new TriggerWorkflow() {
         InstanceName = "My Instance",
         TriggerInputs = new Dictionary<string, TriggerInputs>() {
@@ -222,8 +222,8 @@ var res = await sdk.Maestro.Workflows.TriggerWorkflowAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404                          | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## PauseNewWorkflowInstances
@@ -233,7 +233,7 @@ This operation pauses new workflow instances from being created. Any running wor
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="pauseNewWorkflowInstances" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/pause" -->
+<!-- UsageSnippet language="csharp" operationID="pauseNewWorkflowInstances" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/pause" example="PauseNewWorkflowInstancesExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -242,7 +242,7 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.Workflows.PauseNewWorkflowInstancesAsync(
+var res = await sdk.WorkflowBuilder.Workflows.PauseNewWorkflowInstancesAsync(
     accountId: "00000000-0000-0000-0000-000000000000",
     workflowId: "00000000-0000-0000-0000-000000000000"
 );
@@ -252,10 +252,10 @@ var res = await sdk.Maestro.Workflows.PauseNewWorkflowInstancesAsync(
 
 ### Parameters
 
-| Parameter                             | Type                                  | Required                              | Description                           |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `AccountId`                           | *string*                              | :heavy_check_mark:                    | The unique identifier of the account. |
-| `WorkflowId`                          | *string*                              | :heavy_check_mark:                    | N/A                                   |
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `AccountId`        | *string*           | :heavy_check_mark: | N/A                |
+| `WorkflowId`       | *string*           | :heavy_check_mark: | N/A                |
 
 ### Response
 
@@ -265,8 +265,8 @@ var res = await sdk.Maestro.Workflows.PauseNewWorkflowInstancesAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404, 409                          | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404, 409                     | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## ResumePausedWorkflow
@@ -276,7 +276,7 @@ This operation enables new workflow instances to be created
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="resumePausedWorkflow" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/resume" -->
+<!-- UsageSnippet language="csharp" operationID="resumePausedWorkflow" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/actions/resume" example="ResumeNewWorkflowInstancesExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -285,7 +285,7 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.Workflows.ResumePausedWorkflowAsync(
+var res = await sdk.WorkflowBuilder.Workflows.ResumePausedWorkflowAsync(
     accountId: "00000000-0000-0000-0000-000000000000",
     workflowId: "00000000-0000-0000-0000-000000000000"
 );
@@ -295,10 +295,10 @@ var res = await sdk.Maestro.Workflows.ResumePausedWorkflowAsync(
 
 ### Parameters
 
-| Parameter                             | Type                                  | Required                              | Description                           |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `AccountId`                           | *string*                              | :heavy_check_mark:                    | The unique identifier of the account. |
-| `WorkflowId`                          | *string*                              | :heavy_check_mark:                    | N/A                                   |
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `AccountId`        | *string*           | :heavy_check_mark: | N/A                |
+| `WorkflowId`       | *string*           | :heavy_check_mark: | N/A                |
 
 ### Response
 
@@ -308,6 +308,6 @@ var res = await sdk.Maestro.Workflows.ResumePausedWorkflowAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404, 409                          | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404, 409                     | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |

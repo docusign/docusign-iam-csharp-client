@@ -14,14 +14,14 @@ namespace Docusign.IAM.SDK
     using Docusign.IAM.SDK.Utils;
     using System;
 
-    public interface IMaestro
+    public interface IAgreementManager
     {
-        public IWorkflows Workflows { get; }
+        public IAgreements Agreements { get; }
 
-        public IWorkflowInstanceManagement WorkflowInstanceManagement { get; }
+        public IBulkJob BulkJob { get; }
     }
 
-    public class Maestro: IMaestro
+    public class AgreementManager: IAgreementManager
     {
         /// <summary>
         /// SDK Configuration.
@@ -30,22 +30,22 @@ namespace Docusign.IAM.SDK
         public SDKConfig SDKConfiguration { get; private set; }
 
         /// <summary>
-        /// Workflows SubSDK.
-        /// <see cref="IWorkflows"/>
+        /// Agreements SubSDK.
+        /// <see cref="IAgreements"/>
         /// </summary>
-        public IWorkflows Workflows { get; private set; }
+        public IAgreements Agreements { get; private set; }
 
         /// <summary>
-        /// WorkflowInstanceManagement SubSDK.
-        /// <see cref="IWorkflowInstanceManagement"/>
+        /// BulkJob SubSDK.
+        /// <see cref="IBulkJob"/>
         /// </summary>
-        public IWorkflowInstanceManagement WorkflowInstanceManagement { get; private set; }
+        public IBulkJob BulkJob { get; private set; }
 
-        public Maestro(SDKConfig config)
+        public AgreementManager(SDKConfig config)
         {
             SDKConfiguration = config;
-            Workflows = new Workflows(SDKConfiguration);
-            WorkflowInstanceManagement = new WorkflowInstanceManagement(SDKConfiguration);
+            Agreements = new Agreements(SDKConfiguration);
+            BulkJob = new BulkJob(SDKConfiguration);
         }
     }
 }

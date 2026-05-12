@@ -17,53 +17,17 @@ namespace Docusign.IAM.SDK.Models.Components
 
     public class BulkJob
     {
-        [JsonProperty("_action_templates")]
-        public BulkJobActionTemplates? ActionTemplates { get; set; }
-
-        /// <summary>
-        /// Contains detailed information about the BulkJob including presigned upload links, document IDs, etc.
-        /// </summary>
-        [JsonProperty("_embedded")]
-        public BulkJobEmbedded? Embedded { get; set; }
-
-        [JsonProperty("_links")]
-        public BulkJobLinks? Links { get; set; }
-
-        /// <summary>
-        /// Describes the limits of a bulk job, or an action associated with a bulk job.
-        /// </summary>
-        [JsonProperty("constraints")]
-        public BulkJobConstraints? Constraints { get; set; }
-
-        [JsonProperty("created_at")]
-        public DateTime CreatedAt { get; set; } = default!;
-
-        [JsonProperty("expires_at")]
-        public DateTime ExpiresAt { get; set; } = default!;
-
-        /// <summary>
-        /// User provided reference ID for this job.
-        /// </summary>
-        [JsonProperty("external_job_id")]
-        public string? ExternalJobId { get; set; }
-
         /// <summary>
         /// Id for job.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
-        [JsonProperty("message")]
-        public string? Message { get; set; }
-
         /// <summary>
-        /// Properties about THIS request/response, not the job resource itself.
+        /// User provided reference ID for this job.
         /// </summary>
-        [JsonProperty("metadata")]
-        public BulkJobMetadata Metadata { get; set; } = default!;
-
-        [JsonProperty("modified_at")]
-        public DateTime ModifiedAt { get; set; } = default!;
+        [JsonProperty("external_job_id")]
+        public string? ExternalJobId { get; set; }
 
         /// <summary>
         /// User provided name for this job.
@@ -86,10 +50,46 @@ namespace Docusign.IAM.SDK.Models.Components
         [JsonProperty("status_enum")]
         public List<string> StatusEnum { get; set; } = default!;
 
+        [JsonProperty("created_at")]
+        public DateTime CreatedAt { get; set; } = default!;
+
+        [JsonProperty("modified_at")]
+        public DateTime ModifiedAt { get; set; } = default!;
+
+        [JsonProperty("expires_at")]
+        public DateTime ExpiresAt { get; set; } = default!;
+
         /// <summary>
         /// ISO 8601 duration for job validity.
         /// </summary>
         [JsonProperty("ttl_period")]
         public string? TtlPeriod { get; set; }
+
+        /// <summary>
+        /// Contains detailed information about the BulkJob including presigned upload links, document IDs, etc.
+        /// </summary>
+        [JsonProperty("_embedded")]
+        public BulkJobEmbedded? Embedded { get; set; }
+
+        [JsonProperty("_action_templates")]
+        public BulkJobActionTemplates? ActionTemplates { get; set; }
+
+        [JsonProperty("_links")]
+        public BulkJobLinks? Links { get; set; }
+
+        /// <summary>
+        /// Describes the limits of a bulk job, or an action associated with a bulk job.
+        /// </summary>
+        [JsonProperty("constraints")]
+        public BulkJobConstraints? Constraints { get; set; }
+
+        /// <summary>
+        /// Properties about THIS request/response, not the job resource itself.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public BulkJobMetadata Metadata { get; set; } = default!;
+
+        [JsonProperty("message")]
+        public string? Message { get; set; }
     }
 }

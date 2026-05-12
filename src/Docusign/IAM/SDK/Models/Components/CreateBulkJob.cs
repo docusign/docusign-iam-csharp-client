@@ -11,27 +11,20 @@ namespace Docusign.IAM.SDK.Models.Components
 {
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
 
     public class CreateBulkJob
     {
         /// <summary>
-        /// Optional list of agreement set IDs (21-character NanoID format).
+        /// Name for the new job to be created. If empty, server will auto-create name for the job.
         /// </summary>
-        [JsonProperty("agreement_set_ids")]
-        public List<string>? AgreementSetIds { get; set; }
+        [JsonProperty("job_name")]
+        public string? JobName { get; set; }
 
         /// <summary>
         /// Number of docs this job will have. Will use provided document_requests size if there is a mismatch.
         /// </summary>
         [JsonProperty("expected_number_of_docs")]
         public int ExpectedNumberOfDocs { get; set; } = default!;
-
-        /// <summary>
-        /// Name for the new job to be created. If empty, server will auto-create name for the job.
-        /// </summary>
-        [JsonProperty("job_name")]
-        public string? JobName { get; set; }
 
         /// <summary>
         /// Language for the user, such as en-US, en-GB, if not provided will default to en-US.

@@ -1,5 +1,13 @@
 # GetWorkspaceUsersSortingOption
 
+## Example Usage
+
+```csharp
+using Docusign.IAM.SDK.Models.Components;
+
+var value = GetWorkspaceUsersSortingOption.FirstNameAsc;
+```
+
 
 ## Values
 

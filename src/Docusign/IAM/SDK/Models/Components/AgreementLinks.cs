@@ -23,5 +23,11 @@ namespace Docusign.IAM.SDK.Models.Components
         /// </summary>
         [JsonProperty("document")]
         public Link? Document { get; set; } = null;
+
+        /// <summary>
+        /// Link to the collection of configured agreement types for the account. Always present.
+        /// </summary>
+        [JsonProperty("agreement_types")]
+        public AgreementLinksAgreementTypes? AgreementTypes { get; set; } = null;
     }
 }

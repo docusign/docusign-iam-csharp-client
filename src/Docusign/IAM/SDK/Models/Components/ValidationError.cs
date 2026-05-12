@@ -13,26 +13,26 @@ namespace Docusign.IAM.SDK.Models.Components
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Additional metadata related to this workflow instance.
+    /// A single field-level or parameter-level validation error.
     /// </summary>
-    public class Metadata
+    public class ValidationError
     {
         /// <summary>
-        /// Identifier of the user who originally created the workflow definition.
+        /// A machine-readable error code identifying the specific validation failure.
         /// </summary>
-        [JsonProperty("workflow_created_by")]
-        public string? WorkflowCreatedBy { get; set; }
+        [JsonProperty("code")]
+        public string Code { get; set; } = default!;
 
         /// <summary>
-        /// Version string of the deployed workflow.
+        /// A human-readable description of the validation error.
         /// </summary>
-        [JsonProperty("workflow_version")]
-        public string? WorkflowVersion { get; set; }
+        [JsonProperty("message")]
+        public string Message { get; set; } = default!;
 
         /// <summary>
-        /// Identifier for workflow definition metadata in the system.
+        /// The name of the field, parameter, or path segment that caused the error.
         /// </summary>
-        [JsonProperty("workflow_metadata_id")]
-        public string? WorkflowMetadataId { get; set; }
+        [JsonProperty("target")]
+        public string? Target { get; set; }
     }
 }

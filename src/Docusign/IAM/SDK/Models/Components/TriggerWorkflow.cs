@@ -15,7 +15,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using System.Collections.Generic;
 
     /// <summary>
-    /// The input information needed to trigger a new instance of a Maestro workflow.<br/>
+    /// The input information needed to trigger a new instance of a Workflow Builder workflow.<br/>
     /// This request body contains the metadata to describe the instance being created,<br/>
     /// along with the input data required to trigger the workflow.<br/>
     /// <br/>

@@ -28,9 +28,7 @@ namespace Docusign.IAM.SDK
         /// Create new bulk job with presigned URLs direct to Azure Blob Store.
         /// </summary>
         /// <remarks>
-        /// Create a new job, give pre-signed URLs back, the client will upload to Azure Blob Store directly.<br/>
-        /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `document_uploader_write`, `document_uploader_read`<br/>
+        /// Create a new job, give presigned URLs back, the client will upload to Azure Blob Store directly.<br/>
         /// <br/>
         /// **Important Upload Workflow**:<br/>
         /// 1. Call this endpoint to create a job and receive upload URLs<br/>
@@ -64,19 +62,68 @@ namespace Docusign.IAM.SDK
         /// PUT [pre-signed URL from _actions.upload_document]<br/>
         /// <br/>
         /// Headers:<br/>
-        /// - x-ms-blob-type: BlockBlob<br/>
-        /// - x-ms-meta-filename: YourDocumentName.pdf<br/>
-        /// - Content-Type: application/pdf<br/>
+        /// - x-ms-blob-type: BlockBlob (Required)<br/>
+        /// - x-ms-meta-filename: YourDocumentName.pdf (Recommended)<br/>
+        /// - Content-Type: application/pdf (Required)<br/>
+        /// - x-ms-meta-metadata: &lt;stringified JSON metadata&gt; (Optional)<br/>
         /// <br/>
         /// Body: [Your document binary data]<br/>
         /// ```<br/>
         /// <br/>
         /// **Important Notes**:<br/>
         /// - The `upload_document` URLs are pre-signed Azure Blob Storage URLs with time-limited validity (8 hours)<br/>
+        /// - No Auth header is needed<br/>
         /// - The `x-ms-meta-filename` header should contain your original document filename<br/>
         /// - The `x-ms-blob-type` must be set to `BlockBlob`<br/>
         /// - Setting the `Content-Type` header is recommended to match your document type<br/>
         /// - If `Content-Type` is not specified, Azure defaults to `application/octet-stream`<br/>
+        /// - The `x-ms-meta-metadata` header is optional and allows you to attach metadata to the newly created agreement at upload time. See **Applying Metadata to Agreements** below for details<br/>
+        /// <br/>
+        /// **Applying Metadata to Agreements**:<br/>
+        /// <br/>
+        /// You may include metadata alongside the document bytes during upload. This metadata will be directly applied to the <br/>
+        /// newly created agreement. To do this, include the `x-ms-meta-metadata` header on the PUT operation with a stringified <br/>
+        /// JSON value.<br/>
+        /// <br/>
+        /// The JSON schema for this header follows the same structure as the standard Agreement PATCH request body.<br/>
+        /// <br/>
+        /// **Example metadata JSON**:<br/>
+        /// ```json<br/>
+        /// {<br/>
+        ///   "provisions": {<br/>
+        ///     "jurisdiction": "California",<br/>
+        ///     "payment_terms_due_date": "OTHER"<br/>
+        ///   },<br/>
+        ///   "custom_provisions": {<br/>
+        ///     "c_ClientId": "value"<br/>
+        ///   },<br/>
+        ///   "linked_data": [<br/>
+        ///     {<br/>
+        ///       "application_name": "Salesforce",<br/>
+        ///       "object_name": "Account",<br/>
+        ///       "record_id": "579386BF-C8EA-4673-AE0E-E2F922B09DC5"<br/>
+        ///     },<br/>
+        ///     {<br/>
+        ///       "application_name": "Dynamics",<br/>
+        ///       "object_name": "Account",<br/>
+        ///       "record_id": "514CEAFB-1AC7-43FF-9E88-24CB15150963"<br/>
+        ///     }<br/>
+        ///   ]<br/>
+        /// }<br/>
+        /// ```<br/>
+        /// <br/>
+        /// **Stringified header value**:<br/>
+        /// <br/>
+        /// The JSON must be stringified before being set as the header value. For example, the above JSON would become:<br/>
+        /// ```<br/>
+        /// x-ms-meta-metadata: "{\"provisions\":{\"jurisdiction\":\"California\",\"payment_terms_due_date\":\"OTHER\"},\"custom_provisions\":{\"c_ClientId\":\"value\"},\"linked_data\":[{\"application_name\":\"Salesforce\",\"object_name\":\"Account\",\"record_id\":\"579386BF-C8EA-4673-AE0E-E2F922B09DC5\"},{\"application_name\":\"Dynamics\",\"object_name\":\"Account\",\"record_id\":\"514CEAFB-1AC7-43FF-9E88-24CB15150963\"}]}"<br/>
+        /// ```<br/>
+        /// <br/>
+        /// **Metadata Notes**:<br/>
+        /// - The `x-ms-meta-metadata` header is entirely optional. If omitted, the agreement is created with AI-extracted values only<br/>
+        /// - The JSON must be stringified (serialized to a single string) before being placed in the header value<br/>
+        /// - The metadata payload follows the same schema as the Agreement PATCH endpoint request body<br/>
+        /// - Values provided via metadata will be applied to the agreement after creation, overriding any AI-extracted values for the same fields<br/>
         /// <br/>
         /// **Firewall &amp; Network Configuration**:<br/>
         /// <br/>
@@ -139,12 +186,13 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// **Example Upload Requests**:<br/>
         /// <br/>
-        /// PDF Document:<br/>
+        /// PDF Document (with optional metadata):<br/>
         /// ```<br/>
         /// PUT https://storage.blob.core.windows.net/container/doc-id?signature=...<br/>
         /// Content-Type: application/pdf<br/>
         /// x-ms-blob-type: BlockBlob<br/>
         /// x-ms-meta-filename: contract.pdf<br/>
+        /// x-ms-meta-metadata: "{\"provisions\":{\"jurisdiction\":\"California\"},\"custom_provisions\":{\"c_ClientId\":\"value\"}}"<br/>
         /// <br/>
         /// [Binary PDF data]<br/>
         /// ```<br/>
@@ -167,7 +215,9 @@ namespace Docusign.IAM.SDK
         /// x-ms-meta-filename: signed-page.jpg<br/>
         /// <br/>
         /// [Binary JPEG data]<br/>
-        /// ```
+        /// ```<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="createBulkJob">A <see cref="CreateBulkJob"/> parameter.</param>
         /// <param name="accountId">Description not available.</param>
@@ -189,8 +239,7 @@ namespace Docusign.IAM.SDK
         /// </summary>
         /// <remarks>
         /// Get the current status and details of a bulk job.<br/>
-        /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `document_uploader_read`
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">Description not available.</param>
         /// <param name="jobId">Description not available.</param>
@@ -216,7 +265,7 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// **Important**: Only call this endpoint after successfully uploading all documents to their respective pre-signed URLs obtained from the create job response.<br/>
         /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `document_uploader_write`, `document_uploader_read`
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">Description not available.</param>
         /// <param name="jobId">Description not available.</param>
@@ -251,9 +300,7 @@ namespace Docusign.IAM.SDK
         /// Create new bulk job with presigned URLs direct to Azure Blob Store.
         /// </summary>
         /// <remarks>
-        /// Create a new job, give pre-signed URLs back, the client will upload to Azure Blob Store directly.<br/>
-        /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `document_uploader_write`, `document_uploader_read`<br/>
+        /// Create a new job, give presigned URLs back, the client will upload to Azure Blob Store directly.<br/>
         /// <br/>
         /// **Important Upload Workflow**:<br/>
         /// 1. Call this endpoint to create a job and receive upload URLs<br/>
@@ -287,19 +334,68 @@ namespace Docusign.IAM.SDK
         /// PUT [pre-signed URL from _actions.upload_document]<br/>
         /// <br/>
         /// Headers:<br/>
-        /// - x-ms-blob-type: BlockBlob<br/>
-        /// - x-ms-meta-filename: YourDocumentName.pdf<br/>
-        /// - Content-Type: application/pdf<br/>
+        /// - x-ms-blob-type: BlockBlob (Required)<br/>
+        /// - x-ms-meta-filename: YourDocumentName.pdf (Recommended)<br/>
+        /// - Content-Type: application/pdf (Required)<br/>
+        /// - x-ms-meta-metadata: &lt;stringified JSON metadata&gt; (Optional)<br/>
         /// <br/>
         /// Body: [Your document binary data]<br/>
         /// ```<br/>
         /// <br/>
         /// **Important Notes**:<br/>
         /// - The `upload_document` URLs are pre-signed Azure Blob Storage URLs with time-limited validity (8 hours)<br/>
+        /// - No Auth header is needed<br/>
         /// - The `x-ms-meta-filename` header should contain your original document filename<br/>
         /// - The `x-ms-blob-type` must be set to `BlockBlob`<br/>
         /// - Setting the `Content-Type` header is recommended to match your document type<br/>
         /// - If `Content-Type` is not specified, Azure defaults to `application/octet-stream`<br/>
+        /// - The `x-ms-meta-metadata` header is optional and allows you to attach metadata to the newly created agreement at upload time. See **Applying Metadata to Agreements** below for details<br/>
+        /// <br/>
+        /// **Applying Metadata to Agreements**:<br/>
+        /// <br/>
+        /// You may include metadata alongside the document bytes during upload. This metadata will be directly applied to the <br/>
+        /// newly created agreement. To do this, include the `x-ms-meta-metadata` header on the PUT operation with a stringified <br/>
+        /// JSON value.<br/>
+        /// <br/>
+        /// The JSON schema for this header follows the same structure as the standard Agreement PATCH request body.<br/>
+        /// <br/>
+        /// **Example metadata JSON**:<br/>
+        /// ```json<br/>
+        /// {<br/>
+        ///   "provisions": {<br/>
+        ///     "jurisdiction": "California",<br/>
+        ///     "payment_terms_due_date": "OTHER"<br/>
+        ///   },<br/>
+        ///   "custom_provisions": {<br/>
+        ///     "c_ClientId": "value"<br/>
+        ///   },<br/>
+        ///   "linked_data": [<br/>
+        ///     {<br/>
+        ///       "application_name": "Salesforce",<br/>
+        ///       "object_name": "Account",<br/>
+        ///       "record_id": "579386BF-C8EA-4673-AE0E-E2F922B09DC5"<br/>
+        ///     },<br/>
+        ///     {<br/>
+        ///       "application_name": "Dynamics",<br/>
+        ///       "object_name": "Account",<br/>
+        ///       "record_id": "514CEAFB-1AC7-43FF-9E88-24CB15150963"<br/>
+        ///     }<br/>
+        ///   ]<br/>
+        /// }<br/>
+        /// ```<br/>
+        /// <br/>
+        /// **Stringified header value**:<br/>
+        /// <br/>
+        /// The JSON must be stringified before being set as the header value. For example, the above JSON would become:<br/>
+        /// ```<br/>
+        /// x-ms-meta-metadata: "{\"provisions\":{\"jurisdiction\":\"California\",\"payment_terms_due_date\":\"OTHER\"},\"custom_provisions\":{\"c_ClientId\":\"value\"},\"linked_data\":[{\"application_name\":\"Salesforce\",\"object_name\":\"Account\",\"record_id\":\"579386BF-C8EA-4673-AE0E-E2F922B09DC5\"},{\"application_name\":\"Dynamics\",\"object_name\":\"Account\",\"record_id\":\"514CEAFB-1AC7-43FF-9E88-24CB15150963\"}]}"<br/>
+        /// ```<br/>
+        /// <br/>
+        /// **Metadata Notes**:<br/>
+        /// - The `x-ms-meta-metadata` header is entirely optional. If omitted, the agreement is created with AI-extracted values only<br/>
+        /// - The JSON must be stringified (serialized to a single string) before being placed in the header value<br/>
+        /// - The metadata payload follows the same schema as the Agreement PATCH endpoint request body<br/>
+        /// - Values provided via metadata will be applied to the agreement after creation, overriding any AI-extracted values for the same fields<br/>
         /// <br/>
         /// **Firewall &amp; Network Configuration**:<br/>
         /// <br/>
@@ -362,12 +458,13 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// **Example Upload Requests**:<br/>
         /// <br/>
-        /// PDF Document:<br/>
+        /// PDF Document (with optional metadata):<br/>
         /// ```<br/>
         /// PUT https://storage.blob.core.windows.net/container/doc-id?signature=...<br/>
         /// Content-Type: application/pdf<br/>
         /// x-ms-blob-type: BlockBlob<br/>
         /// x-ms-meta-filename: contract.pdf<br/>
+        /// x-ms-meta-metadata: "{\"provisions\":{\"jurisdiction\":\"California\"},\"custom_provisions\":{\"c_ClientId\":\"value\"}}"<br/>
         /// <br/>
         /// [Binary PDF data]<br/>
         /// ```<br/>
@@ -390,7 +487,9 @@ namespace Docusign.IAM.SDK
         /// x-ms-meta-filename: signed-page.jpg<br/>
         /// <br/>
         /// [Binary JPEG data]<br/>
-        /// ```
+        /// ```<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="createBulkJob">A <see cref="CreateBulkJob"/> parameter.</param>
         /// <param name="accountId">Description not available.</param>
@@ -422,6 +521,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "CreateBulkJob", "json", false, false);
             if (serializedBody != null)
             {
@@ -430,7 +534,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createBulkUploadJob", null, SDKConfiguration.SecuritySource);
@@ -486,9 +590,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -525,7 +629,7 @@ namespace Docusign.IAM.SDK
             }
             else if(new List<int>{400, 401, 403, 429}.Contains(responseStatusCode))
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
                     ErrDetailsPayload payload;
@@ -545,7 +649,7 @@ namespace Docusign.IAM.SDK
             }
             else if(responseStatusCode == 500)
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
                     ErrDetailsPayload payload;
@@ -581,8 +685,7 @@ namespace Docusign.IAM.SDK
         /// </summary>
         /// <remarks>
         /// Get the current status and details of a bulk job.<br/>
-        /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `document_uploader_read`
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">Description not available.</param>
         /// <param name="jobId">Description not available.</param>
@@ -614,9 +717,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getBulkJobStatus", null, SDKConfiguration.SecuritySource);
@@ -672,9 +780,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -711,7 +819,7 @@ namespace Docusign.IAM.SDK
             }
             else if(new List<int>{401, 403, 404}.Contains(responseStatusCode))
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
                     ErrDetailsPayload payload;
@@ -731,7 +839,7 @@ namespace Docusign.IAM.SDK
             }
             else if(responseStatusCode == 500)
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
                     ErrDetailsPayload payload;
@@ -771,7 +879,7 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// **Important**: Only call this endpoint after successfully uploading all documents to their respective pre-signed URLs obtained from the create job response.<br/>
         /// <br/>
-        /// <a href="/docs/navigator-api/auth/">Required scopes</a>: `document_uploader_write`, `document_uploader_read`
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">Description not available.</param>
         /// <param name="jobId">Description not available.</param>
@@ -803,9 +911,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "uploadCompleteBulkJob", null, SDKConfiguration.SecuritySource);
@@ -861,9 +974,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -900,7 +1013,7 @@ namespace Docusign.IAM.SDK
             }
             else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
                     ErrDetailsPayload payload;
@@ -920,7 +1033,7 @@ namespace Docusign.IAM.SDK
             }
             else if(responseStatusCode == 500)
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
                     ErrDetailsPayload payload;

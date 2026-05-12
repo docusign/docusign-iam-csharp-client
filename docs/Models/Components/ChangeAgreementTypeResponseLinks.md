@@ -1,0 +1,12 @@
+# ChangeAgreementTypeResponseLinks
+
+Hypermedia links for the agreement.
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `Self`                                                                                                            | [Self](../../Models/Components/Self.md)                                                                           | :heavy_minus_sign:                                                                                                | N/A                                                                                                               |
+| `Collection`                                                                                                      | [Collection](../../Models/Components/Collection.md)                                                               | :heavy_minus_sign:                                                                                                | N/A                                                                                                               |
+| `AgreementTypes`                                                                                                  | [ChangeAgreementTypeResponseAgreementTypes](../../Models/Components/ChangeAgreementTypeResponseAgreementTypes.md) | :heavy_minus_sign:                                                                                                | N/A                                                                                                               |

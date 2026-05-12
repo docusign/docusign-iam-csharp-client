@@ -18,14 +18,14 @@ namespace Docusign.IAM.SDK.Models.Components
     /// </summary>
     public class BulkJobConstraints
     {
-        [JsonProperty("allowed_formats")]
-        public List<string>? AllowedFormats { get; set; }
+        [JsonProperty("max_size_mb")]
+        public int? MaxSizeMb { get; set; }
 
         [JsonProperty("max_documents_per_job")]
         public int? MaxDocumentsPerJob { get; set; }
 
-        [JsonProperty("max_size_mb")]
-        public int? MaxSizeMb { get; set; }
+        [JsonProperty("allowed_formats")]
+        public List<string>? AllowedFormats { get; set; }
 
         [JsonProperty("timeout_seconds")]
         public int? TimeoutSeconds { get; set; }

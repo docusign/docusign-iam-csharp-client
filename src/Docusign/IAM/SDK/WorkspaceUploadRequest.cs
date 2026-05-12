@@ -28,7 +28,8 @@ namespace Docusign.IAM.SDK
         /// Creates a new upload request within a workspace.
         /// </summary>
         /// <remarks>
-        /// This operation creates a new upload request within a workspace. The upload request includes name, description, due date, and user assignments. Upload requests can be created as drafts or sent immediately based on the status field.
+        /// This operation creates a new upload request within a workspace. The upload request includes name, description, due date, and user assignments. Upload requests can be created as drafts or sent immediately based on the status field.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -51,7 +52,8 @@ namespace Docusign.IAM.SDK
         /// Gets upload requests within a workspace.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves a list of upload requests within a workspace. Each upload request includes details such as ID, name, description, status, owner information, associated documents, assignments, and various dates.
+        /// This operation retrieves a list of upload requests within a workspace. Each upload request includes details such as ID, name, description, status, owner information, associated documents, assignments, and various dates.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -72,7 +74,8 @@ namespace Docusign.IAM.SDK
         /// Gets details for a specific upload request.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves details about a specific upload request within a workspace. The response includes comprehensive information about the upload request including status, assigned users, associated documents, owner details, and various dates.
+        /// This operation retrieves details about a specific upload request within a workspace. The response includes comprehensive information about the upload request including status, assigned users, associated documents, owner details, and various dates.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -95,7 +98,8 @@ namespace Docusign.IAM.SDK
         /// Updates a specific upload request.
         /// </summary>
         /// <remarks>
-        /// This operation updates a specific upload request within a workspace. Only draft upload requests can be edited. The editable fields are name, description, due date, and status. Status changes are restricted - only transitions from draft to in_progress are allowed. Attempting to update a non-draft upload request will result in an INVALID_STATUS error. Attempting an invalid status change will result in an INVALID_STATUS_CHANGE error.
+        /// This operation updates a specific upload request within a workspace. Only draft upload requests can be edited. The editable fields are name, description, due date, and status. Status changes are restricted - only transitions from draft to in_progress are allowed. Attempting to update a non-draft upload request will result in an INVALID_STATUS error. Attempting an invalid status change will result in an INVALID_STATUS_CHANGE error.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -120,7 +124,8 @@ namespace Docusign.IAM.SDK
         /// Deletes a specific upload request.
         /// </summary>
         /// <remarks>
-        /// This operation deletes a specific upload request within a workspace. Upload requests cannot be deleted if they are complete or have associated documents.
+        /// This operation deletes a specific upload request within a workspace. Upload requests cannot be deleted if they are complete or have associated documents.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -143,7 +148,8 @@ namespace Docusign.IAM.SDK
         /// Add a document to an upload request via file upload.
         /// </summary>
         /// <remarks>
-        /// This operation adds a document to a specific upload request within a workspace via file upload. The file is passed in the request body as multipart/form-data. The file name is used as the document name.
+        /// This operation adds a document to a specific upload request within a workspace via file upload. The file is passed in the request body as multipart/form-data. The file name is used as the document name.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -168,7 +174,8 @@ namespace Docusign.IAM.SDK
         /// Complete an upload request.
         /// </summary>
         /// <remarks>
-        /// This operation completes a specific upload request within a workspace and is intended to be called by the user completing the upload request. Only upload requests that are in progress can be completed.
+        /// This operation completes a specific upload request within a workspace and is intended to be called by the user completing the upload request. Only upload requests that are in progress can be completed.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -205,7 +212,8 @@ namespace Docusign.IAM.SDK
         /// Creates a new upload request within a workspace.
         /// </summary>
         /// <remarks>
-        /// This operation creates a new upload request within a workspace. The upload request includes name, description, due date, and user assignments. Upload requests can be created as drafts or sent immediately based on the status field.
+        /// This operation creates a new upload request within a workspace. The upload request includes name, description, due date, and user assignments. Upload requests can be created as drafts or sent immediately based on the status field.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -241,6 +249,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "CreateWorkspaceUploadRequestBody", "json", false, false);
             if (serializedBody != null)
             {
@@ -249,7 +262,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createWorkspaceUploadRequest", null, SDKConfiguration.SecuritySource);
@@ -305,9 +318,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -399,7 +412,8 @@ namespace Docusign.IAM.SDK
         /// Gets upload requests within a workspace.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves a list of upload requests within a workspace. Each upload request includes details such as ID, name, description, status, owner information, associated documents, assignments, and various dates.
+        /// This operation retrieves a list of upload requests within a workspace. Each upload request includes details such as ID, name, description, status, owner information, associated documents, assignments, and various dates.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -431,9 +445,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkspaceUploadRequests", null, SDKConfiguration.SecuritySource);
@@ -489,9 +508,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -583,7 +602,8 @@ namespace Docusign.IAM.SDK
         /// Gets details for a specific upload request.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves details about a specific upload request within a workspace. The response includes comprehensive information about the upload request including status, assigned users, associated documents, owner details, and various dates.
+        /// This operation retrieves details about a specific upload request within a workspace. The response includes comprehensive information about the upload request including status, assigned users, associated documents, owner details, and various dates.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -619,9 +639,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkspaceUploadRequest", null, SDKConfiguration.SecuritySource);
@@ -677,9 +702,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -771,7 +796,8 @@ namespace Docusign.IAM.SDK
         /// Updates a specific upload request.
         /// </summary>
         /// <remarks>
-        /// This operation updates a specific upload request within a workspace. Only draft upload requests can be edited. The editable fields are name, description, due date, and status. Status changes are restricted - only transitions from draft to in_progress are allowed. Attempting to update a non-draft upload request will result in an INVALID_STATUS error. Attempting an invalid status change will result in an INVALID_STATUS_CHANGE error.
+        /// This operation updates a specific upload request within a workspace. Only draft upload requests can be edited. The editable fields are name, description, due date, and status. Status changes are restricted - only transitions from draft to in_progress are allowed. Attempting to update a non-draft upload request will result in an INVALID_STATUS error. Attempting an invalid status change will result in an INVALID_STATUS_CHANGE error.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -811,6 +837,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "UpdateWorkspaceUploadRequestBody", "json", false, false);
             if (serializedBody != null)
             {
@@ -819,7 +850,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "updateWorkspaceUploadRequest", null, SDKConfiguration.SecuritySource);
@@ -875,9 +906,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -969,7 +1000,8 @@ namespace Docusign.IAM.SDK
         /// Deletes a specific upload request.
         /// </summary>
         /// <remarks>
-        /// This operation deletes a specific upload request within a workspace. Upload requests cannot be deleted if they are complete or have associated documents.
+        /// This operation deletes a specific upload request within a workspace. Upload requests cannot be deleted if they are complete or have associated documents.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -1005,9 +1037,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "deleteWorkspaceUploadRequest", null, SDKConfiguration.SecuritySource);
@@ -1063,9 +1100,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1121,7 +1158,8 @@ namespace Docusign.IAM.SDK
         /// Add a document to an upload request via file upload.
         /// </summary>
         /// <remarks>
-        /// This operation adds a document to a specific upload request within a workspace via file upload. The file is passed in the request body as multipart/form-data. The file name is used as the document name.
+        /// This operation adds a document to a specific upload request within a workspace via file upload. The file is passed in the request body as multipart/form-data. The file name is used as the document name.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -1160,6 +1198,11 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             var serializedBody = RequestBodySerializer.Serialize(request, "AddWorkspaceUploadRequestDocumentRequestValue", "multipart", false, true);
             if (serializedBody != null)
             {
@@ -1168,7 +1211,7 @@ namespace Docusign.IAM.SDK
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "addWorkspaceUploadRequestDocument", null, SDKConfiguration.SecuritySource);
@@ -1224,9 +1267,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1318,7 +1361,8 @@ namespace Docusign.IAM.SDK
         /// Complete an upload request.
         /// </summary>
         /// <remarks>
-        /// This operation completes a specific upload request within a workspace and is intended to be called by the user completing the upload request. Only upload requests that are in progress can be completed.
+        /// This operation completes a specific upload request within a workspace and is intended to be called by the user completing the upload request. Only upload requests that are in progress can be completed.<br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The ID of the account.</param>
         /// <param name="workspaceId">The ID of the workspace.</param>
@@ -1354,9 +1398,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "completeWorkspaceUploadRequest", null, SDKConfiguration.SecuritySource);
@@ -1412,9 +1461,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;

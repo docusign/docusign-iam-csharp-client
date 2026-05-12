@@ -26,9 +26,9 @@ namespace Docusign.IAM.SDK
     {
         public IAuth Auth { get; }
 
-        public IMaestro Maestro { get; }
+        public IWorkflowBuilder WorkflowBuilder { get; }
 
-        public INavigator Navigator { get; }
+        public IAgreementManager AgreementManager { get; }
 
         public IConnectedFields ConnectedFields { get; }
 
@@ -49,13 +49,13 @@ namespace Docusign.IAM.SDK
         /// </summary>
         public IAuth Auth { get; private set; }
         /// <summary>
-        /// The Maestro sub-SDK.
+        /// The WorkflowBuilder sub-SDK.
         /// </summary>
-        public IMaestro Maestro { get; private set; }
+        public IWorkflowBuilder WorkflowBuilder { get; private set; }
         /// <summary>
-        /// The Navigator sub-SDK.
+        /// The AgreementManager sub-SDK.
         /// </summary>
-        public INavigator Navigator { get; private set; }
+        public IAgreementManager AgreementManager { get; private set; }
         /// <summary>
         /// The ConnectedFields sub-SDK.
         /// </summary>
@@ -76,9 +76,9 @@ namespace Docusign.IAM.SDK
 
             Auth = new Auth(SDKConfiguration);
 
-            Maestro = new Maestro(SDKConfiguration);
+            WorkflowBuilder = new WorkflowBuilder(SDKConfiguration);
 
-            Navigator = new Navigator(SDKConfiguration);
+            AgreementManager = new AgreementManager(SDKConfiguration);
 
             ConnectedFields = new ConnectedFields(SDKConfiguration);
 
@@ -136,9 +136,9 @@ namespace Docusign.IAM.SDK
 
             Auth = new Auth(SDKConfiguration);
 
-            Maestro = new Maestro(SDKConfiguration);
+            WorkflowBuilder = new WorkflowBuilder(SDKConfiguration);
 
-            Navigator = new Navigator(SDKConfiguration);
+            AgreementManager = new AgreementManager(SDKConfiguration);
 
             ConnectedFields = new ConnectedFields(SDKConfiguration);
 

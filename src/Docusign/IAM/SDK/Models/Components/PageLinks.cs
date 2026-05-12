@@ -30,14 +30,14 @@ namespace Docusign.IAM.SDK.Models.Components
         /// A URL that references a specific page in the pagination process. This is typically used for navigation<br/>
         /// between paginated results.
         /// </summary>
-        [JsonProperty("next")]
-        public PageLink? Next { get; set; } = null;
+        [JsonProperty("self")]
+        public PageLink? Self { get; set; } = null;
 
         /// <summary>
         /// A URL that references a specific page in the pagination process. This is typically used for navigation<br/>
         /// between paginated results.
         /// </summary>
-        [JsonProperty("self")]
-        public PageLink? Self { get; set; } = null;
+        [JsonProperty("next")]
+        public PageLink? Next { get; set; } = null;
     }
 }
