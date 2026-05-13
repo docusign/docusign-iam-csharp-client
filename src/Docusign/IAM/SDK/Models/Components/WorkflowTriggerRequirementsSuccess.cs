@@ -46,8 +46,14 @@ namespace Docusign.IAM.SDK.Models.Components
         [JsonProperty("trigger_input_schema")]
         public List<TriggerInputSchema>? TriggerInputSchema { get; set; }
 
+        /// <summary>
+        /// Metadata related to the workflow definition, including details about when the workflow was<br/>
+        /// created, who created it, when it was last modified, and by whom. This information is useful<br/>
+        /// for tracking changes to the workflow over time and identifying the user or system responsible<br/>
+        /// for creating or modifying the workflow.
+        /// </summary>
         [JsonProperty("metadata")]
-        public ResourceMetadata? Metadata { get; set; }
+        public MetadataResponse? Metadata { get; set; }
 
         /// <summary>
         /// The maximum number of items that can be returned in a single page.
@@ -62,17 +68,17 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? RequestId { get; set; }
 
         /// <summary>
+        /// The timestamp indicating when the response was generated.
+        /// </summary>
+        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? ResponseTimestamp { get; set; }
+
+        /// <summary>
         /// The duration of time, in milliseconds, that the server took to process and respond<br/>
         /// to the request. This is measured from the time the server received the request<br/>
         /// until the time the response was sent.
         /// </summary>
         [JsonProperty("response_duration_ms", NullValueHandling = NullValueHandling.Include)]
         public int? ResponseDurationMs { get; set; }
-
-        /// <summary>
-        /// The timestamp indicating when the response was generated.
-        /// </summary>
-        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
-        public DateTime? ResponseTimestamp { get; set; }
     }
 }

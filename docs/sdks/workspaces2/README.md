@@ -20,7 +20,7 @@ Pagination is supported by passing `start_position` and `count` in the request. 
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaces" method="get" path="/v1/accounts/{accountId}/workspaces" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaces" method="get" path="/v1/accounts/{accountId}/workspaces" example="GetWorkspacesResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -62,7 +62,7 @@ Once created, the `workspace_id` is utilized to associate tasks such as envelope
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="createWorkspace" method="post" path="/v1/accounts/{accountId}/workspaces" -->
+<!-- UsageSnippet language="csharp" operationID="createWorkspace" method="post" path="/v1/accounts/{accountId}/workspaces" example="CreateWorkspaceResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -106,7 +106,7 @@ This operation updates details about a specific workspace. It returns the worksp
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="updateWorkspace" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}" -->
+<!-- UsageSnippet language="csharp" operationID="updateWorkspace" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}" example="UpdateWorkspaceResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -152,7 +152,7 @@ This operation retrieves details about a specific workspace. It returns the work
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspace" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspace" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}" example="GetWorkspaceResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -198,7 +198,7 @@ Pagination is supported by passing `start_position` and `count` in the request. 
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaceAssignableRoles" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/assignable-roles" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaceAssignableRoles" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/assignable-roles" example="GetWorkspaceAssignableRolesResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -250,7 +250,7 @@ When `document_ids` is empty or excluded, the envelope is created without any do
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="createWorkspaceEnvelope" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes" -->
+<!-- UsageSnippet language="csharp" operationID="createWorkspaceEnvelope" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes" example="CreateWorkspaceEnvelopeResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -298,7 +298,7 @@ Based on the permissions of the caller, additional envelope details may be retri
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaceEnvelopes" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaceEnvelopes" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes" example="GetWorkspaceEnvelopesResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

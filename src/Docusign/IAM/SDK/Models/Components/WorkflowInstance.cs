@@ -138,6 +138,6 @@ namespace Docusign.IAM.SDK.Models.Components
         /// Additional metadata related to this workflow instance.
         /// </summary>
         [JsonProperty("metadata")]
-        public Metadata? Metadata { get; set; }
+        public WorkflowInstanceMetadata? Metadata { get; set; }
     }
 }

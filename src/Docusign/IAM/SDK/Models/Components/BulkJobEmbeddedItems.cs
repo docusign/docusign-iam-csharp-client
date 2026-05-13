@@ -15,32 +15,17 @@ namespace Docusign.IAM.SDK.Models.Components
 
     public class BulkJobEmbeddedItems
     {
-        [JsonProperty("_actions")]
-        public BulkJobItemActions? Actions { get; set; }
+        /// <summary>
+        /// Id of the document.
+        /// </summary>
+        [JsonProperty("id")]
+        public string? Id { get; set; }
 
         /// <summary>
         /// Agreement ID associated with this document, if created.
         /// </summary>
         [JsonProperty("agreement_id")]
         public string? AgreementId { get; set; }
-
-        /// <summary>
-        /// Error message if document processing failed.
-        /// </summary>
-        [JsonProperty("error")]
-        public string? Error { get; set; }
-
-        /// <summary>
-        /// Error code if document processing failed.
-        /// </summary>
-        [JsonProperty("error_code")]
-        public int? ErrorCode { get; set; }
-
-        /// <summary>
-        /// Id of the document.
-        /// </summary>
-        [JsonProperty("id")]
-        public string? Id { get; set; }
 
         /// <summary>
         /// Sequential order of the document.
@@ -53,5 +38,32 @@ namespace Docusign.IAM.SDK.Models.Components
         /// </summary>
         [JsonProperty("status")]
         public DocStatus? Status { get; set; }
+
+        /// <summary>
+        /// The name of the uploaded file.
+        /// </summary>
+        [JsonProperty("file_name")]
+        public string? FileName { get; set; }
+
+        /// <summary>
+        /// Error code if document processing failed.
+        /// </summary>
+        [JsonProperty("error_code")]
+        public int? ErrorCode { get; set; }
+
+        /// <summary>
+        /// Error message if document processing failed.
+        /// </summary>
+        [JsonProperty("error")]
+        public string? Error { get; set; }
+
+        [JsonProperty("_actions")]
+        public BulkJobItemActions? Actions { get; set; }
+
+        /// <summary>
+        /// Hypermedia links related to this document.
+        /// </summary>
+        [JsonProperty("_links")]
+        public BulkJobEmbeddedItemsLinks? Links { get; set; }
     }
 }

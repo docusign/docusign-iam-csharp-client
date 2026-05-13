@@ -235,15 +235,14 @@ catch (System.Net.Http.HttpRequestException ex)
 **Primary exception:**
 * [`IamClientError`](./src/Docusign/IAM/SDK/Models/Errors/IamClientError.cs): The base class for HTTP error responses.
 
-**Less common exceptions (6)**
+**Less common exceptions (5)**
 
 * [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
 
 * Inheriting from [`IamClientError`](./src/Docusign/IAM/SDK/Models/Errors/IamClientError.cs):
-  * [`ErrorDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrorDetails.cs): The error response object for the Workspaces API. Applicable to 26 of 46 methods.*
-  * [`Error`](./src/Docusign/IAM/SDK/Models/Errors/Error.cs): Bad Request - The request could not be understood or was missing required parameters. Applicable to 10 of 46 methods.*
-  * [`OAuthErrorResponse`](./src/Docusign/IAM/SDK/Models/Errors/OAuthErrorResponse.cs): Status code `400`. Applicable to 5 of 46 methods.*
-  * [`ErrDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrDetails.cs): Applicable to 3 of 46 methods.*
+  * [`ErrorDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrorDetails.cs): The error response object for the Workspaces API. Applicable to 26 of 50 methods.*
+  * [`ErrDetails`](./src/Docusign/IAM/SDK/Models/Errors/ErrDetails.cs): Error response conforming to RFC 9457 (Problem Details for HTTP APIs). See: https://www.rfc-editor.org/rfc/rfc9457.html. Applicable to 17 of 50 methods.*
+  * [`OAuthErrorResponse`](./src/Docusign/IAM/SDK/Models/Errors/OAuthErrorResponse.cs): Status code `400`. Applicable to 5 of 50 methods.*
   * [`ResponseValidationError`](./src/Docusign/IAM/SDK/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
 
 \* Refer to the [relevant documentation](#available-resources-and-operations) to determine whether an exception applies to a specific operation.
@@ -270,18 +269,12 @@ using Docusign.IAM.SDK.Models.Requests;
 
 var sdk = IamClient.Builder()
     .WithServer(SDKConfig.Server.Demo)
+    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-ConfidentialAuthCodeGrantRequestBody req = new ConfidentialAuthCodeGrantRequestBody() {
-    Code = "eyJ0eXAi.....QFsje43QVZ_gw",
-};
-
-var res = await sdk.Auth.GetTokenFromConfidentialAuthCodeAsync(
-    security: new GetTokenFromConfidentialAuthCodeSecurity() {
-        ClientId = "2da1cb14-xxxx-xxxx-xxxx-5b7b40829e79",
-        SecretKey = "MTIzNDU2Nzxxxxxxxxxxxxxxxxxxxxx0NTY3ODkwMTI",
-    },
-    request: req
+var res = await sdk.WorkflowBuilder.Workflows.GetWorkflowsListAsync(
+    accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
+    status: Status.Active
 );
 
 // handle response
@@ -297,18 +290,12 @@ using Docusign.IAM.SDK.Models.Requests;
 
 var sdk = IamClient.Builder()
     .WithServerUrl("https://api-d.docusign.com")
+    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-ConfidentialAuthCodeGrantRequestBody req = new ConfidentialAuthCodeGrantRequestBody() {
-    Code = "eyJ0eXAi.....QFsje43QVZ_gw",
-};
-
-var res = await sdk.Auth.GetTokenFromConfidentialAuthCodeAsync(
-    security: new GetTokenFromConfidentialAuthCodeSecurity() {
-        ClientId = "2da1cb14-xxxx-xxxx-xxxx-5b7b40829e79",
-        SecretKey = "MTIzNDU2Nzxxxxxxxxxxxxxxxxxxxxx0NTY3ODkwMTI",
-    },
-    request: req
+var res = await sdk.WorkflowBuilder.Workflows.GetWorkflowsListAsync(
+    accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
+    status: Status.Active
 );
 
 // handle response

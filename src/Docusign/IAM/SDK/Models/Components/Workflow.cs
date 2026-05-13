@@ -15,6 +15,9 @@ namespace Docusign.IAM.SDK.Models.Components
 
     public class Workflow
     {
+        /// <summary>
+        /// A unique ID for this workflow.
+        /// </summary>
         [JsonProperty("id")]
         public string? Id { get; set; } = "00000000-0000-0000-0000-000000000000";
 
@@ -24,6 +27,9 @@ namespace Docusign.IAM.SDK.Models.Components
         [JsonProperty("name")]
         public string? Name { get; set; }
 
+        /// <summary>
+        /// A unique ID for the account associated with the workflow.
+        /// </summary>
         [JsonProperty("account_id")]
         public string? AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
 

@@ -14,14 +14,14 @@ namespace Docusign.IAM.SDK
     using Docusign.IAM.SDK.Utils;
     using System;
 
-    public interface INavigator
+    public interface IWorkflowBuilder
     {
-        public IAgreements Agreements { get; }
+        public IWorkflows Workflows { get; }
 
-        public IBulkJob BulkJob { get; }
+        public IWorkflowInstanceManagement WorkflowInstanceManagement { get; }
     }
 
-    public class Navigator: INavigator
+    public class WorkflowBuilder: IWorkflowBuilder
     {
         /// <summary>
         /// SDK Configuration.
@@ -30,22 +30,22 @@ namespace Docusign.IAM.SDK
         public SDKConfig SDKConfiguration { get; private set; }
 
         /// <summary>
-        /// Agreements SubSDK.
-        /// <see cref="IAgreements"/>
+        /// Workflows SubSDK.
+        /// <see cref="IWorkflows"/>
         /// </summary>
-        public IAgreements Agreements { get; private set; }
+        public IWorkflows Workflows { get; private set; }
 
         /// <summary>
-        /// BulkJob SubSDK.
-        /// <see cref="IBulkJob"/>
+        /// WorkflowInstanceManagement SubSDK.
+        /// <see cref="IWorkflowInstanceManagement"/>
         /// </summary>
-        public IBulkJob BulkJob { get; private set; }
+        public IWorkflowInstanceManagement WorkflowInstanceManagement { get; private set; }
 
-        public Navigator(SDKConfig config)
+        public WorkflowBuilder(SDKConfig config)
         {
             SDKConfiguration = config;
-            Agreements = new Agreements(SDKConfiguration);
-            BulkJob = new BulkJob(SDKConfiguration);
+            Workflows = new Workflows(SDKConfiguration);
+            WorkflowInstanceManagement = new WorkflowInstanceManagement(SDKConfiguration);
         }
     }
 }

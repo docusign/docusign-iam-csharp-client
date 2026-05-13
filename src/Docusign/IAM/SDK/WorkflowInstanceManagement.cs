@@ -28,7 +28,7 @@ namespace Docusign.IAM.SDK
         /// Retrieve All Workflow Instances.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves a list of all available Maestro workflow instances. It returns basic information<br/>
+        /// This operation retrieves a list of all available Workflow Builder workflow instances. It returns basic information<br/>
         /// about each workflow instance, including its unique identifier (`id`), name, status, timestamps, and<br/>
         /// additional metadata.<br/>
         /// <br/>
@@ -43,11 +43,13 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Comprehensive Instance Overview**: Provides a full list of workflow instances, giving visibility<br/>
-        ///   into all ongoing and completed workflows within the Maestro platform<br/>
+        ///   into all ongoing and completed workflows within the Workflow Builder platform<br/>
         /// - **Metadata for Tracking**: Includes helpful metadata like creation time, last modification date,<br/>
         ///   and user details to support audit trails<br/>
         /// - **Scalable and Future-Proof**: Designed to handle growing numbers of workflow instances as the<br/>
-        ///   platform scales.
+        ///   platform scales<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The unique identifier of the account.</param>
         /// <param name="workflowId">Description not available.</param>
@@ -67,7 +69,7 @@ namespace Docusign.IAM.SDK
         /// Retrieve a Workflow Instance.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves a single Maestro workflow instance by its unique identifier (`id`).<br/>
+        /// This operation retrieves a single Workflow Builder workflow instance by its unique identifier (`id`).<br/>
         /// It returns the primary details of the workflow instance, including its name, status,<br/>
         /// starting information, and other metadata.<br/>
         /// <br/>
@@ -84,7 +86,9 @@ namespace Docusign.IAM.SDK
         /// - **Single Workflow Instance**: Provides direct access to a specific workflow instance by `id`<br/>
         /// - **Detailed Status Information**: Includes the workflow's start and end times, status, and other lifecycle timestamps<br/>
         /// - **Metadata for Tracking**: Useful metadata like who initiated the workflow (`started_by`) and versioning details<br/>
-        /// - **Future-Proof**: Designed to be extensible if additional fields or nested information are required over time.
+        /// - **Future-Proof**: Designed to be extensible if additional fields or nested information are required over time<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="instanceId">Unique identifier for the workflow instance.</param>
         /// <param name="accountId">The unique identifier of the account.</param>
@@ -94,7 +98,7 @@ namespace Docusign.IAM.SDK
         /// <exception cref="ArgumentNullException">One of <paramref name="instanceId"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<WorkflowInstance> GetWorkflowInstanceAsync(
             string instanceId,
@@ -107,7 +111,7 @@ namespace Docusign.IAM.SDK
         /// Cancel a Running Workflow Instance.
         /// </summary>
         /// <remarks>
-        /// This operation cancels a running Maestro workflow instance by its unique identifier (`instanceId`).<br/>
+        /// This operation cancels a running Workflow Builder workflow instance by its unique identifier (`instanceId`).<br/>
         /// Once canceled, the workflow instance will no longer continue executing any remaining steps.<br/>
         /// <br/>
         /// ### Use Cases:<br/>
@@ -116,7 +120,9 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Immediate Termination**: Ensures the workflow instance no longer processes subsequent steps<br/>
-        /// - **Clear Feedback**: Returns a confirmation message including both the instance and workflow identifiers.
+        /// - **Clear Feedback**: Returns a confirmation message including both the instance and workflow identifiers<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="instanceId">Unique identifier for the workflow instance.</param>
         /// <param name="accountId">The unique identifier of the account.</param>
@@ -126,7 +132,7 @@ namespace Docusign.IAM.SDK
         /// <exception cref="ArgumentNullException">One of <paramref name="instanceId"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404, 409 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404, 409 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CancelWorkflowInstanceResponse> CancelWorkflowInstanceAsync(
             string instanceId,
@@ -153,7 +159,7 @@ namespace Docusign.IAM.SDK
         /// Retrieve All Workflow Instances.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves a list of all available Maestro workflow instances. It returns basic information<br/>
+        /// This operation retrieves a list of all available Workflow Builder workflow instances. It returns basic information<br/>
         /// about each workflow instance, including its unique identifier (`id`), name, status, timestamps, and<br/>
         /// additional metadata.<br/>
         /// <br/>
@@ -168,11 +174,13 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Comprehensive Instance Overview**: Provides a full list of workflow instances, giving visibility<br/>
-        ///   into all ongoing and completed workflows within the Maestro platform<br/>
+        ///   into all ongoing and completed workflows within the Workflow Builder platform<br/>
         /// - **Metadata for Tracking**: Includes helpful metadata like creation time, last modification date,<br/>
         ///   and user details to support audit trails<br/>
         /// - **Scalable and Future-Proof**: Designed to handle growing numbers of workflow instances as the<br/>
-        ///   platform scales.
+        ///   platform scales<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="accountId">The unique identifier of the account.</param>
         /// <param name="workflowId">Description not available.</param>
@@ -203,9 +211,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkflowInstancesList", null, SDKConfiguration.SecuritySource);
@@ -261,9 +274,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -315,7 +328,7 @@ namespace Docusign.IAM.SDK
         /// Retrieve a Workflow Instance.
         /// </summary>
         /// <remarks>
-        /// This operation retrieves a single Maestro workflow instance by its unique identifier (`id`).<br/>
+        /// This operation retrieves a single Workflow Builder workflow instance by its unique identifier (`id`).<br/>
         /// It returns the primary details of the workflow instance, including its name, status,<br/>
         /// starting information, and other metadata.<br/>
         /// <br/>
@@ -332,7 +345,9 @@ namespace Docusign.IAM.SDK
         /// - **Single Workflow Instance**: Provides direct access to a specific workflow instance by `id`<br/>
         /// - **Detailed Status Information**: Includes the workflow's start and end times, status, and other lifecycle timestamps<br/>
         /// - **Metadata for Tracking**: Useful metadata like who initiated the workflow (`started_by`) and versioning details<br/>
-        /// - **Future-Proof**: Designed to be extensible if additional fields or nested information are required over time.
+        /// - **Future-Proof**: Designed to be extensible if additional fields or nested information are required over time<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="instanceId">Unique identifier for the workflow instance.</param>
         /// <param name="accountId">The unique identifier of the account.</param>
@@ -342,7 +357,7 @@ namespace Docusign.IAM.SDK
         /// <exception cref="ArgumentNullException">One of <paramref name="instanceId"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<WorkflowInstance> GetWorkflowInstanceAsync(
             string instanceId,
@@ -368,9 +383,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "getWorkflowInstance", null, SDKConfiguration.SecuritySource);
@@ -426,9 +446,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -463,42 +483,42 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ErrorPayload payload;
+                    ErrDetailsPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ErrorPayload.", httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
                     }
 
-                    throw new Error(payload, httpResponse, httpResponseBody);
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 500)
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ErrorPayload payload;
+                    ErrDetailsPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ErrorPayload.", httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
                     }
 
-                    throw new Error(payload, httpResponse, httpResponseBody);
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
@@ -520,7 +540,7 @@ namespace Docusign.IAM.SDK
         /// Cancel a Running Workflow Instance.
         /// </summary>
         /// <remarks>
-        /// This operation cancels a running Maestro workflow instance by its unique identifier (`instanceId`).<br/>
+        /// This operation cancels a running Workflow Builder workflow instance by its unique identifier (`instanceId`).<br/>
         /// Once canceled, the workflow instance will no longer continue executing any remaining steps.<br/>
         /// <br/>
         /// ### Use Cases:<br/>
@@ -529,7 +549,9 @@ namespace Docusign.IAM.SDK
         /// <br/>
         /// ### Key Features:<br/>
         /// - **Immediate Termination**: Ensures the workflow instance no longer processes subsequent steps<br/>
-        /// - **Clear Feedback**: Returns a confirmation message including both the instance and workflow identifiers.
+        /// - **Clear Feedback**: Returns a confirmation message including both the instance and workflow identifiers<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="Docusign.IAM.SDK.Models.Components.Security.AccessToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="instanceId">Unique identifier for the workflow instance.</param>
         /// <param name="accountId">The unique identifier of the account.</param>
@@ -539,7 +561,7 @@ namespace Docusign.IAM.SDK
         /// <exception cref="ArgumentNullException">One of <paramref name="instanceId"/>, <paramref name="accountId"/> or <paramref name="workflowId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="Error">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 403, 404, 409 or 500 response.</exception>
+        /// <exception cref="ErrDetails">Bad Request - The request could not be understood or was missing required parameters. Thrown when the API returns a 400, 401, 403, 404, 409 or 500 response.</exception>
         /// <exception cref="APIException">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CancelWorkflowInstanceResponse> CancelWorkflowInstanceAsync(
             string instanceId,
@@ -565,9 +587,14 @@ namespace Docusign.IAM.SDK
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "AccessToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "cancelWorkflowInstance", null, SDKConfiguration.SecuritySource);
@@ -623,9 +650,9 @@ namespace Docusign.IAM.SDK
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -660,42 +687,42 @@ namespace Docusign.IAM.SDK
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 403, 404, 409}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 403, 404, 409}.Contains(responseStatusCode))
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ErrorPayload payload;
+                    ErrDetailsPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ErrorPayload.", httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
                     }
 
-                    throw new Error(payload, httpResponse, httpResponseBody);
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 500)
             {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                if(Utilities.IsContentTypeMatch("application/problem+json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    ErrorPayload payload;
+                    ErrDetailsPayload payload;
                     try
                     {
-                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrorPayload>(httpResponseBody, NullValueHandling.Ignore);
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ErrDetailsPayload>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into ErrorPayload.", httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into ErrDetailsPayload.", httpResponse, httpResponseBody, ex);
                     }
 
-                    throw new Error(payload, httpResponse, httpResponseBody);
+                    throw new ErrDetails(payload, httpResponse, httpResponseBody);
                 }
 
                 throw new Models.Errors.APIException("Unknown content type received", httpResponse, await httpResponse.Content.ReadAsStringAsync());

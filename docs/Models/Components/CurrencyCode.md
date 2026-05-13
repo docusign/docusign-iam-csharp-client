@@ -4,6 +4,14 @@
 https://www.currency-iso.org/en/home/tables/table-a1.html'
 
 
+## Example Usage
+
+```csharp
+using Docusign.IAM.SDK.Models.Components;
+
+var value = CurrencyCode.Aed;
+```
+
 
 ## Values
 

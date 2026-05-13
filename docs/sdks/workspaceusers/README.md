@@ -18,7 +18,7 @@ Pagination is supported by passing `start_position` and `count` in the request. 
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaceUsers" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/users" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaceUsers" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/users" example="GetWorkspaceUsersResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -64,7 +64,7 @@ Available role IDs can be retrieved via the Assignable Roles operation on a work
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="addWorkspaceUser" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/users" -->
+<!-- UsageSnippet language="csharp" operationID="addWorkspaceUser" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/users" example="CreateWorkspaceUserResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -107,7 +107,7 @@ This operation updates the specified user's role in the workspace. Users within 
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="updateWorkspaceUser" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}" -->
+<!-- UsageSnippet language="csharp" operationID="updateWorkspaceUser" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}" example="UpdateWorkspaceUserResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

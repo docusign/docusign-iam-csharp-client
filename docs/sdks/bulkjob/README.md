@@ -1,4 +1,4 @@
-# Navigator.BulkJob
+# AgreementManager.BulkJob
 
 ## Overview
 
@@ -10,9 +10,7 @@
 
 ## CreateBulkUploadJob
 
-Create a new job, give pre-signed URLs back, the client will upload to Azure Blob Store directly.
-
-[Required scopes](/docs/navigator-api/auth/): `document_uploader_write`, `document_uploader_read`
+Create a new job, give presigned URLs back, the client will upload to Azure Blob Store directly.
 
 **Important Upload Workflow**:
 1. Call this endpoint to create a job and receive upload URLs
@@ -46,19 +44,68 @@ Use the pre-signed URL from step 2 to upload your document directly to Azure Blo
 PUT [pre-signed URL from _actions.upload_document]
 
 Headers:
-- x-ms-blob-type: BlockBlob
-- x-ms-meta-filename: YourDocumentName.pdf
-- Content-Type: application/pdf
+- x-ms-blob-type: BlockBlob (Required)
+- x-ms-meta-filename: YourDocumentName.pdf (Recommended)
+- Content-Type: application/pdf (Required)
+- x-ms-meta-metadata: <stringified JSON metadata> (Optional)
 
 Body: [Your document binary data]
 ```
 
 **Important Notes**:
 - The `upload_document` URLs are pre-signed Azure Blob Storage URLs with time-limited validity (8 hours)
+- No Auth header is needed
 - The `x-ms-meta-filename` header should contain your original document filename
 - The `x-ms-blob-type` must be set to `BlockBlob`
 - Setting the `Content-Type` header is recommended to match your document type
 - If `Content-Type` is not specified, Azure defaults to `application/octet-stream`
+- The `x-ms-meta-metadata` header is optional and allows you to attach metadata to the newly created agreement at upload time. See **Applying Metadata to Agreements** below for details
+
+**Applying Metadata to Agreements**:
+
+You may include metadata alongside the document bytes during upload. This metadata will be directly applied to the 
+newly created agreement. To do this, include the `x-ms-meta-metadata` header on the PUT operation with a stringified 
+JSON value.
+
+The JSON schema for this header follows the same structure as the standard Agreement PATCH request body.
+
+**Example metadata JSON**:
+```json
+{
+  "provisions": {
+    "jurisdiction": "California",
+    "payment_terms_due_date": "OTHER"
+  },
+  "custom_provisions": {
+    "c_ClientId": "value"
+  },
+  "linked_data": [
+    {
+      "application_name": "Salesforce",
+      "object_name": "Account",
+      "record_id": "579386BF-C8EA-4673-AE0E-E2F922B09DC5"
+    },
+    {
+      "application_name": "Dynamics",
+      "object_name": "Account",
+      "record_id": "514CEAFB-1AC7-43FF-9E88-24CB15150963"
+    }
+  ]
+}
+```
+
+**Stringified header value**:
+
+The JSON must be stringified before being set as the header value. For example, the above JSON would become:
+```
+x-ms-meta-metadata: "{\"provisions\":{\"jurisdiction\":\"California\",\"payment_terms_due_date\":\"OTHER\"},\"custom_provisions\":{\"c_ClientId\":\"value\"},\"linked_data\":[{\"application_name\":\"Salesforce\",\"object_name\":\"Account\",\"record_id\":\"579386BF-C8EA-4673-AE0E-E2F922B09DC5\"},{\"application_name\":\"Dynamics\",\"object_name\":\"Account\",\"record_id\":\"514CEAFB-1AC7-43FF-9E88-24CB15150963\"}]}"
+```
+
+**Metadata Notes**:
+- The `x-ms-meta-metadata` header is entirely optional. If omitted, the agreement is created with AI-extracted values only
+- The JSON must be stringified (serialized to a single string) before being placed in the header value
+- The metadata payload follows the same schema as the Agreement PATCH endpoint request body
+- Values provided via metadata will be applied to the agreement after creation, overriding any AI-extracted values for the same fields
 
 **Firewall & Network Configuration**:
 
@@ -121,12 +168,13 @@ The table below shows common file formats and their recommended Content-Type hea
 
 **Example Upload Requests**:
 
-PDF Document:
+PDF Document (with optional metadata):
 ```
 PUT https://storage.blob.core.windows.net/container/doc-id?signature=...
 Content-Type: application/pdf
 x-ms-blob-type: BlockBlob
 x-ms-meta-filename: contract.pdf
+x-ms-meta-metadata: "{\"provisions\":{\"jurisdiction\":\"California\"},\"custom_provisions\":{\"c_ClientId\":\"value\"}}"
 
 [Binary PDF data]
 ```
@@ -154,7 +202,7 @@ x-ms-meta-filename: signed-page.jpg
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="createBulkUploadJob" method="post" path="/v1/accounts/{accountId}/upload/jobs" -->
+<!-- UsageSnippet language="csharp" operationID="createBulkUploadJob" method="post" path="/v1/accounts/{accountId}/upload/jobs" example="BulkJobCreated" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -163,11 +211,11 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Navigator.BulkJob.CreateBulkUploadJobAsync(
+var res = await sdk.AgreementManager.BulkJob.CreateBulkUploadJobAsync(
     accountId: "00000000-0000-0000-0000-000000000000",
     createBulkJob: new CreateBulkJob() {
-        ExpectedNumberOfDocs = 2,
         JobName = "Q4 2025 Contracts",
+        ExpectedNumberOfDocs = 2,
         Language = "en-US",
     }
 );
@@ -190,19 +238,17 @@ var res = await sdk.Navigator.BulkJob.CreateBulkUploadJobAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 429                          | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 429                          | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## GetBulkJobStatus
 
 Get the current status and details of a bulk job.
 
-[Required scopes](/docs/navigator-api/auth/): `document_uploader_read`
-
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getBulkJobStatus" method="get" path="/v1/accounts/{accountId}/upload/jobs/{jobId}" -->
+<!-- UsageSnippet language="csharp" operationID="getBulkJobStatus" method="get" path="/v1/accounts/{accountId}/upload/jobs/{jobId}" example="BulkJobStatus" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -211,7 +257,7 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Navigator.BulkJob.GetBulkJobStatusAsync(
+var res = await sdk.AgreementManager.BulkJob.GetBulkJobStatusAsync(
     accountId: "00000000-0000-0000-0000-000000000000",
     jobId: "00000000-0000-0000-0000-000000000000"
 );
@@ -234,8 +280,8 @@ var res = await sdk.Navigator.BulkJob.GetBulkJobStatusAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 401, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 401, 403, 404                               | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## UploadCompleteBulkJob
@@ -244,8 +290,6 @@ Mark the upload of documents as complete for a bulk job.
 End user won't upload more docs for this job.
 
 **Important**: Only call this endpoint after successfully uploading all documents to their respective pre-signed URLs obtained from the create job response.
-
-[Required scopes](/docs/navigator-api/auth/): `document_uploader_write`, `document_uploader_read`
 
 
 ### Example Usage
@@ -259,7 +303,7 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Navigator.BulkJob.UploadCompleteBulkJobAsync(
+var res = await sdk.AgreementManager.BulkJob.UploadCompleteBulkJobAsync(
     accountId: "00000000-0000-0000-0000-000000000000",
     jobId: "00000000-0000-0000-0000-000000000000"
 );
@@ -282,6 +326,6 @@ var res = await sdk.Navigator.BulkJob.UploadCompleteBulkJobAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404                          | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404                          | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |

@@ -18,7 +18,7 @@ This operation creates a new upload request within a workspace. The upload reque
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="createWorkspaceUploadRequest" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests" -->
+<!-- UsageSnippet language="csharp" operationID="createWorkspaceUploadRequest" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests" example="GetWorkspaceUploadRequestResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -35,7 +35,7 @@ var res = await sdk.Workspaces.WorkspaceUploadRequest.CreateWorkspaceUploadReque
     createWorkspaceUploadRequestBody: new CreateWorkspaceUploadRequestBody() {
         Name = "<value>",
         Description = "what than unique limply quaintly tattered grown",
-        DueDate = System.DateTime.Parse("2024-04-25T08:01:44.605Z"),
+        DueDate = System.DateTime.Parse("2024-04-25T08:01:44.605Z").ToUniversalTime(),
         Assignments = new List<CreateWorkspaceUploadRequestAssignment>() {
             new CreateWorkspaceUploadRequestAssignment() {
                 UploadRequestResponsibilityTypeId = WorkspaceUploadRequestResponsibilityType.Assignee,
@@ -74,7 +74,7 @@ This operation retrieves a list of upload requests within a workspace. Each uplo
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaceUploadRequests" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaceUploadRequests" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests" example="GetWorkspaceUploadRequestsResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -116,7 +116,7 @@ This operation retrieves details about a specific upload request within a worksp
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaceUploadRequest" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaceUploadRequest" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}" example="GetWorkspaceUploadRequestResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -160,7 +160,7 @@ This operation updates a specific upload request within a workspace. Only draft 
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="updateWorkspaceUploadRequest" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}" -->
+<!-- UsageSnippet language="csharp" operationID="updateWorkspaceUploadRequest" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}" example="GetWorkspaceUploadRequestResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -178,7 +178,7 @@ var res = await sdk.Workspaces.WorkspaceUploadRequest.UpdateWorkspaceUploadReque
         Name = "<value>",
         Description = "at providence phew furthermore save digitize than how circa never",
         Status = WorkspaceUploadRequestStatus.Overdue,
-        DueDate = System.DateTime.Parse("<value>"),
+        DueDate = System.DateTime.Parse("<value>").ToUniversalTime(),
     }
 );
 
@@ -252,7 +252,7 @@ This operation adds a document to a specific upload request within a workspace v
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="addWorkspaceUploadRequestDocument" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/documents" -->
+<!-- UsageSnippet language="csharp" operationID="addWorkspaceUploadRequestDocument" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/documents" example="AddWorkspaceUploadRequestDocumentResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

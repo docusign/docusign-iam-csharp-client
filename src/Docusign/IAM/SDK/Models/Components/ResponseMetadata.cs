@@ -31,17 +31,17 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? RequestId { get; set; }
 
         /// <summary>
+        /// The timestamp indicating when the response was generated.
+        /// </summary>
+        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? ResponseTimestamp { get; set; }
+
+        /// <summary>
         /// The duration of time, in milliseconds, that the server took to process and respond<br/>
         /// to the request. This is measured from the time the server received the request<br/>
         /// until the time the response was sent.
         /// </summary>
         [JsonProperty("response_duration_ms", NullValueHandling = NullValueHandling.Include)]
         public int? ResponseDurationMs { get; set; }
-
-        /// <summary>
-        /// The timestamp indicating when the response was generated.
-        /// </summary>
-        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
-        public DateTime? ResponseTimestamp { get; set; }
     }
 }

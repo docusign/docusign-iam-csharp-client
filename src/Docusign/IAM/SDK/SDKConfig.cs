@@ -55,7 +55,7 @@ namespace Docusign.IAM.SDK
             Client = client ?? new SpeakeasyHttpClient();
             ServerUrl = "";
             ServerName = null;
-            UserAgent = "speakeasy-sdk/csharp 1.0.0-beta.7 2.803.3 v1 Docusign.IAM.SDK";
+            UserAgent = "speakeasy-sdk/csharp 1.0.0-beta.8 2.882.0 v1 Docusign.IAM.SDK";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

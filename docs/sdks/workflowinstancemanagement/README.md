@@ -1,4 +1,4 @@
-# Maestro.WorkflowInstanceManagement
+# WorkflowBuilder.WorkflowInstanceManagement
 
 ## Overview
 
@@ -10,7 +10,7 @@
 
 ## GetWorkflowInstancesList
 
-This operation retrieves a list of all available Maestro workflow instances. It returns basic information
+This operation retrieves a list of all available Workflow Builder workflow instances. It returns basic information
 about each workflow instance, including its unique identifier (`id`), name, status, timestamps, and
 additional metadata.
 
@@ -25,7 +25,7 @@ as who started it, when it was last modified, and how many steps have been compl
 
 ### Key Features:
 - **Comprehensive Instance Overview**: Provides a full list of workflow instances, giving visibility
-  into all ongoing and completed workflows within the Maestro platform
+  into all ongoing and completed workflows within the Workflow Builder platform
 - **Metadata for Tracking**: Includes helpful metadata like creation time, last modification date,
   and user details to support audit trails
 - **Scalable and Future-Proof**: Designed to handle growing numbers of workflow instances as the
@@ -34,7 +34,7 @@ as who started it, when it was last modified, and how many steps have been compl
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkflowInstancesList" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkflowInstancesList" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances" example="multipleWorkflowInstances" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -43,9 +43,9 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.WorkflowInstanceManagement.GetWorkflowInstancesListAsync(
-    accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
-    workflowId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb"
+var res = await sdk.WorkflowBuilder.WorkflowInstanceManagement.GetWorkflowInstancesListAsync(
+    accountId: "00000000-0000-0000-0000-000000000000",
+    workflowId: "00000000-0000-0000-0000-000000000000"
 );
 
 // handle response
@@ -70,7 +70,7 @@ var res = await sdk.Maestro.WorkflowInstanceManagement.GetWorkflowInstancesListA
 
 ## GetWorkflowInstance
 
-This operation retrieves a single Maestro workflow instance by its unique identifier (`id`).
+This operation retrieves a single Workflow Builder workflow instance by its unique identifier (`id`).
 It returns the primary details of the workflow instance, including its name, status,
 starting information, and other metadata.
 
@@ -92,7 +92,7 @@ auditing and reporting within the system.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkflowInstance" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkflowInstance" method="get" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}" example="workflowInstance" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -101,10 +101,10 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.WorkflowInstanceManagement.GetWorkflowInstanceAsync(
-    accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
-    workflowId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
-    instanceId: "ce20ee0f-4090-48d8-b5fa-3d05ca654f73"
+var res = await sdk.WorkflowBuilder.WorkflowInstanceManagement.GetWorkflowInstanceAsync(
+    accountId: "00000000-0000-0000-0000-000000000000",
+    workflowId: "00000000-0000-0000-0000-000000000000",
+    instanceId: "75bf864c-a7e9-4262-affb-fdc932e921f0"
 );
 
 // handle response
@@ -126,13 +126,13 @@ var res = await sdk.Maestro.WorkflowInstanceManagement.GetWorkflowInstanceAsync(
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404                               | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404                          | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |
 
 ## CancelWorkflowInstance
 
-This operation cancels a running Maestro workflow instance by its unique identifier (`instanceId`).
+This operation cancels a running Workflow Builder workflow instance by its unique identifier (`instanceId`).
 Once canceled, the workflow instance will no longer continue executing any remaining steps.
 
 ### Use Cases:
@@ -144,9 +144,9 @@ Once canceled, the workflow instance will no longer continue executing any remai
 - **Clear Feedback**: Returns a confirmation message including both the instance and workflow identifiers
 
 
-### Example Usage
+### Example Usage: CancelWorkflowInstanceResponseExample
 
-<!-- UsageSnippet language="csharp" operationID="cancelWorkflowInstance" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}/actions/cancel" -->
+<!-- UsageSnippet language="csharp" operationID="cancelWorkflowInstance" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}/actions/cancel" example="CancelWorkflowInstanceResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -155,10 +155,29 @@ var sdk = IamClient.Builder()
     .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
     .Build();
 
-var res = await sdk.Maestro.WorkflowInstanceManagement.CancelWorkflowInstanceAsync(
+var res = await sdk.WorkflowBuilder.WorkflowInstanceManagement.CancelWorkflowInstanceAsync(
+    accountId: "00000000-0000-0000-0000-000000000000",
+    workflowId: "00000000-0000-0000-0000-000000000000",
+    instanceId: "ba4a94fa-3efc-4309-9463-36899a4c6d1e"
+);
+
+// handle response
+```
+### Example Usage: cancelSuccess
+
+<!-- UsageSnippet language="csharp" operationID="cancelWorkflowInstance" method="post" path="/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}/actions/cancel" example="cancelSuccess" -->
+```csharp
+using Docusign.IAM.SDK;
+using Docusign.IAM.SDK.Models.Components;
+
+var sdk = IamClient.Builder()
+    .WithAccessToken("<YOUR_ACCESS_TOKEN_HERE>")
+    .Build();
+
+var res = await sdk.WorkflowBuilder.WorkflowInstanceManagement.CancelWorkflowInstanceAsync(
     accountId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
     workflowId: "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
-    instanceId: "ba4a94fa-3efc-4309-9463-36899a4c6d1e"
+    instanceId: "6fdf215b-e22e-4bb9-9526-ab5cd1430b4c"
 );
 
 // handle response
@@ -180,6 +199,6 @@ var res = await sdk.Maestro.WorkflowInstanceManagement.CancelWorkflowInstanceAsy
 
 | Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| Docusign.IAM.SDK.Models.Errors.Error        | 400, 403, 404, 409                          | application/json                            |
-| Docusign.IAM.SDK.Models.Errors.Error        | 500                                         | application/json                            |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 400, 401, 403, 404, 409                     | application/problem+json                    |
+| Docusign.IAM.SDK.Models.Errors.ErrDetails   | 500                                         | application/problem+json                    |
 | Docusign.IAM.SDK.Models.Errors.APIException | 4XX, 5XX                                    | \*/\*                                       |

@@ -13,7 +13,7 @@ This operation retrieves details about a specific workspace. It returns the bran
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaceBrand" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/brand" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaceBrand" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/brand" example="GetWorkspaceBrandResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -55,7 +55,7 @@ This operation updates brand for a specific workspace. It returns the brand deta
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="updateWorkspaceBrand" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/brand" -->
+<!-- UsageSnippet language="csharp" operationID="updateWorkspaceBrand" method="put" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/brand" example="UpdateWorkspaceBrandResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

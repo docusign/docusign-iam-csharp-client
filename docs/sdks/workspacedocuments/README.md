@@ -18,7 +18,7 @@ Pagination is supported by passing `start_position` and `count` in the request. 
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaceDocuments" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/documents" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaceDocuments" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/documents" example="GetWorkspaceDocumentsResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -64,7 +64,7 @@ Once added, it may be used to create an envelope associated with the workspace.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="addWorkspaceDocument" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/documents" -->
+<!-- UsageSnippet language="csharp" operationID="addWorkspaceDocument" method="post" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/documents" example="CreateWorkspaceDocumentResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;
@@ -107,7 +107,7 @@ This operation retrieves information about the document. The response includes t
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="getWorkspaceDocument" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}" -->
+<!-- UsageSnippet language="csharp" operationID="getWorkspaceDocument" method="get" path="/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}" example="GetWorkspaceDocumentResponseExample" -->
 ```csharp
 using Docusign.IAM.SDK;
 using Docusign.IAM.SDK.Models.Components;

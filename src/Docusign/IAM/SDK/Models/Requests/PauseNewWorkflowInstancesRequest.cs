@@ -13,9 +13,6 @@ namespace Docusign.IAM.SDK.Models.Requests
 
     public class PauseNewWorkflowInstancesRequest
     {
-        /// <summary>
-        /// The unique identifier of the account.
-        /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountId")]
         public string AccountId { get; set; } = "00000000-0000-0000-0000-000000000000";
 

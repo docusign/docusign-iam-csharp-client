@@ -19,6 +19,12 @@ namespace Docusign.IAM.SDK.Models.Components
     public class Provisions
     {
         /// <summary>
+        /// The type of assignment rights in the agreement (e.g., transferability).
+        /// </summary>
+        [JsonProperty("assignment_type")]
+        public string? AssignmentType { get; set; } = null;
+
+        /// <summary>
         /// Provisions related to changes in control of the assigning party.
         /// </summary>
         [JsonProperty("assignment_change_of_control")]
@@ -29,12 +35,6 @@ namespace Docusign.IAM.SDK.Models.Components
         /// </summary>
         [JsonProperty("assignment_termination_rights")]
         public string? AssignmentTerminationRights { get; set; } = null;
-
-        /// <summary>
-        /// The type of assignment rights in the agreement (e.g., transferability).
-        /// </summary>
-        [JsonProperty("assignment_type")]
-        public string? AssignmentType { get; set; } = null;
 
         /// <summary>
         /// A subset of ISO 8601 duration. Fractional or negative values are not supported.
@@ -103,22 +103,16 @@ namespace Docusign.IAM.SDK.Models.Components
         public double? LatePaymentFeePercent { get; set; } = null;
 
         /// <summary>
-        /// Currency code for the liability cap amount.
-        /// </summary>
-        [JsonProperty("liability_cap_currency_code")]
-        public CurrencyCode? LiabilityCapCurrencyCode { get; set; } = null;
-
-        /// <summary>
-        /// Duration for the liability cap.
-        /// </summary>
-        [JsonProperty("liability_cap_duration")]
-        public string? LiabilityCapDuration { get; set; } = null;
-
-        /// <summary>
         /// Maximum liability cap in the agreement.
         /// </summary>
         [JsonProperty("liability_cap_fixed_amount")]
         public double? LiabilityCapFixedAmount { get; set; } = null;
+
+        /// <summary>
+        /// Currency code for the liability cap amount.
+        /// </summary>
+        [JsonProperty("liability_cap_currency_code")]
+        public CurrencyCode? LiabilityCapCurrencyCode { get; set; } = null;
 
         /// <summary>
         /// Multiplier applied to calculate the liability cap.
@@ -127,34 +121,22 @@ namespace Docusign.IAM.SDK.Models.Components
         public double? LiabilityCapMultiplier { get; set; } = null;
 
         /// <summary>
+        /// Duration for the liability cap.
+        /// </summary>
+        [JsonProperty("liability_cap_duration")]
+        public string? LiabilityCapDuration { get; set; } = null;
+
+        /// <summary>
         /// Maximum allowed percentage increase in prices, limited between 0 and 100.
         /// </summary>
         [JsonProperty("price_cap_percent_increase")]
         public float? PriceCapPercentIncrease { get; set; } = null;
 
         /// <summary>
-        /// The duration of the auto-renewal period.
+        /// Specifies the type of renewal (e.g., automatic, manual).
         /// </summary>
-        [JsonProperty("auto_renewal_term_length")]
-        public string? AutoRenewalTermLength { get; set; } = null;
-
-        /// <summary>
-        /// Additional information related to the renewal process.
-        /// </summary>
-        [JsonProperty("renewal_additional_info")]
-        public string? RenewalAdditionalInfo { get; set; } = null;
-
-        /// <summary>
-        /// The period an agreement has been extended after it has been renewed.
-        /// </summary>
-        [JsonProperty("renewal_extension_period")]
-        public string? RenewalExtensionPeriod { get; set; } = null;
-
-        /// <summary>
-        /// ISO 8601 formatted date-time string. May be local (no timezone), UTC (Z suffix), or include an explicit offset (e.g., +05:30, -0800).
-        /// </summary>
-        [JsonProperty("renewal_notice_date")]
-        public string? RenewalNoticeDate { get; set; }
+        [JsonProperty("renewal_type")]
+        public string? RenewalType { get; set; } = null;
 
         /// <summary>
         /// The period of time that a party is required to provide to indicate their intention to renew an agreement.
@@ -163,16 +145,34 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? RenewalNoticePeriod { get; set; } = null;
 
         /// <summary>
+        /// ISO 8601 formatted date-time string. May be local (no timezone), UTC (Z suffix), or include an explicit offset (e.g., +05:30, -0800).
+        /// </summary>
+        [JsonProperty("renewal_notice_date")]
+        public string? RenewalNoticeDate { get; set; }
+
+        /// <summary>
+        /// The duration of the auto-renewal period.
+        /// </summary>
+        [JsonProperty("auto_renewal_term_length")]
+        public string? AutoRenewalTermLength { get; set; } = null;
+
+        /// <summary>
+        /// The period an agreement has been extended after it has been renewed.
+        /// </summary>
+        [JsonProperty("renewal_extension_period")]
+        public string? RenewalExtensionPeriod { get; set; } = null;
+
+        /// <summary>
         /// User ID of the person responsible for managing the renewal process.
         /// </summary>
         [JsonProperty("renewal_process_owner")]
         public string? RenewalProcessOwner { get; set; }
 
         /// <summary>
-        /// Specifies the type of renewal (e.g., automatic, manual).
+        /// Additional information related to the renewal process.
         /// </summary>
-        [JsonProperty("renewal_type")]
-        public string? RenewalType { get; set; } = null;
+        [JsonProperty("renewal_additional_info")]
+        public string? RenewalAdditionalInfo { get; set; } = null;
 
         /// <summary>
         /// The specific duration that a party has to give notice before terminating the agreement due to a significant breach or violation of terms.<br/>
@@ -196,14 +196,14 @@ namespace Docusign.IAM.SDK.Models.Components
         /// <summary>
         /// ISO 8601 formatted date-time string. May be local (no timezone), UTC (Z suffix), or include an explicit offset (e.g., +05:30, -0800).
         /// </summary>
-        [JsonProperty("execution_date")]
-        public string? ExecutionDate { get; set; }
+        [JsonProperty("expiration_date")]
+        public string? ExpirationDate { get; set; }
 
         /// <summary>
         /// ISO 8601 formatted date-time string. May be local (no timezone), UTC (Z suffix), or include an explicit offset (e.g., +05:30, -0800).
         /// </summary>
-        [JsonProperty("expiration_date")]
-        public string? ExpirationDate { get; set; }
+        [JsonProperty("execution_date")]
+        public string? ExecutionDate { get; set; }
 
         /// <summary>
         /// Overall duration of the agreement.

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>Docusign.IAM.SDK</PackageId>
-    <Version>1.0.0-beta.7</Version>
+    <Version>1.0.0-beta.8</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Docusign</Authors>
     <Copyright>Copyright (c) Docusign 2026</Copyright>

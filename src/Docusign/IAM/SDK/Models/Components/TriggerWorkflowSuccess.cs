@@ -18,6 +18,12 @@ namespace Docusign.IAM.SDK.Models.Components
     /// </summary>
     public class TriggerWorkflowSuccess
     {
+        /// <summary>
+        /// A unique identifier for this specific instance of the workflow. This UUID<br/>
+        /// is used to reference the running instance in other API calls (e.g., to<br/>
+        /// retrieve its status or terminate the instance).<br/>
+        /// Example: '1a46ccde-9db4-42d6-94fa-0ddd07a3d2ff'
+        /// </summary>
         [JsonProperty("instance_id")]
         public string? InstanceId { get; set; } = "00000000-0000-0000-0000-000000000000";
 
@@ -42,17 +48,17 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? RequestId { get; set; }
 
         /// <summary>
+        /// The timestamp indicating when the response was generated.
+        /// </summary>
+        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
+        public DateTime? ResponseTimestamp { get; set; }
+
+        /// <summary>
         /// The duration of time, in milliseconds, that the server took to process and respond<br/>
         /// to the request. This is measured from the time the server received the request<br/>
         /// until the time the response was sent.
         /// </summary>
         [JsonProperty("response_duration_ms", NullValueHandling = NullValueHandling.Include)]
         public int? ResponseDurationMs { get; set; }
-
-        /// <summary>
-        /// The timestamp indicating when the response was generated.
-        /// </summary>
-        [JsonProperty("response_timestamp", NullValueHandling = NullValueHandling.Include)]
-        public DateTime? ResponseTimestamp { get; set; }
     }
 }
