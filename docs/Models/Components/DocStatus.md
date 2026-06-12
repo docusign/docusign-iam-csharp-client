@@ -1,6 +1,6 @@
 # DocStatus
 
-Document status. Last 3 are terminal statuses. Matches enum with similar name in the backend.
+Document status. Last 4 are terminal statuses. Matches enum with similar name in the backend.
 
 ## Example Usage
 
@@ -13,10 +13,11 @@ var value = DocStatus.NotStarted;
 
 ## Values
 
-| Name         | Value        |
-| ------------ | ------------ |
-| `NotStarted` | NOT_STARTED  |
-| `InProgress` | IN_PROGRESS  |
-| `Canceled`   | CANCELED     |
-| `Succeeded`  | SUCCEEDED    |
-| `Failed`     | FAILED       |
+| Name                    | Value                   |
+| ----------------------- | ----------------------- |
+| `NotStarted`            | NOT_STARTED             |
+| `InProgress`            | IN_PROGRESS             |
+| `Canceled`              | CANCELED                |
+| `Succeeded`             | SUCCEEDED               |
+| `SucceededWithWarnings` | SUCCEEDED_WITH_WARNINGS |
+| `Failed`                | FAILED                  |

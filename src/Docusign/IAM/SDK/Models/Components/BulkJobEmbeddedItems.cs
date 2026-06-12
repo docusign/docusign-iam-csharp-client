@@ -12,6 +12,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public class BulkJobEmbeddedItems
     {
@@ -34,7 +35,7 @@ namespace Docusign.IAM.SDK.Models.Components
         public int? Sequence { get; set; }
 
         /// <summary>
-        /// Document status. Last 3 are terminal statuses. Matches enum with similar name in the backend.
+        /// Document status. Last 4 are terminal statuses. Matches enum with similar name in the backend.
         /// </summary>
         [JsonProperty("status")]
         public DocStatus? Status { get; set; }
@@ -44,6 +45,12 @@ namespace Docusign.IAM.SDK.Models.Components
         /// </summary>
         [JsonProperty("file_name")]
         public string? FileName { get; set; }
+
+        /// <summary>
+        /// Whether AI extraction was performed on this document.
+        /// </summary>
+        [JsonProperty("ai_extraction")]
+        public bool? AiExtraction { get; set; }
 
         /// <summary>
         /// Error code if document processing failed.
@@ -57,6 +64,15 @@ namespace Docusign.IAM.SDK.Models.Components
         [JsonProperty("error")]
         public string? Error { get; set; }
 
+        /// <summary>
+        /// List of warnings encountered during document processing. Present when status is SUCCEEDED_WITH_WARNINGS.
+        /// </summary>
+        [JsonProperty("warnings")]
+        public List<DocumentWarning>? Warnings { get; set; }
+
+        /// <summary>
+        /// Available actions for this document. Actions vary based on document state - upload actions during initial upload, remediation actions after processing.
+        /// </summary>
         [JsonProperty("_actions")]
         public BulkJobItemActions? Actions { get; set; }
 

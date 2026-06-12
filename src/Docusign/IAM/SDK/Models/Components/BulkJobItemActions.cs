@@ -9,9 +9,13 @@
 #nullable enable
 namespace Docusign.IAM.SDK.Models.Components
 {
+    using Docusign.IAM.SDK.Models.Components;
     using Docusign.IAM.SDK.Utils;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// Available actions for this document. Actions vary based on document state - upload actions during initial upload, remediation actions after processing.
+    /// </summary>
     public class BulkJobItemActions
     {
         /// <summary>
@@ -21,9 +25,14 @@ namespace Docusign.IAM.SDK.Models.Components
         public string? UploadDocument { get; set; }
 
         /// <summary>
-        /// Azure Blob Store url to upload metadata of the specific file.
+        /// Affordances (aka 'actions') describe the available operations on a resource, including CRUD and RPC-like operations. It details the<br/>
+        /// expected input payload, http method, query parameters, and the resulting output.<br/>
+        /// <br/>
+        /// Affordances enable clients to dynamically adapt to the API's current state and available actions. Instead of<br/>
+        /// hardcoding all possible endpoints and their associated logic, a client can inspect the affordances within a<br/>
+        /// resource's representation to discover what actions are possible and how to perform them.
         /// </summary>
-        [JsonProperty("upload_metadata")]
-        public string? UploadMetadata { get; set; }
+        [JsonProperty("update_metadata")]
+        public Affordance? UpdateMetadata { get; set; } = null;
     }
 }

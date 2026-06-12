@@ -23,5 +23,11 @@ namespace Docusign.IAM.SDK.Models.Components
         /// </summary>
         [JsonProperty("document")]
         public Document? Document { get; set; }
+
+        /// <summary>
+        /// Link to the associated agreement.
+        /// </summary>
+        [JsonProperty("agreement")]
+        public BulkJobEmbeddedItemsAgreement? Agreement { get; set; }
     }
 }
