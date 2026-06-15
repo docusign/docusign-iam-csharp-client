@@ -14,33 +14,32 @@ namespace Docusign.IAM.SDK.Models.Components
     using System;
 
     /// <summary>
-    /// The HTTP method used to trigger the workflow. This defines the type of request<br/>
-    /// that will initiate the workflow (e.g., GET, POST).
+    /// The http method to use when invoking this affordance.
     /// </summary>
-    public enum Method
+    public enum AffordanceMethod
     {
-        [JsonProperty("GET")]
-        Get,
         [JsonProperty("POST")]
         Post,
-        [JsonProperty("PUT")]
-        Put,
+        [JsonProperty("GET")]
+        Get,
         [JsonProperty("PATCH")]
         Patch,
+        [JsonProperty("PUT")]
+        Put,
         [JsonProperty("DELETE")]
         Delete,
     }
 
-    public static class MethodExtension
+    public static class AffordanceMethodExtension
     {
-        public static string Value(this Method value)
+        public static string Value(this AffordanceMethod value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static Method ToEnum(this string value)
+        public static AffordanceMethod ToEnum(this string value)
         {
-            foreach(var field in typeof(Method).GetFields())
+            foreach(var field in typeof(AffordanceMethod).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -53,14 +52,14 @@ namespace Docusign.IAM.SDK.Models.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is Method)
+                    if (enumVal is AffordanceMethod)
                     {
-                        return (Method)enumVal;
+                        return (AffordanceMethod)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum Method");
+            throw new Exception($"Unknown value {value} for enum AffordanceMethod");
         }
     }
 }

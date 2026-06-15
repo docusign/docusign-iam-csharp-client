@@ -14,7 +14,7 @@ namespace Docusign.IAM.SDK.Models.Components
     using System;
 
     /// <summary>
-    /// Document status. Last 3 are terminal statuses. Matches enum with similar name in the backend.
+    /// Document status. Last 4 are terminal statuses. Matches enum with similar name in the backend.
     /// </summary>
     public enum DocStatus
     {
@@ -26,6 +26,8 @@ namespace Docusign.IAM.SDK.Models.Components
         Canceled,
         [JsonProperty("SUCCEEDED")]
         Succeeded,
+        [JsonProperty("SUCCEEDED_WITH_WARNINGS")]
+        SucceededWithWarnings,
         [JsonProperty("FAILED")]
         Failed,
     }

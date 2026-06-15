@@ -25,7 +25,7 @@ namespace Docusign.IAM.SDK.Models.Components
         /// that will initiate the workflow (e.g., GET, POST).
         /// </summary>
         [JsonProperty("method")]
-        public Method? Method { get; set; }
+        public MethodResponse? Method { get; set; }
 
         /// <summary>
         /// The URL that is associated with the trigger event. This is the endpoint that must be<br/>

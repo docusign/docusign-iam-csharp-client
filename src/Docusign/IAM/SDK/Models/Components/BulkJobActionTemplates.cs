@@ -17,8 +17,5 @@ namespace Docusign.IAM.SDK.Models.Components
     {
         [JsonProperty("upload_document")]
         public BulkJobActionTemplate? UploadDocument { get; set; }
-
-        [JsonProperty("upload_metadata")]
-        public BulkJobActionTemplate? UploadMetadata { get; set; }
     }
 }
